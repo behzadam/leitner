@@ -26,20 +26,20 @@ export class FlashcardsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.flashcardsService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.flashcardsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateFlashcardDto: UpdateFlashcardDto
   ) {
-    return this.flashcardsService.update(+id, updateFlashcardDto);
+    return this.flashcardsService.update(id, updateFlashcardDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.flashcardsService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.flashcardsService.remove(id);
   }
 }
