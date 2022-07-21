@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFlashcardDto } from './dto/create-flashcard.dto';
 import { UpdateFlashcardDto } from './dto/update-flashcard.dto';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Flashcard } from './entities/flashcard.entity';
 
 @Injectable()
 export class FlashcardsService {
+  constructor(
+    @InjectRepository(Flashcard)
+    private flashcardRepository: Repository<Flashcard>
+  ) {}
+
   create(createFlashcardDto: CreateFlashcardDto) {
-    return 'This action adds a new flashcard';
+    return this.flashcardRepository.save(createFlashcardDto);
   }
 
   findAll() {
-    return `This action returns all flashcards`;
+    return this.flashcardRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} flashcard`;
+    return this.flashcardRepository.findOneBy({ id });
   }
 
   update(id: number, updateFlashcardDto: UpdateFlashcardDto) {
-    return `This action updates a #${id} flashcard`;
+    return this.flashcardRepository.update(id, updateFlashcardDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} flashcard`;
+    return this.flashcardRepository.delete(id);
   }
 }
