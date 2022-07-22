@@ -1,18 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FlashcardsService } from './flashcards.service';
 import { CreateFlashcardDto } from './dto/create-flashcard.dto';
 import { UpdateFlashcardDto } from './dto/update-flashcard.dto';
-import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('flashcards')
 @Controller('flashcards')
 export class FlashcardsController {
   constructor(private readonly flashcardsService: FlashcardsService) {}
@@ -28,20 +18,17 @@ export class FlashcardsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.flashcardsService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.flashcardsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: number,
-    @Body() updateFlashcardDto: UpdateFlashcardDto
-  ) {
-    return this.flashcardsService.update(id, updateFlashcardDto);
+  update(@Param('id') id: string, @Body() updateFlashcardDto: UpdateFlashcardDto) {
+    return this.flashcardsService.update(+id, updateFlashcardDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.flashcardsService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.flashcardsService.remove(+id);
   }
 }
