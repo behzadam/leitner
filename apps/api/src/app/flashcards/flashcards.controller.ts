@@ -29,7 +29,7 @@ export class FlashcardsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.flashcardsService.findOne(+id);
+    return this.flashcardsService.findOne(Number(id));
   }
 
   @Patch(':id')
@@ -37,11 +37,11 @@ export class FlashcardsController {
     @Param('id') id: string,
     @Body() updateFlashcardDto: UpdateFlashcardDto
   ) {
-    return this.flashcardsService.update(+id, updateFlashcardDto);
+    return this.flashcardsService.update(Number(id), updateFlashcardDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.flashcardsService.remove(+id);
+    return this.flashcardsService.remove(Number(id));
   }
 }
