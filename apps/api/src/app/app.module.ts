@@ -17,6 +17,7 @@ import { FlashcardsModule } from './flashcards/flashcards.module';
       database: 'leitner',
       entities: [],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     UsersModule,
     FlashcardsModule,
