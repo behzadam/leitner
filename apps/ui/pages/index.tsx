@@ -1,10 +1,9 @@
+import FlashcardForm from '@/components/Flashcard/FlashcardForm';
 
 export function Index() {
   return (
     <div>
-      <div className="wrapper">
-        Hello
-      </div>
+      <FlashcardForm />
     </div>
   );
 }
