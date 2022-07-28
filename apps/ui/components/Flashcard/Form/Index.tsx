@@ -1,4 +1,4 @@
-import Form from '../Form/Index'
+import Form from '../../Form/Index'
 
 const FlashcardForm = () => {
   return (
