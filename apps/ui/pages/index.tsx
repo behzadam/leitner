@@ -1,9 +1,9 @@
-import FlashcardForm from '@/components/Flashcard/FlashcardForm';
+import List from '@/components/Flashcard/List/Index';
 
 export function Index() {
   return (
     <div>
-      <FlashcardForm />
+      <List />
     </div>
   );
 }
