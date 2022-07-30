@@ -3,6 +3,9 @@ import Head from 'next/head';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import axios from "axios";
+axios.defaults.baseURL = process.env.BASE_URL
+
 const theme = createTheme({
   typography: {
     fontSize: 13,
@@ -11,7 +14,6 @@ const theme = createTheme({
     mode: 'dark',
   },
 });
-
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
