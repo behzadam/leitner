@@ -1,6 +1,22 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import './styles.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme();
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
+
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -8,9 +24,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Welcome to ui!</title>
       </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <ThemeProvider theme={theme}>
+        <main>
+          <h2>Hello</h2>
+          <Component {...pageProps} />
+        </main>
+      </ThemeProvider>
     </>
   );
 }
