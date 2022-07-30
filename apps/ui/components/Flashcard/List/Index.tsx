@@ -33,11 +33,11 @@ const List = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth="md" sx={{ mt: 4 }}>
       <Box sx={{ height: 315, width: '100%' }}>
         <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
           <Button size="small" onClick={addRow} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
-            Add a row
+            New Flashcard
           </Button>
         </Stack>
         <DataGrid
