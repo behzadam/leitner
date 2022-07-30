@@ -1,32 +1,27 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-const theme = createTheme();
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
+const theme = createTheme({
+  typography: {
+    fontSize: 13,
+  },
+  palette: {
+    mode: 'dark',
+  },
+});
 
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to ui!</title>
+        <title>Leitner</title>
       </Head>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <main>
-          <h2>Hello</h2>
           <Component {...pageProps} />
         </main>
       </ThemeProvider>
