@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { wrapper } from '@/store/index';
 
 import axios from "axios";
 axios.defaults.baseURL = process.env.BASE_URL
@@ -31,4 +32,4 @@ function CustomApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default CustomApp;
+export default wrapper.withRedux(CustomApp);
