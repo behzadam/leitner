@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-type FlashcardState = {
+export type FlashcardState = {
   flashcards: any[];
   isLoading: boolean;
 };
 
-const initialState: FlashcardState = {
+export const initialState: FlashcardState = {
   flashcards: [],
   isLoading: false,
 };
@@ -16,7 +16,7 @@ export const fetchFlashcards = createAsyncThunk('fetchFlashcards', async () => {
   return response.data;
 });
 
-const FlashcardSlice = createSlice({
+const flashcardSlice = createSlice({
   name: 'FlashcardSlice',
   initialState,
   extraReducers: (builder) => {
@@ -29,5 +29,4 @@ const FlashcardSlice = createSlice({
   reducers: undefined,
 });
 
-const { reducer } = FlashcardSlice;
-export default reducer;
+export default flashcardSlice.reducer;
