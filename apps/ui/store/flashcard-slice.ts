@@ -1,22 +1,33 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export interface FlashcardState {
-  list: any[];
-}
+type FlashcardState = {
+  flashcards: any[];
+  isLoading: boolean;
+};
 
 const initialState: FlashcardState = {
-  list: [],
+  flashcards: [],
+  isLoading: false,
 };
+
+export const fetchFlashcards = createAsyncThunk('fetchFlashcards', async () => {
+  const response = await axios.get('/flashcards');
+  return response.data;
+});
 
 const FlashcardSlice = createSlice({
   name: 'FlashcardSlice',
   initialState,
-  reducers: {
-    setList: (state: FlashcardState, action: PayloadAction<any[]>) => {
-      state.list = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder.addCase(fetchFlashcards.fulfilled, (state, action) => {
+      state.isLoading = true;
+      state.flashcards = action.payload;
+      state.isLoading = false;
+    });
   },
+  reducers: undefined,
 });
 
-export const { setList } = FlashcardSlice.actions;
-export default FlashcardSlice;
+const { reducer } = FlashcardSlice;
+export default reducer;
