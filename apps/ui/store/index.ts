@@ -8,7 +8,7 @@ import {
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { Reducer } from '@reduxjs/toolkit';
 import { Action } from 'redux';
-import flashcardReducer, { FlashcardState } from '@/store/flashcard-slice';
+import flashcardReducer, { FlashcardState } from '@/store/flashcardSlice';
 
 export interface RootState {
   flashcard: FlashcardState;
