@@ -1,8 +1,10 @@
-import List from '@/components/Flashcard/List/Index';
+import FlashcardList from '@/features/flashcard/FlashcardList'
+import useFlashcardList from "@/features/flashcard/hooks/useFlashcardList";
 
 export function Index() {
+  const { items } = useFlashcardList();
   return (
-    <List />
+    <FlashcardList items={items} />
   );
 }
 
