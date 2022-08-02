@@ -9,17 +9,11 @@ const columns: GridColDef[] = [
   }
 ];
 
-const rows = [{
-  id: 1,
-  word: 'Word 1'
-}]
+type Props = {
+  items: any[]
+}
 
-const List = () => {
-
-  const addRow = () => {
-    console.log('addRow')
-  }
-
+const List = ({ items }: Props) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Box sx={{ height: 420, width: '100%' }}>
@@ -27,13 +21,13 @@ const List = () => {
           <Typography variant="h6" component="h6">
             Flashcards
           </Typography>
-          <Button size="small" onClick={addRow} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
+          <Button size="small" sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
             New Flashcard
           </Button>
         </Stack>
         <Paper elevation={1} sx={{ height: 420 }}>
           <DataGrid
-            rows={rows}
+            rows={items}
             columns={columns}
             pageSize={6}
             rowsPerPageOptions={[6]}
