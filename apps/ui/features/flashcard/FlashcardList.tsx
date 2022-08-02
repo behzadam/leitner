@@ -1,5 +1,8 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Paper, Stack, Button, Typography, Container } from '@mui/material';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import { useState } from 'react';
 
 const columns: GridColDef[] = [
   {
@@ -14,14 +17,28 @@ type Props = {
 }
 
 const Toolbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    console.log('Log')
+    setOpen(false);
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Stack direction="row" justifyContent="space-between" spacing={1} sx={{ mb: 1, width: '100%' }}>
       <Typography variant="h6" component="h6">
         Flashcards
       </Typography>
-      <Button size="small" sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
+      <Button size="small" onClick={handleClickOpen} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
         New Flashcard
       </Button>
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>Flashcard Form</DialogTitle>
+      </Dialog>
     </Stack>
   )
 }
