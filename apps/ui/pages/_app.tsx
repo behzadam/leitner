@@ -2,10 +2,11 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { wrapper } from '@/store/index';
+import { Provider } from 'react-redux';
+import { store } from '../store/index';
 
 import axios from "axios";
-axios.defaults.baseURL = process.env.BASE_URL
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 const theme = createTheme({
   typography: {
@@ -25,11 +26,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <main>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </main>
       </ThemeProvider>
     </>
   );
 }
 
-export default wrapper.withRedux(CustomApp);
+export default CustomApp;
