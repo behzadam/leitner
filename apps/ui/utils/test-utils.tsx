@@ -3,30 +3,29 @@ import React, { PropsWithChildren } from 'react'
 import { render } from '@testing-library/react'
 import type { RenderOptions } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
-import type { PreloadedState } from '@reduxjs/toolkit'
+import type { PreloadedState, } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-import type { RootState, AppStore } from '@/store/index'
-
-import flashcardReducer from '@/store/flashcardSlice'
+import type { RootState } from '@/store/index'
+import flashcardReducer from '@/features/flashcard/FlashcardSlice'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
-  store?: AppStore
+  store?: RootState
 }
 
 export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {
-      flashcard: undefined
+      flashcard: null
     },
-    // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { flashcard: flashcardReducer }, preloadedState }),
+    store = configureStore({ reducer: { flashcards: flashcardReducer }, preloadedState }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
-  function Wrapper({ children }: PropsWithChildren): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>
   }
 
