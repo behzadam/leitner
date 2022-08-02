@@ -1,43 +1,13 @@
-import {
-  configureStore,
-  combineReducers,
-  AnyAction,
-  CombinedState,
-  ThunkAction,
-} from '@reduxjs/toolkit';
-import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import { Reducer } from '@reduxjs/toolkit';
-import { Action } from 'redux';
-import flashcardReducer, { FlashcardState } from '@/store/flashcardSlice';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import flashcardReducer from '@/features/flashcard/FlashcardSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
-export interface RootState {
-  flashcard: FlashcardState;
-}
-
-const combinedState = combineReducers({
-  flashcard: flashcardReducer,
+export const store = configureStore({
+  reducer: { flashcards: flashcardReducer },
 });
 
-const rootReducer = (
-  state: RootState,
-  action: AnyAction
-): CombinedState<RootState> => {
-  if (action.type === HYDRATE) return { ...state, ...action.payload };
-  return combinedState(state, action);
-};
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
-export const makeStore = () =>
-  configureStore({
-    reducer: rootReducer as Reducer<CombinedState<RootState>, AnyAction>,
-    devTools: process.env.NODE_ENV === 'development',
-  });
-
-export const wrapper = createWrapper(makeStore);
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore['getState']>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
