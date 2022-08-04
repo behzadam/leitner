@@ -1,4 +1,4 @@
-import FlashcardList from '@/features/flashcard/FlashcardList'
+import FlashcardList from '@/features/flashcard/Flashcard.list'
 import useFlashcardList from "@/features/flashcard/hooks/useFlashcardList";
 
 export function Index() {
