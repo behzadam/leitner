@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { isEmpty } from 'utils/isEmpty';
 
 type FlashcardFormProps = {
-  // should replace any with DTO
+  // TODO: should replace any with DTO
   onSubmit: (data: any) => void
 }
 
