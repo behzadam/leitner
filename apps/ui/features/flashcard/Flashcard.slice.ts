@@ -39,7 +39,6 @@ export const deleteFlashcard = createAsyncThunk(
 export const updateFlashcard = createAsyncThunk(
   'flashcard/updateFlashcard',
   async (params: any) => {
-    console.log({ params });
     // TODO: should ckeck if data is existing
     const response = await api.updateFlashcard(params);
     return response.data;
@@ -73,7 +72,21 @@ const flashcardSlice = createSlice({
         state.items.splice(index, 1);
       })
       .addCase(updateFlashcard.fulfilled, (state, action) => {
-        console.log('addCase', action);
+        const { id, word, translate, description } = action.payload;
+        console.log(
+          'addCase',
+          id,
+          word,
+          translate,
+          description,
+          action.payload
+        );
+        // state.items = state.items.map((item) => {
+        //   if (item.id === action.payload.id) {
+        //     const { word, translate, description } =
+        //     item = { ...item, ...action.payload };
+        //   }
+        // });
       });
   },
   reducers: undefined,
