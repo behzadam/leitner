@@ -7,7 +7,7 @@ type FlashcardFormProps = {
   onSubmit: (data: any) => void
 }
 
-const FlashcardForm = ({ onSubmit }: FlashcardFormProps) => {
+const FlashcardFormCreate = ({ onSubmit }: FlashcardFormProps) => {
   const {
     register,
     handleSubmit,
@@ -31,4 +31,4 @@ const FlashcardForm = ({ onSubmit }: FlashcardFormProps) => {
   );
 }
 
-export default FlashcardForm;
+export default FlashcardFormCreate;

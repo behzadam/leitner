@@ -3,10 +3,12 @@ import { Box, Paper, Stack, Button, Typography, Container, DialogContent, IconBu
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { useState } from 'react';
-import FlashcardForm from './Flashcard.form.edit';
+import FlashcardFormCreate from './Flashcard.form.create';
+import FlashcardFormEdit from './Flashcard.form.edit';
 import { useAppDispatch } from "@/store/index";
-import { createFlashcard, deleteFlashcard } from './Flashcard.slice';
+import { createFlashcard, deleteFlashcard, updateFlashcard } from './Flashcard.slice';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import NoRows from '@/components/NoRows';
 
 
@@ -39,14 +41,25 @@ const FlashcardList = ({ items }: Props) => {
               alignItems: "center"
             }}
           >
-            <IconButton onClick={() => handleDeleteRow(params.id)}>
+            <IconButton onClick={() => handleDeleteRow(Number(params.id))}>
               <DeleteIcon fontSize="small" />
+            </IconButton>
+            <IconButton onClick={() => handleEditRow(Number(params.id))}>
+              <EditIcon fontSize="small" />
             </IconButton>
           </Box>
         );
       }
     }
   ]
+
+  const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [flashcard, setFlashCard] = useState({
+    id: -1,
+    word: null,
+    translate: null,
+    description: null
+  })
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
@@ -64,13 +77,27 @@ const FlashcardList = ({ items }: Props) => {
     dispatch(deleteFlashcard(id))
   }
 
-  const onSubmit = (data: any) => {
+  const handleEditRow = (id: number) => {
+    console.log('handleEditRow', id, isEdit)
+    const flashcard = items.find(item => item.id === id)
+    if (!flashcard) return;
+    setFlashCard(flashcard)
+    setIsEdit(true);
+    setOpen(true);
+  }
+
+  const handleSubmit = (data: any) => {
     try {
-      dispatch(createFlashcard(data))
+      if (isEdit) {
+        dispatch(updateFlashcard(data))
+      } else {
+        dispatch(createFlashcard(data))
+      }
       handleClose()
+      setIsEdit(false)
       // eslint-disable-next-line no-empty
     } catch (error) {
-
+      setIsEdit(false)
     }
   }
 
@@ -82,12 +109,16 @@ const FlashcardList = ({ items }: Props) => {
             Flashcards
           </Typography>
           <Button size="small" onClick={handleClickOpen} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
-            New Flashcard
+            New
           </Button>
           <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth={maxWidth}>
-            <DialogTitle>Flashcard Form</DialogTitle>
+            <DialogTitle>{isEdit ? 'Edit' : 'New'} Flashcard</DialogTitle>
             <DialogContent>
-              <FlashcardForm onSubmit={onSubmit} />
+              {
+                isEdit ?
+                  (<FlashcardFormEdit flashcard={flashcard} onSubmit={handleSubmit} />)
+                  : (<FlashcardFormCreate onSubmit={handleSubmit} />)
+              }
             </DialogContent>
           </Dialog>
         </Stack>

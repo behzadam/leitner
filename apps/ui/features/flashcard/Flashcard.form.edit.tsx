@@ -1,18 +1,26 @@
 import { Box, TextField, Stack, Button } from '@mui/material';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { isEmpty } from 'utils/isEmpty';
 
 type FlashcardFormProps = {
   // TODO: should replace any with DTO
-  onSubmit: (data: any) => void
+  onSubmit: (data: any) => void,
+  // TODO: should replace any with DTO
+  flashcard: any
 }
 
-const FlashcardForm = ({ onSubmit }: FlashcardFormProps) => {
+const FlashcardFormEdit = ({ onSubmit, flashcard }: FlashcardFormProps) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    reset(flashcard);
+  }, [flashcard]);
 
   return (
     <Box
@@ -31,4 +39,4 @@ const FlashcardForm = ({ onSubmit }: FlashcardFormProps) => {
   );
 }
 
-export default FlashcardForm;
+export default FlashcardFormEdit;
