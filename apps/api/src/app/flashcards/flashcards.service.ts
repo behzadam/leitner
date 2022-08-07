@@ -25,7 +25,7 @@ export class FlashcardsService {
   }
 
   update(id: number, updateFlashcardDto: UpdateFlashcardDto) {
-    return this.flashcardsRepository.update(id, updateFlashcardDto);
+    return this.flashcardsRepository.save({ updateFlashcardDto, id });
   }
 
   remove(id: number) {
