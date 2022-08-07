@@ -78,7 +78,6 @@ const FlashcardList = ({ items }: Props) => {
   }
 
   const handleEditRow = (id: number) => {
-    console.log('handleEditRow', id, isEdit)
     const flashcard = items.find(item => item.id === id)
     if (!flashcard) return;
     setFlashCard(flashcard)
@@ -95,7 +94,6 @@ const FlashcardList = ({ items }: Props) => {
       }
       handleClose()
       setIsEdit(false)
-      // eslint-disable-next-line no-empty
     } catch (error) {
       setIsEdit(false)
     }
