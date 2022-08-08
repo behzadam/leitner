@@ -8,8 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, UpdateUserDto } from '@leitner/types';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Users')
@@ -33,7 +32,10 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto
+  ) {
     return this.usersService.update(+id, updateUserDto);
   }
 
