@@ -49,7 +49,7 @@
     "@nrwl/nest": "14.5.4",
     "@nrwl/next": "^14.4.3",
     "@nrwl/node": "14.4.3",
-    "@nrwl/nx-cloud": "latest",
+    "@nrwl/nx-cloud": "^14.3.0",
     "@nrwl/react": "14.4.3",
     "@nrwl/web": "14.4.3",
     "@nrwl/workspace": "14.4.3",
