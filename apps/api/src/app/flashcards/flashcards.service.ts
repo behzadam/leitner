@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFlashcardDto } from './dto/create-flashcard.dto';
-import { UpdateFlashcardDto } from './dto/update-flashcard.dto';
+import {
+  CreateFlashcardDto,
+  UpdateFlashcardDto,
+} from '@leitner/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Flashcard } from './entities/flashcard.entity';
 import { Repository } from 'typeorm';
