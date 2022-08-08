@@ -8,14 +8,18 @@ import {
   Delete,
 } from '@nestjs/common';
 import { FlashcardsService } from './flashcards.service';
-import { CreateFlashcardDto } from './dto/create-flashcard.dto';
-import { UpdateFlashcardDto } from './dto/update-flashcard.dto';
+import {
+  CreateFlashcardDto,
+  UpdateFlashcardDto,
+} from '@leitner/types';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Flashcards')
 @Controller('flashcards')
 export class FlashcardsController {
-  constructor(private readonly flashcardsService: FlashcardsService) {}
+  constructor(
+    private readonly flashcardsService: FlashcardsService
+  ) {}
 
   @Post()
   create(@Body() createFlashcardDto: CreateFlashcardDto) {
@@ -37,7 +41,10 @@ export class FlashcardsController {
     @Param('id') id: string,
     @Body() updateFlashcardDto: UpdateFlashcardDto
   ) {
-    return this.flashcardsService.update(Number(id), updateFlashcardDto);
+    return this.flashcardsService.update(
+      Number(id),
+      updateFlashcardDto
+    );
   }
 
   @Delete(':id')
