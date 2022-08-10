@@ -7,30 +7,45 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Flashcard } from './entities/flashcard.entity';
 import { Repository } from 'typeorm';
 
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
+
 @Injectable()
 export class FlashcardsService {
   constructor(
     @InjectRepository(Flashcard)
-    private flashcardsRepository: Repository<Flashcard>
+    private repository: Repository<Flashcard>
   ) {}
 
+  async paginate(
+    options: IPaginationOptions
+  ): Promise<Pagination<Flashcard>> {
+    const queryBuilder = this.repository.createQueryBuilder('q');
+    queryBuilder.orderBy('q.word', 'DESC');
+
+    return paginate<Flashcard>(queryBuilder, options);
+  }
+
   create(createFlashcardDto: CreateFlashcardDto) {
-    return this.flashcardsRepository.save(createFlashcardDto);
+    return this.repository.save(createFlashcardDto);
   }
 
   findAll() {
-    return this.flashcardsRepository.find();
+    return this.repository.find();
   }
 
   findOne(id: number) {
-    return this.flashcardsRepository.findOneBy({ id });
+    return this.repository.findOneBy({ id });
   }
 
   update(id: number, updateFlashcardDto: UpdateFlashcardDto) {
-    return this.flashcardsRepository.save({ updateFlashcardDto, id });
+    return this.repository.save({ updateFlashcardDto, id });
   }
 
   remove(id: number) {
-    return this.flashcardsRepository.delete(id);
+    return this.repository.delete(id);
   }
 }
