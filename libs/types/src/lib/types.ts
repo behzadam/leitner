@@ -1,5 +1,5 @@
-export * from './create-flashcard.dto';
-export * from './update-flashcard.dto';
+export * from './flashcard/create-flashcard.dto';
+export * from './flashcard/update-flashcard.dto';
 
-export * from './create-user.dto';
-export * from './update-user.dto';
+export * from './user/create-user.dto';
+export * from './user/update-user.dto';
