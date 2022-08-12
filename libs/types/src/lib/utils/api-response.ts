@@ -1,9 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-
 export class Response {
-  @ApiProperty()
   code: number;
-  @ApiProperty()
   message: string;
 }
 
@@ -23,10 +19,7 @@ interface PaginationLinks {
 }
 
 export class PaginatedDto<TData> extends Response {
-  @ApiProperty()
   meta: PaginationMeta;
-  @ApiProperty()
   links: PaginationLinks;
-  @ApiProperty()
   items: TData[];
 }
