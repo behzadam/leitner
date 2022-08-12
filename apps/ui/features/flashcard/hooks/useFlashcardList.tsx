@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { fetchFlashcards } from "../Flashcard.slice";
-import { useAppDispatch, useAppSelector } from "@/store/index";
+import { useAppDispatch, useAppSelector } from "@ui/store/index";
 
 const useFlashcardList = () => {
   const { items } = useAppSelector(store => store.flashcards)
