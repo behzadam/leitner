@@ -5,11 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import { useState } from 'react';
 import FlashcardFormCreate from './Flashcard.form.create';
 import FlashcardFormEdit from './Flashcard.form.edit';
-import { useAppDispatch } from "@/store/index";
 import { createFlashcard, deleteFlashcard, updateFlashcard } from './Flashcard.slice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import NoRows from '@/components/NoRows';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import NoRows from '@ui/components/NoRows';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { useAppDispatch } from "@ui/store/index";
 
 
 type Props = {
