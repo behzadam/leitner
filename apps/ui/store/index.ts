@@ -3,7 +3,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
-import flashcardReducer from '@/features/flashcard/Flashcard.slice';
+import flashcardReducer from '@ui/features/flashcard/Flashcard.slice';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({

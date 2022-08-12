@@ -7,8 +7,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState, } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-import type { RootState } from '@/store/index'
-import flashcardReducer from '@/features/flashcard/FlashcardSlice'
+import type { RootState } from '@ui/store/index'
+import flashcardReducer from '@ui/features/flashcard/FlashcardSlice'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
