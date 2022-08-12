@@ -14,11 +14,19 @@
     "types": ["jest", "node"],
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/store/*": ["store/*"],
-      "@/features/*": ["features/*"]
+      "@shared/types": ["../../libs/types/src/index.ts"],
+      "@ui/components/*": ["components/*"],
+      "@ui/store/*": ["store/*"],
+      "@ui/features/*": ["features/*"],
+      "@ui/utils/*": ["utils/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "next-env.d.ts"
+  ],
   "exclude": ["node_modules", "jest.config.ts"]
 }
