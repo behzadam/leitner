@@ -4,15 +4,14 @@ import {
   UpdateFlashcardDto,
   Flashcard,
 } from '@shared/types';
-
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
 import {
   paginate,
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { FlashcardListItemDto } from '@shared/types';
 
 @Injectable()
 export class FlashcardsService {
@@ -34,8 +33,13 @@ export class FlashcardsService {
     return this.repository.save(createFlashcardDto);
   }
 
-  findAll(): Promise<Flashcard[]> {
-    return this.repository.find();
+  async findAll(): Promise<FlashcardListItemDto[]> {
+    const flashcards: Flashcard[] = await this.repository.find();
+    const mapped: FlashcardListItemDto[] = flashcards.map(
+      (flashcard) => {
+        return new FlashcardListItemDto();
+      }
+    );
   }
 
   findOne(id: number): Promise<Flashcard> {
