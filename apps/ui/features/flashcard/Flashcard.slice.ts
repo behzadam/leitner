@@ -1,11 +1,16 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import { Flashcard, PaginatedDto } from '@shared/types';
 import axios from 'axios';
 import * as api from './Flashcard.api';
 
 export const fetchFlashcards = createAsyncThunk(
   'flashcard/fetchFlashcards',
   async () => {
-    const response = await axios.get('/flashcards');
+    const response = await api.fetchFlashcards();
     return response.data;
   }
 );
@@ -46,7 +51,7 @@ export const updateFlashcard = createAsyncThunk(
 );
 
 export type FlashcardState = {
-  items: any[];
+  items: Flashcard[];
 };
 
 export const initialState: FlashcardState = {
@@ -58,9 +63,12 @@ const flashcardSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFlashcards.fulfilled, (state, action) => {
-        state.items = action.payload;
-      })
+      .addCase(
+        fetchFlashcards.fulfilled,
+        (state, action: PayloadAction<PaginatedDto<Flashcard>>) => {
+          state.items = action.payload.items;
+        }
+      )
       .addCase(createFlashcard.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
