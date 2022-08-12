@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from '@leitner/types';
+import { CreateUserDto, UpdateUserDto } from '@shared/types';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Users')

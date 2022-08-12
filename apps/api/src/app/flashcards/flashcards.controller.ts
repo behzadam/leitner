@@ -13,10 +13,10 @@ import {
 import {
   CreateFlashcardDto,
   UpdateFlashcardDto,
-} from '@leitner/types';
+  Flashcard,
+} from '@shared/types';
 import { FlashcardsService } from './flashcards.service';
 import { ApiTags } from '@nestjs/swagger';
-import { Flashcard } from './entities/flashcard.entity';
 import { ApiPaginatedResponse } from '../../common';
 import { Pagination } from 'nestjs-typeorm-paginate';
 

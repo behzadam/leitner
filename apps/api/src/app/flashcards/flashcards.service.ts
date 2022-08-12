@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import {
   CreateFlashcardDto,
   UpdateFlashcardDto,
-} from '@leitner/types';
+  Flashcard,
+} from '@shared/types';
+
 import { InjectRepository } from '@nestjs/typeorm';
-import { Flashcard } from './entities/flashcard.entity';
 import { Repository } from 'typeorm';
 
 import {
@@ -33,11 +34,11 @@ export class FlashcardsService {
     return this.repository.save(createFlashcardDto);
   }
 
-  findAll() {
+  findAll(): Promise<Flashcard[]> {
     return this.repository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Flashcard> {
     return this.repository.findOneBy({ id });
   }
 
