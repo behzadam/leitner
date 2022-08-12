@@ -1,6 +1,6 @@
 import { Box, TextField, Stack, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { isEmpty } from 'utils/isEmpty';
+import { isEmpty } from '@ui/utils/isEmpty';
 
 type FlashcardFormProps = {
   // TODO: should replace any with DTO
