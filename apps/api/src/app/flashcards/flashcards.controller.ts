@@ -10,14 +10,16 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
+
 import {
   CreateFlashcardDto,
   UpdateFlashcardDto,
-  Flashcard,
+  FlashcardListItemDto,
 } from '@shared/types';
+
 import { FlashcardsService } from './flashcards.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiPaginatedResponse } from '../../common';
+import { ApiPaginatedResponse, ApiResponse } from '../../common';
 import { Pagination } from 'nestjs-typeorm-paginate';
 
 @ApiTags('Flashcards')
@@ -33,13 +35,13 @@ export class FlashcardsController {
   }
 
   @Get()
-  @ApiPaginatedResponse(Flashcard)
+  @ApiPaginatedResponse(FlashcardListItemDto)
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
     limit = 10
-  ): Promise<Pagination<Flashcard>> {
+  ): Promise<Pagination<FlashcardListItemDto>> {
     return this.flashcardsService.paginate({
       page: page,
       limit: limit,
@@ -53,6 +55,7 @@ export class FlashcardsController {
   }
 
   @Patch(':id')
+  @ApiResponse(FlashcardListItemDto)
   update(
     @Param('id') id: string,
     @Body() updateFlashcardDto: UpdateFlashcardDto
