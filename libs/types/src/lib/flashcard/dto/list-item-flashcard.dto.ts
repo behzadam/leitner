@@ -1,12 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { CreateFlashcardDto } from './create-flashcard.dto';
 
-export class FlashcardListItemDto {
+export class FlashcardListItemDto extends PartialType(
+  CreateFlashcardDto
+) {
   @ApiProperty()
-  word: string;
-
-  @ApiProperty()
-  translate: string;
-
-  @ApiProperty()
-  description?: string;
+  id: number;
 }
