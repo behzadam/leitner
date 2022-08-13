@@ -1,6 +1,10 @@
-export class Response {
+export class ResponseBase {
   code: number;
   message: string;
+}
+
+export class Response<TData> extends ResponseBase {
+  data: TData;
 }
 
 interface PaginationMeta {
@@ -18,7 +22,7 @@ interface PaginationLinks {
   last: string;
 }
 
-export class PaginatedDto<TData> extends Response {
+export class PaginatedDto<TData> extends ResponseBase {
   meta: PaginationMeta;
   links: PaginationLinks;
   items: TData[];
