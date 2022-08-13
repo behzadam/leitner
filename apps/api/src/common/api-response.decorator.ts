@@ -1,4 +1,4 @@
-import { PaginatedDto } from '@shared/types';
+import { PaginatedDto, Response } from '@shared/types';
 import { applyDecorators, Type } from '@nestjs/common';
 import {
   ApiExtraModels,
