@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import {
   CreateFlashcardDto,
   UpdateFlashcardDto,
-  Flashcard,
 } from '@shared/types';
 import {
   paginate,
@@ -12,6 +11,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FlashcardListItemDto } from '@shared/types';
+import { Flashcard } from './entities/flashcard.entity';
 
 @Injectable()
 export class FlashcardsService {
@@ -23,34 +23,52 @@ export class FlashcardsService {
   async paginate(
     options: IPaginationOptions
   ): Promise<Pagination<Flashcard>> {
-    const queryBuilder = this.repository.createQueryBuilder('q');
+    const queryBuilder = await this.repository.createQueryBuilder(
+      'q'
+    );
     queryBuilder.orderBy('q.word', 'DESC');
-
     return paginate<Flashcard>(queryBuilder, options);
   }
 
-  create(createFlashcardDto: CreateFlashcardDto) {
-    return this.repository.save(createFlashcardDto);
+  async create(createFlashcardDto: CreateFlashcardDto) {
+    return await this.repository.save(createFlashcardDto);
   }
 
   async findAll(): Promise<FlashcardListItemDto[]> {
     const flashcards: Flashcard[] = await this.repository.find();
-    const mapped: FlashcardListItemDto[] = flashcards.map(
-      (flashcard) => {
-        return new FlashcardListItemDto();
-      }
+    return flashcards.map((entity: Flashcard) =>
+      this.toFlashcardListItemDto(entity)
     );
   }
 
-  findOne(id: number): Promise<Flashcard> {
-    return this.repository.findOneBy({ id });
+  async findOne(id: number): Promise<FlashcardListItemDto> {
+    const flashcard: Flashcard = await this.repository.findOneBy({
+      id,
+    });
+    return this.toFlashcardListItemDto(flashcard);
   }
 
-  update(id: number, updateFlashcardDto: UpdateFlashcardDto) {
-    return this.repository.save({ updateFlashcardDto, id });
+  async update(
+    id: number,
+    updateFlashcardDto: UpdateFlashcardDto
+  ): Promise<FlashcardListItemDto> {
+    const flashcard: Flashcard = await this.repository.save({
+      ...updateFlashcardDto,
+      id,
+    });
+    return this.toFlashcardListItemDto(flashcard);
   }
 
-  remove(id: number) {
-    return this.repository.delete(id);
+  async remove(id: number) {
+    return await this.repository.delete(id);
+  }
+
+  toFlashcardListItemDto(entity: Flashcard): FlashcardListItemDto {
+    const dto = new FlashcardListItemDto();
+    dto.id = entity.id;
+    dto.word = entity.word;
+    dto.translate = entity.translate;
+    dto.description = entity.description;
+    return dto;
   }
 }
