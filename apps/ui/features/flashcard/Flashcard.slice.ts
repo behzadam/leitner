@@ -3,9 +3,10 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { Flashcard, PaginatedDto } from '@shared/types';
+import { PaginatedDto, UpdateFlashcardDto } from '@shared/types';
 import axios from 'axios';
 import * as api from './Flashcard.api';
+import { FlashcardListItemDto } from '../../../../libs/types/src/lib/flashcard/dto/list-item-flashcard.dto';
 
 export const fetchFlashcards = createAsyncThunk(
   'flashcard/fetchFlashcards',
@@ -51,7 +52,7 @@ export const updateFlashcard = createAsyncThunk(
 );
 
 export type FlashcardState = {
-  items: Flashcard[];
+  items: UpdateFlashcardDto[];
 };
 
 export const initialState: FlashcardState = {
@@ -65,7 +66,10 @@ const flashcardSlice = createSlice({
     builder
       .addCase(
         fetchFlashcards.fulfilled,
-        (state, action: PayloadAction<PaginatedDto<Flashcard>>) => {
+        (
+          state,
+          action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
+        ) => {
           state.items = action.payload.items;
         }
       )
@@ -79,23 +83,29 @@ const flashcardSlice = createSlice({
         if (index < 0) return;
         state.items.splice(index, 1);
       })
-      .addCase(updateFlashcard.fulfilled, (state, action) => {
-        const { id, word, translate, description } = action.payload;
-        console.log(
-          'addCase',
-          id,
-          word,
-          translate,
-          description,
-          action.payload
-        );
-        // state.items = state.items.map((item) => {
-        //   if (item.id === action.payload.id) {
-        //     const { word, translate, description } =
-        //     item = { ...item, ...action.payload };
-        //   }
-        // });
-      });
+      .addCase(
+        updateFlashcard.fulfilled,
+        (
+          state: FlashcardState,
+          action: PayloadAction<UpdateFlashcardDto>
+        ) => {
+          const items = state.items.map((item) => {
+            if (item.id !== action.payload.id) {
+              return item;
+            }
+
+            return {
+              ...item,
+              ...action.payload,
+            };
+          });
+
+          return {
+            ...state,
+            items: items,
+          };
+        }
+      );
   },
   reducers: undefined,
 });
