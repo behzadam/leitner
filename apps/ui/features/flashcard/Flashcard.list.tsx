@@ -8,15 +8,13 @@ import FlashcardFormEdit from './Flashcard.form.edit';
 import { createFlashcard, deleteFlashcard, updateFlashcard } from './Flashcard.slice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import NoRows from '@ui/components/NoRows';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { useAppDispatch } from "@ui/store/index";
+import { FlashcardListItemDto } from '@shared/types';
 
 
 type Props = {
-  // should replace with shared DTO
-  items: any[]
+  items: FlashcardListItemDto[]
 }
 
 
@@ -56,7 +54,7 @@ const FlashcardList = ({ items }: Props) => {
   ]
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [flashcard, setFlashCard] = useState({
+  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>({
     id: -1,
     word: null,
     translate: null,
