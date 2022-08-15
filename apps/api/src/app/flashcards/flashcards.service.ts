@@ -23,12 +23,18 @@ export class FlashcardsService {
 
   async paginate(
     options: IPaginationOptions
-  ): Promise<Pagination<Flashcard>> {
-    const queryBuilder = await this.repository.createQueryBuilder(
-      'q'
+  ): Promise<Pagination<FlashcardListItemDto>> {
+    const queryBuilder = this.repository.createQueryBuilder('q');
+    queryBuilder.orderBy('q.createdAt', 'ASC');
+    const results = await paginate<Flashcard>(queryBuilder, options);
+    const items = results.items.map((entity: Flashcard) =>
+      this.toFlashcardListItemDto(entity)
     );
-    queryBuilder.orderBy('q.word', 'DESC');
-    return paginate<Flashcard>(queryBuilder, options);
+    return new Pagination<FlashcardListItemDto>(
+      items,
+      results.meta,
+      results.links
+    );
   }
 
   async create(createFlashcardDto: CreateFlashcardDto) {
@@ -74,6 +80,7 @@ export class FlashcardsService {
     dto.word = entity.word;
     dto.translate = entity.translate;
     dto.description = entity.description;
+    dto.createdAt = entity.createdAt;
     return dto;
   }
 }
