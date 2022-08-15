@@ -9,6 +9,7 @@ import {
   DefaultValuePipe,
   Query,
   ParseIntPipe,
+  Logger,
 } from '@nestjs/common';
 
 import {
@@ -36,17 +37,18 @@ export class FlashcardsController {
 
   @Get()
   @ApiPaginatedResponse(FlashcardListItemDto)
-  findAll(
+  async findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
     limit = 10
   ): Promise<Pagination<FlashcardListItemDto>> {
-    return this.flashcardsService.paginate({
+    const results = await this.flashcardsService.paginate({
       page: page,
       limit: limit,
       route: '',
     });
+    return results;
   }
 
   @Get(':id')
