@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
+  COPYRIGHT_TEXT,
   CreateFlashcardDto,
   UpdateFlashcardDto,
 } from '@shared/types';
@@ -31,6 +32,10 @@ export class FlashcardsService {
   }
 
   async create(createFlashcardDto: CreateFlashcardDto) {
+    if (createFlashcardDto.description) {
+      createFlashcardDto.description =
+        createFlashcardDto.description.concat(' ', COPYRIGHT_TEXT);
+    }
     return await this.repository.save(createFlashcardDto);
   }
 

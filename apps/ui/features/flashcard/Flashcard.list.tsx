@@ -67,6 +67,7 @@ const FlashcardList = ({ items }: Props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setIsEdit(false);
   }
 
   const handleClickOpen = () => {
@@ -93,7 +94,6 @@ const FlashcardList = ({ items }: Props) => {
         dispatch(createFlashcard(data))
       }
       handleClose()
-      setIsEdit(false)
     } catch (error) {
       setIsEdit(false)
     }
