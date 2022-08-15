@@ -6,4 +6,7 @@ export class FlashcardListItemDto extends PartialType(
 ) {
   @ApiProperty()
   id: number;
+
+  @ApiProperty()
+  createdAt: Date;
 }

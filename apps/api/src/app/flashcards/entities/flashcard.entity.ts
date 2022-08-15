@@ -4,6 +4,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -35,4 +38,13 @@ export class Flashcard extends BaseEntity {
   })
   @Column()
   description: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

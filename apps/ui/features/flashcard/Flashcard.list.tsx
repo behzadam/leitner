@@ -27,6 +27,11 @@ const FlashcardList = ({ items }: Props) => {
       flex: 1
     },
     {
+      field: 'createdAt',
+      headerName: 'Created',
+      minWidth: 120
+    },
+    {
       field: "actions",
       headerName: "Actions",
       minWidth: 60,
@@ -54,12 +59,7 @@ const FlashcardList = ({ items }: Props) => {
   ]
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>({
-    id: -1,
-    word: null,
-    translate: null,
-    description: null
-  })
+  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
