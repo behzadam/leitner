@@ -40,11 +40,11 @@ export class Flashcard extends BaseEntity {
   description: string;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updatedAt: Date;
 
   @DeleteDateColumn()
-  deletedDate: Date;
+  deletedAt: Date;
 }
