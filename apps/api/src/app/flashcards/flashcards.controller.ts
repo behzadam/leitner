@@ -31,8 +31,10 @@ export class FlashcardsController {
   ) {}
 
   @Post()
-  create(@Body() createFlashcardDto: CreateFlashcardDto) {
-    return this.flashcardsService.create(createFlashcardDto);
+  async create(
+    @Body() createFlashcardDto: CreateFlashcardDto
+  ): Promise<FlashcardListItemDto> {
+    return await this.flashcardsService.create(createFlashcardDto);
   }
 
   @Get()
