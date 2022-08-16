@@ -17,10 +17,10 @@
     "paths": {
       "@shared/types": ["../../libs/types/src/index.ts"],
       "@ui/types": ["types/index.ts"],
-      "@ui/components": ["components/*"],
-      "@ui/store": ["store/*"],
-      "@ui/features": ["features/*"],
-      "@ui/utils": ["utils/*"]
+      "@ui/components/*": ["components/*"],
+      "@ui/store/*": ["store/*"],
+      "@ui/features/*": ["features/*"],
+      "@ui/utils/*": ["utils/*"]
     }
   },
   "include": [
