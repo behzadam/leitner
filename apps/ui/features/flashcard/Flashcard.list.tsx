@@ -12,6 +12,7 @@ import NoRows from '@ui/components/NoRows';
 import { useAppDispatch } from "@ui/store/index";
 import { FlashcardListItemDto } from '@shared/types';
 import useFlashcardList from './hooks/useFlashcardList';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const FlashcardList = () => {
   const columns: GridColDef[] = [
@@ -54,13 +55,8 @@ const FlashcardList = () => {
   ]
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>({
-    id: -1,
-    word: null,
-    translate: null,
-    description: null
-  })
-  const { flashcards } = useFlashcardList();
+  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
+  const { flashcards, fetchFlashcardsStatus } = useFlashcardList();
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
@@ -125,11 +121,19 @@ const FlashcardList = () => {
           <DataGrid
             components={{
               NoRowsOverlay: NoRows,
+              LoadingOverlay: LinearProgress,
             }}
+            loading={fetchFlashcardsStatus === 'PENDING'}
             rows={flashcards.items}
             columns={columns}
-            pageSize={flashcards.meta.totalPages}
+            initialState={{
+              pagination: {
+                page: 1,
+              },
+            }}
+            pageSize={5}
             rowsPerPageOptions={[flashcards.meta.itemsPerPage]}
+            pagination
           />
         </Paper>
       </Box>
