@@ -1,13 +1,13 @@
 export class ResponseBase {
-  code: number;
-  message: string;
+  code?: number;
+  message?: string;
 }
 
 export class Response<TData> extends ResponseBase {
   data: TData;
 }
 
-interface PaginationMeta {
+export interface PaginationMeta {
   totalItems: number;
   itemCount: number;
   itemsPerPage: number;
@@ -15,7 +15,7 @@ interface PaginationMeta {
   currentPage: number;
 }
 
-interface PaginationLinks {
+export interface PaginationLinks {
   first: string;
   previous: string;
   next: string;

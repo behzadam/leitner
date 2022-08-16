@@ -37,12 +37,15 @@ export class FlashcardsService {
     );
   }
 
-  async create(createFlashcardDto: CreateFlashcardDto) {
+  async create(
+    createFlashcardDto: CreateFlashcardDto
+  ): Promise<FlashcardListItemDto> {
     if (createFlashcardDto.description) {
       createFlashcardDto.description =
         createFlashcardDto.description.concat(' ', COPYRIGHT_TEXT);
     }
-    return await this.repository.save(createFlashcardDto);
+    const flashcard = await this.repository.save(createFlashcardDto);
+    return this.toFlashcardListItemDto(flashcard);
   }
 
   async findAll(): Promise<FlashcardListItemDto[]> {
