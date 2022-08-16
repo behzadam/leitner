@@ -11,14 +11,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import NoRows from '@ui/components/NoRows';
 import { useAppDispatch } from "@ui/store/index";
 import { FlashcardListItemDto } from '@shared/types';
+import useFlashcardList from './hooks/useFlashcardList';
 
-
-type Props = {
-  items: FlashcardListItemDto[]
-}
-
-
-const FlashcardList = ({ items }: Props) => {
+const FlashcardList = () => {
   const columns: GridColDef[] = [
     {
       field: 'word',
@@ -59,7 +54,13 @@ const FlashcardList = ({ items }: Props) => {
   ]
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
+  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>({
+    id: -1,
+    word: null,
+    translate: null,
+    description: null
+  })
+  const { flashcards } = useFlashcardList();
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
@@ -79,7 +80,7 @@ const FlashcardList = ({ items }: Props) => {
   }
 
   const handleEditRow = (id: number) => {
-    const flashcard = items.find(item => item.id === id)
+    const flashcard = flashcards.items.find(item => item.id === id)
     if (!flashcard) return;
     setFlashCard(flashcard)
     setIsEdit(true);
@@ -125,10 +126,10 @@ const FlashcardList = ({ items }: Props) => {
             components={{
               NoRowsOverlay: NoRows,
             }}
-            rows={items}
+            rows={flashcards.items}
             columns={columns}
-            pageSize={6}
-            rowsPerPageOptions={[6]}
+            pageSize={flashcards.meta.totalPages}
+            rowsPerPageOptions={[flashcards.meta.itemsPerPage]}
           />
         </Paper>
       </Box>

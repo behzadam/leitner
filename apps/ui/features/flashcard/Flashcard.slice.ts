@@ -3,10 +3,13 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { PaginatedDto, UpdateFlashcardDto } from '@shared/types';
+import {
+  FlashcardListItemDto,
+  PaginatedDto,
+  UpdateFlashcardDto,
+} from '@shared/types';
 import axios from 'axios';
 import * as api from './Flashcard.api';
-import { FlashcardListItemDto } from '../../../../libs/types/src/lib/flashcard/dto/list-item-flashcard.dto';
 
 export const fetchFlashcards = createAsyncThunk(
   'flashcard/fetchFlashcards',
@@ -26,86 +29,68 @@ export const fetchFlashcardById = createAsyncThunk(
 
 export const createFlashcard = createAsyncThunk(
   'flashcard/createFlashcard',
-  async (params: any) => {
+  async (params: any, { dispatch }) => {
     const response = await axios.post('/flashcards', params);
+    dispatch(fetchFlashcards());
     return response.data;
   }
 );
 
 export const deleteFlashcard = createAsyncThunk(
   'flashcard/deleteFlashcard',
-  async (id: number) => {
+  async (id: number, { dispatch }) => {
     const item = await api.fetchFlashcardById(id);
     if (!item.data) return;
     await axios.delete(`/flashcards/${id}`);
-    return id;
+    dispatch(fetchFlashcards());
   }
 );
 
 export const updateFlashcard = createAsyncThunk(
   'flashcard/updateFlashcard',
-  async (params: any) => {
+  async (params: any, { dispatch }) => {
     // TODO: should ckeck if data is existing
-    const response = await api.updateFlashcard(params);
-    return response.data;
+    await api.updateFlashcard(params);
+    dispatch(fetchFlashcards());
   }
 );
 
 export type FlashcardState = {
-  items: UpdateFlashcardDto[];
+  flashcards: PaginatedDto<FlashcardListItemDto>;
 };
 
 export const initialState: FlashcardState = {
-  items: [],
+  flashcards: {
+    items: [],
+    meta: {
+      currentPage: 1,
+      itemCount: 0,
+      itemsPerPage: 10,
+      totalItems: 0,
+      totalPages: 1,
+    },
+    links: {
+      first: '',
+      last: '',
+      next: '',
+      previous: '',
+    },
+  },
 };
 
 const flashcardSlice = createSlice({
   name: 'FlashcardSlice',
   initialState,
   extraReducers: (builder) => {
-    builder
-      .addCase(
-        fetchFlashcards.fulfilled,
-        (
-          state,
-          action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
-        ) => {
-          state.items = action.payload.items;
-        }
-      )
-      .addCase(createFlashcard.fulfilled, (state, action) => {
-        state.items.push(action.payload);
-      })
-      .addCase(deleteFlashcard.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
-          ({ id }) => id === action.payload
-        );
-        if (index < 0) return;
-        state.items.splice(index, 1);
-      })
-      .addCase(
-        updateFlashcard.fulfilled,
-        (
-          state: FlashcardState,
-          action: PayloadAction<UpdateFlashcardDto>
-        ) => {
-          const items = state.items.map((item) => {
-            if (item.id !== action.payload.id) {
-              return item;
-            }
-
-            return {
-              ...item,
-              ...action.payload,
-            };
-          });
-
-          return {
-            ...state,
-            items: items,
-          };
-        }
-      );
+    builder.addCase(
+      fetchFlashcards.fulfilled,
+      (
+        state,
+        action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
+      ) => {
+        state.flashcards = action.payload;
+      }
+    );
   },
   reducers: undefined,
 });
