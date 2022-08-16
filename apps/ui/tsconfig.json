@@ -16,10 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@shared/types": ["../../libs/types/src/index.ts"],
-      "@ui/components/*": ["components/*"],
-      "@ui/store/*": ["store/*"],
-      "@ui/features/*": ["features/*"],
-      "@ui/utils/*": ["utils/*"]
+      "@ui/types": ["types/index.ts"],
+      "@ui/components": ["components/*"],
+      "@ui/store": ["store/*"],
+      "@ui/features": ["features/*"],
+      "@ui/utils": ["utils/*"]
     }
   },
   "include": [
