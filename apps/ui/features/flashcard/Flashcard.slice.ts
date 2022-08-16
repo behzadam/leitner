@@ -3,12 +3,9 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import {
-  FlashcardListItemDto,
-  PaginatedDto,
-  UpdateFlashcardDto,
-} from '@shared/types';
+import { FlashcardListItemDto, PaginatedDto } from '@shared/types';
 import axios from 'axios';
+import { ApiStatus } from '@ui/types';
 import * as api from './Flashcard.api';
 
 export const fetchFlashcards = createAsyncThunk(
@@ -57,6 +54,7 @@ export const updateFlashcard = createAsyncThunk(
 
 export type FlashcardState = {
   flashcards: PaginatedDto<FlashcardListItemDto>;
+  fetchFlashcardsStatus: ApiStatus;
 };
 
 export const initialState: FlashcardState = {
@@ -76,21 +74,30 @@ export const initialState: FlashcardState = {
       previous: '',
     },
   },
+  fetchFlashcardsStatus: 'IDLE',
 };
 
 const flashcardSlice = createSlice({
   name: 'FlashcardSlice',
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchFlashcards.fulfilled,
-      (
-        state,
-        action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
-      ) => {
-        state.flashcards = action.payload;
-      }
-    );
+    builder
+      .addCase(
+        fetchFlashcards.fulfilled,
+        (
+          state,
+          action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
+        ) => {
+          state.fetchFlashcardsStatus = 'SUCCEEDED';
+          state.flashcards = action.payload;
+        }
+      )
+      .addCase(fetchFlashcards.pending, (state) => {
+        state.fetchFlashcardsStatus = 'PENDING';
+      })
+      .addCase(fetchFlashcards.rejected, (state) => {
+        state.fetchFlashcardsStatus = 'FAILED';
+      });
   },
   reducers: undefined,
 });
