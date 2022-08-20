@@ -3,12 +3,14 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
-import flashcardReducer from '@ui/features/flashcard/Flashcard.slice';
+import flashcardReducer from '@ui/features/flashcard/flashcardSlice';
+import { NotificationReducer } from '@ui/features/notification/notificationSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
     flashcards: flashcardReducer,
+    notification: NotificationReducer,
   },
 });
 

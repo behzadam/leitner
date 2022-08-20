@@ -1,8 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   COPYRIGHT_TEXT,
   CreateFlashcardDto,
   UpdateFlashcardDto,
+  FlashcardListItemDto,
 } from '@shared/types';
 import {
   paginate,
@@ -11,7 +12,6 @@ import {
 } from 'nestjs-typeorm-paginate';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { FlashcardListItemDto } from '@shared/types';
 import { Flashcard } from './entities/flashcard.entity';
 
 @Injectable()
