@@ -16,6 +16,7 @@ const Notification = (): JSX.Element => {
       open={notification.open}
       autoHideDuration={notification.timeout}
       onClose={handleClose}
+      anchorOrigin={{ vertical: notification.vertical, horizontal: notification.horizontal }}
     >
       <p>
         {notification.message}

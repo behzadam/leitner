@@ -1,18 +1,22 @@
-import { AlertColor } from '@mui/material';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+type vertical = 'top' | 'bottom';
+type horizontal = 'left' | 'right' | 'center';
 
 export interface NotificationState {
   open?: boolean;
-  type?: AlertColor;
   message: string;
   timeout?: number | null;
+  vertical?: vertical;
+  horizontal?: horizontal;
 }
 
 export const notificationInitialState: NotificationState = {
   open: false,
-  type: 'info',
   message: '',
-  timeout: 1500,
+  timeout: 2000,
+  vertical: 'bottom',
+  horizontal: 'center',
 };
 
 export const NotificationSlice = createSlice({
