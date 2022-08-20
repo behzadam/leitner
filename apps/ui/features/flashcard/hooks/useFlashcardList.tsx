@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { fetchFlashcards } from "../Flashcard.slice";
+import { fetchFlashcards } from "../flashcardSlice";
 import { useAppDispatch, useAppSelector } from "@ui/store/index";
 
 const useFlashcardList = () => {
