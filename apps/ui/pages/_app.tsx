@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
+import Notification from '@ui/features/notification/Notification';
 
 import axios from "axios";
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -28,6 +29,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <main>
           <Provider store={store}>
             <Component {...pageProps} />
+            <Notification />
           </Provider>
         </main>
       </ThemeProvider>

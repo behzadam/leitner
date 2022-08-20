@@ -13,6 +13,7 @@ import { useAppDispatch } from "@ui/store/index";
 import { FlashcardListItemDto } from '@shared/types';
 import useFlashcardList from './hooks/useFlashcardList';
 import LinearProgress from '@mui/material/LinearProgress';
+import { useNotification } from '@ui/features/notification/useNotification';
 
 const FlashcardList = () => {
   const columns: GridColDef[] = [
@@ -57,6 +58,7 @@ const FlashcardList = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
   const { flashcards, fetchFlashcardsStatus } = useFlashcardList();
+  const { showNotification } = useNotification();
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
@@ -86,13 +88,15 @@ const FlashcardList = () => {
   const handleSubmit = (data: any) => {
     try {
       if (isEdit) {
-        dispatch(updateFlashcard(data))
+        dispatch(updateFlashcard(data));
+        showNotification({ message: 'Flashcard updated successfully.' });
       } else {
-        dispatch(createFlashcard(data))
+        dispatch(createFlashcard(data));
+        showNotification({ message: 'Flashcard created successfully.' });
       }
-      handleClose()
+      handleClose();
     } catch (error) {
-      setIsEdit(false)
+      setIsEdit(false);
     }
   }
 
