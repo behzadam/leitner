@@ -74,7 +74,7 @@ export class FlashcardsService {
   }
 
   async remove(id: number) {
-    return await this.repository.delete(id);
+    return await this.repository.softDelete(id);
   }
 
   toFlashcardListItemDto(entity: Flashcard): FlashcardListItemDto {
