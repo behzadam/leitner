@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { FlashcardsModule } from './flashcards/flashcards.module';
+import { FlashcardSubscriber } from './flashcards/flashcards.subscriber';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { FlashcardsModule } from './flashcards/flashcards.module';
       entities: [],
       synchronize: true,
       autoLoadEntities: true,
+      subscribers: [FlashcardSubscriber],
     }),
     UsersModule,
     FlashcardsModule,
