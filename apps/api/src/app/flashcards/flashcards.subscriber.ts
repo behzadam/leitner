@@ -15,7 +15,6 @@ export class FlashcardSubscriber
   constructor() {}
 
   listenTo() {
-    Logger.log('listenTo');
     return Flashcard;
   }
 
