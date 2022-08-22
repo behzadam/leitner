@@ -9,7 +9,6 @@ import {
   DefaultValuePipe,
   Query,
   ParseIntPipe,
-  Logger,
 } from '@nestjs/common';
 
 import {
@@ -22,6 +21,7 @@ import { FlashcardsService } from './flashcards.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ApiPaginatedResponse, ApiResponse } from '../../common';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { Logger } from '@nestjs/common';
 
 @ApiTags('Flashcards')
 @Controller('flashcards')
@@ -54,8 +54,8 @@ export class FlashcardsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.flashcardsService.findOne(Number(id));
+  async findOne(@Param('id') id: string) {
+    return await this.flashcardsService.findHistories(Number(id));
   }
 
   @Patch(':id')

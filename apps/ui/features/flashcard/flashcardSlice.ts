@@ -7,6 +7,7 @@ import { FlashcardListItemDto, PaginatedDto } from '@shared/types';
 import axios from 'axios';
 import { ApiStatus } from '@ui/types';
 import * as api from './Flashcard.api';
+import { S } from 'msw/lib/glossary-297d38ba';
 
 export const fetchFlashcards = createAsyncThunk(
   'flashcard/fetchFlashcards',
@@ -20,6 +21,14 @@ export const fetchFlashcardById = createAsyncThunk(
   'flashcard/fetchFlashcardById',
   async (id: number) => {
     const response = await api.fetchFlashcardById(id);
+    return response.data;
+  }
+);
+
+export const fetchFlashcardHistory = createAsyncThunk(
+  'flashcard/fetchFlashcardHistory',
+  async (id: number) => {
+    const response = await api.fetchFlashcardHistory(id);
     return response.data;
   }
 );
@@ -54,27 +63,31 @@ export const updateFlashcard = createAsyncThunk(
 
 export type FlashcardState = {
   flashcards: PaginatedDto<FlashcardListItemDto>;
-  fetchFlashcardsStatus: ApiStatus;
+  flashcardHistory: FlashcardListItemDto[];
+  status: ApiStatus;
+};
+
+const defaultFlashcards: PaginatedDto<FlashcardListItemDto> = {
+  items: [],
+  meta: {
+    currentPage: 1,
+    itemCount: 0,
+    itemsPerPage: 10,
+    totalItems: 0,
+    totalPages: 1,
+  },
+  links: {
+    first: '',
+    last: '',
+    next: '',
+    previous: '',
+  },
 };
 
 export const initialState: FlashcardState = {
-  flashcards: {
-    items: [],
-    meta: {
-      currentPage: 1,
-      itemCount: 0,
-      itemsPerPage: 10,
-      totalItems: 0,
-      totalPages: 1,
-    },
-    links: {
-      first: '',
-      last: '',
-      next: '',
-      previous: '',
-    },
-  },
-  fetchFlashcardsStatus: 'IDLE',
+  flashcards: { ...defaultFlashcards },
+  flashcardHistory: { ...defaultFlashcards },
+  status: 'IDLE',
 };
 
 const flashcardSlice = createSlice({
@@ -88,15 +101,28 @@ const flashcardSlice = createSlice({
           state,
           action: PayloadAction<PaginatedDto<FlashcardListItemDto>>
         ) => {
-          state.fetchFlashcardsStatus = 'SUCCEEDED';
+          state.status = 'SUCCEEDED';
           state.flashcards = action.payload;
         }
       )
       .addCase(fetchFlashcards.pending, (state) => {
-        state.fetchFlashcardsStatus = 'PENDING';
+        state.status = 'PENDING';
       })
       .addCase(fetchFlashcards.rejected, (state) => {
-        state.fetchFlashcardsStatus = 'FAILED';
+        state.status = 'FAILED';
+      })
+      .addCase(
+        fetchFlashcardHistory.fulfilled,
+        (state, action: PayloadAction<FlashcardListItemDto[]>) => {
+          state.status = 'SUCCEEDED';
+          state.flashcardHistory = action.payload;
+        }
+      )
+      .addCase(fetchFlashcardHistory.pending, (state) => {
+        state.status = 'PENDING';
+      })
+      .addCase(fetchFlashcardHistory.rejected, (state) => {
+        state.status = 'FAILED';
       });
   },
   reducers: undefined,

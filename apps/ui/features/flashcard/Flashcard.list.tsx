@@ -8,12 +8,14 @@ import FlashcardFormEdit from './Flashcard.form.edit';
 import { createFlashcard, deleteFlashcard, updateFlashcard } from './flashcardSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import InfoIcon from '@mui/icons-material/Info';
 import NoRows from '@ui/components/NoRows';
 import { useAppDispatch } from "@ui/store/index";
 import { FlashcardListItemDto } from '@shared/types';
 import useFlashcardList from './hooks/useFlashcardList';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNotification } from '@ui/features/notification/useNotification';
+import Link from 'next/link';
 
 const FlashcardList = () => {
   const columns: GridColDef[] = [
@@ -31,7 +33,7 @@ const FlashcardList = () => {
     {
       field: "actions",
       headerName: "Actions",
-      minWidth: 60,
+      minWidth: 120,
       sortable: false,
       disableColumnMenu: true,
       renderCell: (params) => {
@@ -49,6 +51,18 @@ const FlashcardList = () => {
             <IconButton onClick={() => handleEditRow(Number(params.id))}>
               <EditIcon fontSize="small" />
             </IconButton>
+            <Link
+              href={{
+                pathname: `/detail/[id]`,
+                query: { id: params.id }
+              }}
+            >
+              <a>
+                <IconButton>
+                  <InfoIcon fontSize="small" />
+                </IconButton>
+              </a>
+            </Link>
           </Box>
         );
       }
@@ -57,7 +71,7 @@ const FlashcardList = () => {
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
-  const { flashcards, fetchFlashcardsStatus } = useFlashcardList();
+  const { flashcards, status } = useFlashcardList();
   const { showNotification } = useNotification();
 
   const dispatch = useAppDispatch();
@@ -127,7 +141,7 @@ const FlashcardList = () => {
               NoRowsOverlay: NoRows,
               LoadingOverlay: LinearProgress,
             }}
-            loading={fetchFlashcardsStatus === 'PENDING'}
+            loading={status === 'PENDING'}
             rows={flashcards.items}
             columns={columns}
             initialState={{

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import {
   COPYRIGHT_TEXT,
   CreateFlashcardDto,
@@ -13,12 +13,15 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Flashcard } from './entities/flashcard.entity';
+import { FlashcardHistory } from './entities/flashcard.history.entity';
 
 @Injectable()
 export class FlashcardsService {
   constructor(
     @InjectRepository(Flashcard)
-    private repository: Repository<Flashcard>
+    private repository: Repository<Flashcard>,
+    @InjectRepository(FlashcardHistory)
+    private historyRepository: Repository<FlashcardHistory>
   ) {}
 
   async paginate(
@@ -62,6 +65,17 @@ export class FlashcardsService {
     return this.toFlashcardListItemDto(flashcard);
   }
 
+  async findHistories(id: number): Promise<FlashcardListItemDto[]> {
+    const histories = await this.historyRepository.find({
+      where: {
+        flashcardId: id,
+      },
+    });
+    return histories.map((entity: FlashcardHistory) =>
+      this.toFlashcardListItemDto(entity)
+    );
+  }
+
   async update(
     id: number,
     updateFlashcardDto: UpdateFlashcardDto
@@ -77,7 +91,9 @@ export class FlashcardsService {
     return await this.repository.softDelete(id);
   }
 
-  toFlashcardListItemDto(entity: Flashcard): FlashcardListItemDto {
+  toFlashcardListItemDto(
+    entity: Flashcard | FlashcardHistory
+  ): FlashcardListItemDto {
     const dto = new FlashcardListItemDto();
     dto.id = entity.id;
     dto.word = entity.word;
