@@ -11,6 +11,9 @@ export const fetchFlashcardById = async (id: number) =>
 export const fetchFlashcards = async () =>
   await axios.get<PaginatedDto<FlashcardListItemDto>>('/flashcards');
 
+export const fetchFlashcardHistory = async (id: number) =>
+  await axios.get<FlashcardListItemDto[]>(`/flashcards/${id}`);
+
 export const updateFlashcard = async (params: UpdateFlashcardDto) =>
   await axios.patch<FlashcardListItemDto>(
     `/flashcards/${params.id}`,
