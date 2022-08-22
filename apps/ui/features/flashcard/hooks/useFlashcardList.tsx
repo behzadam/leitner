@@ -3,7 +3,7 @@ import { fetchFlashcards } from "../flashcardSlice";
 import { useAppDispatch, useAppSelector } from "@ui/store/index";
 
 const useFlashcardList = () => {
-  const { flashcards, fetchFlashcardsStatus } = useAppSelector(store => store.flashcards)
+  const { flashcards, status } = useAppSelector(store => store.flashcards)
   const dispatch = useAppDispatch();
 
   const initFetch = useCallback(() => {
@@ -14,7 +14,7 @@ const useFlashcardList = () => {
     initFetch()
   }, [initFetch])
 
-  return { flashcards, fetchFlashcardsStatus }
+  return { flashcards, status }
 }
 
 export default useFlashcardList;
