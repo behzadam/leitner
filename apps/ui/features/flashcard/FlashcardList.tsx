@@ -71,7 +71,7 @@ const FlashcardList = () => {
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
-  const { flashcards, status } = useFlashcardList();
+  const { flashcards, onDeleteItem, status } = useFlashcardList();
   const { showNotification } = useNotification();
 
   const dispatch = useAppDispatch();
@@ -87,8 +87,8 @@ const FlashcardList = () => {
     setOpen(true);
   };
 
-  const handleDeleteRow = (id: number) => {
-    dispatch(deleteFlashcard(id))
+  const handleDeleteRow = async (id: number) => {
+    await onDeleteItem(id)
   }
 
   const handleEditRow = (id: number) => {
