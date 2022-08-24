@@ -1,4 +1,4 @@
-import FlashcardList from '@ui/features/flashcard/Flashcard.list'
+import FlashcardList from '@ui/features/flashcard/FlashcardList'
 
 export function Index() {
 
