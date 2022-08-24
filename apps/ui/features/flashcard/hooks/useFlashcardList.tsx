@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { fetchFlashcards } from "../flashcardSlice";
+import { fetchFlashcards, deleteFlashcard } from "../flashcardSlice";
 import { useAppDispatch, useAppSelector } from "@ui/store/index";
 
 const useFlashcardList = () => {
@@ -10,11 +10,15 @@ const useFlashcardList = () => {
     return dispatch(fetchFlashcards());
   }, [dispatch])
 
+  const onDeleteItem = async (id: number): Promise<void> => {
+    await dispatch(deleteFlashcard(id))
+  }
+
   useEffect(() => {
     initFetch()
   }, [initFetch])
 
-  return { flashcards, status }
+  return { flashcards, onDeleteItem, status }
 }
 
 export default useFlashcardList;

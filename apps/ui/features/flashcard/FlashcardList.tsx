@@ -16,6 +16,7 @@ import useFlashcardList from './hooks/useFlashcardList';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNotification } from '@ui/features/notification/useNotification';
 import Link from 'next/link';
+import ConfirmDialog from '@ui/components/ConfirmDialog';
 
 const FlashcardList = () => {
   const columns: GridColDef[] = [
@@ -69,13 +70,16 @@ const FlashcardList = () => {
     }
   ]
 
-  const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>()
-  const { flashcards, status } = useFlashcardList();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [flashcard, setFlashCard] = useState<FlashcardListItemDto>();
+  const { flashcards, onDeleteItem, status } = useFlashcardList();
   const { showNotification } = useNotification();
 
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  const [currentItem, setCurrentItem] = useState<number | null>(null);
+
   const dispatch = useAppDispatch();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const maxWidth = 'xs';
 
   const handleClose = () => {
@@ -88,7 +92,16 @@ const FlashcardList = () => {
   };
 
   const handleDeleteRow = (id: number) => {
-    dispatch(deleteFlashcard(id))
+    setOpenDeleteConfirm(true)
+    setCurrentItem(id)
+  }
+
+  const onConfirmDelete = async (confirmed: boolean) => {
+    if (confirmed) {
+      await onDeleteItem(currentItem)
+    }
+    setOpenDeleteConfirm(false)
+    setCurrentItem(null)
   }
 
   const handleEditRow = (id: number) => {
@@ -153,6 +166,14 @@ const FlashcardList = () => {
             rowsPerPageOptions={[flashcards.meta.itemsPerPage]}
             pagination
           />
+
+          <ConfirmDialog
+            title="Delete Flashcard?"
+            open={openDeleteConfirm}
+            onConfirm={(value) => onConfirmDelete(value)}
+          >
+            Are you sure you want to delete this record?
+          </ConfirmDialog>
         </Paper>
       </Box>
     </Container >
