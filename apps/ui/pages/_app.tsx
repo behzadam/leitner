@@ -26,12 +26,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <main>
-          <Provider store={store}>
-            <Component {...pageProps} />
-            <Notification />
-          </Provider>
-        </main>
+        <Provider store={store}>
+          <Component {...pageProps} />
+          <Notification />
+        </Provider>
       </ThemeProvider>
     </>
   );
