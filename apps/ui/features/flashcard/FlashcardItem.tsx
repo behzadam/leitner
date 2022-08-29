@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, Chip, Divider, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Divider, Grid, IconButton, Typography } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import LockIcon from '@mui/icons-material/Lock';
@@ -6,7 +6,13 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useState } from "react";
 import Show from "@ui/components/Show";
 
-const FlashcardItem = (): JSX.Element => {
+type FlashcardItemProps = {
+  onRemember?: (id: number, rememberedIt: boolean) => void
+}
+
+const FlashcardItem = ({
+  onRemember
+}: FlashcardItemProps): JSX.Element => {
   const [showBack, setShowBack] = useState<boolean>(true);
 
   const handleShowBack = (): void => {
@@ -40,14 +46,14 @@ const FlashcardItem = (): JSX.Element => {
         </Box>
       </CardContent>
       <CardActions>
-        <Grid container spacing={2} sx={{ maxWidth: 140, mx: 'auto', py: 1 }}>
-          <Grid item xs={6}>
-            <IconButton aria-label="check" color="warning">
+        <Grid container sx={{ maxWidth: 200, mx: 'auto', py: 1 }}>
+          <Grid item xs={6} container justifyContent="center" alignItems="center">
+            <IconButton onClick={() => onRemember(1, false)} aria-label="skip" color="warning">
               <CloseIcon />
             </IconButton>
           </Grid>
-          <Grid item xs={6}>
-            <IconButton aria-label="check" color="success">
+          <Grid item xs={6} container justifyContent="center" alignItems="center">
+            <IconButton onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
               <CheckIcon />
             </IconButton>
           </Grid>
