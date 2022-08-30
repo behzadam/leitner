@@ -6,7 +6,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import FlashcardItem from "@ui/features/flashcard/FlashcardItem";
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 type QuizListProps = {
@@ -40,21 +40,23 @@ function QuizList({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {items.map((_, index) => (
-          <div key={index}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <FlashcardItem onRemember={(id, value) => onRemember(id, value)} />
-            ) : null}
-          </div>
-        ))}
-      </SwipeableViews>
-      <Grid container sx={{}}>
+      <Paper>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+          {items.map((_, index) => (
+            <div key={index}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <FlashcardItem onRemember={(id, value) => onRemember(id, value)} />
+              ) : null}
+            </div>
+          ))}
+        </SwipeableViews>
+      </Paper>
+      <Grid container sx={{ mt: 1 }}>
         <Grid sx={{ flex: 1 }}>
           <MobileStepper
             variant="text"
