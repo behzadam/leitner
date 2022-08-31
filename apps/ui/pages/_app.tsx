@@ -8,14 +8,14 @@ import Notification from '@ui/features/notification/Notification';
 
 import axios from "axios";
 import React from 'react';
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const theme = createTheme({
   typography: {
     fontSize: 13,
   },
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
       main: '#2c2c2c',
     },
@@ -32,6 +32,25 @@ const theme = createTheme({
     warning: {
       main: '#ca8a04',
     },
+  },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          border: '2px solid #2c2c2c',
+          backgroundColor: '#fff'
+        }
+      }
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        dense: {
+          height: 48,
+          minHeight: 48
+        }
+      }
+    }
   }
 });
 
