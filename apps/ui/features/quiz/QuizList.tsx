@@ -6,8 +6,9 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import FlashcardItem from "@ui/features/flashcard/FlashcardItem";
-import { Grid, IconButton, Paper } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import IconButtonRounded from '@ui/components/IconButtonRounded';
 
 type QuizListProps = {
   items?: any[]
@@ -59,12 +60,13 @@ function QuizList({
       <Grid container sx={{ mt: 1 }}>
         <Grid sx={{ flex: 1 }}>
           <MobileStepper
+            sx={{ border: 'none' }}
             variant="text"
             steps={maxSteps}
             position="static"
             activeStep={activeStep}
             nextButton={
-              <IconButton
+              <IconButtonRounded
                 size="medium"
                 onClick={handleNext}
                 disabled={activeStep === maxSteps - 1}
@@ -74,23 +76,23 @@ function QuizList({
                 ) : (
                   <KeyboardArrowRight />
                 )}
-              </IconButton>
+              </IconButtonRounded>
             }
             backButton={
-              <IconButton size="medium" onClick={handleBack} disabled={activeStep === 0}>
+              <IconButtonRounded size="medium" onClick={handleBack} disabled={activeStep === 0}>
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowRight />
                 ) : (
                   <KeyboardArrowLeft />
                 )}
-              </IconButton>
+              </IconButtonRounded>
             }
           />
         </Grid>
         <Grid sx={{ py: 1, ml: 'auto' }}>
-          <IconButton size="medium" color="success">
+          <IconButtonRounded size="medium">
             <AddIcon />
-          </IconButton>
+          </IconButtonRounded>
         </Grid>
       </Grid>
     </Box>
