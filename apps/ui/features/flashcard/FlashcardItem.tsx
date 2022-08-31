@@ -1,10 +1,11 @@
-import { Box, Card, CardActions, CardContent, Divider, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Chip, Divider, Grid, IconButton, Typography } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import LockIcon from '@mui/icons-material/Lock';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import { useState } from "react";
 import Show from "@ui/components/Show";
+import IconButtonRounded from "@ui/components/IconButtonRounded";
 
 type FlashcardItemProps = {
   onRemember?: (id: number, rememberedIt: boolean) => void
@@ -20,7 +21,7 @@ const FlashcardItem = ({
   }
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, border: 'none' }}>
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', py: 4 }}>
           <Typography sx={{ fontSize: 16 }} variant="h6" component="div">
@@ -28,9 +29,9 @@ const FlashcardItem = ({
           </Typography>
         </Box>
         <Divider sx={{ my: 2 }}>
-          <IconButton aria-label="Show card back" onClick={handleShowBack} >
+          <IconButton sx={{ border: 'none' }} onClick={handleShowBack} >
             <Show when={showBack}>
-              <LockOpenIcon />
+              <LockOpenTwoToneIcon color="info" />
             </Show>
             <Show when={!showBack}>
               <LockIcon />
@@ -48,14 +49,14 @@ const FlashcardItem = ({
       <CardActions>
         <Grid container sx={{ maxWidth: 200, mx: 'auto', py: 1 }}>
           <Grid item xs={6} container justifyContent="center" alignItems="center">
-            <IconButton onClick={() => onRemember(1, false)} aria-label="skip" color="warning">
+            <IconButtonRounded onClick={() => onRemember(1, false)} aria-label="skip" color="error">
               <CloseIcon />
-            </IconButton>
+            </IconButtonRounded>
           </Grid>
           <Grid item xs={6} container justifyContent="center" alignItems="center">
-            <IconButton onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
+            <IconButtonRounded onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
               <CheckIcon />
-            </IconButton>
+            </IconButtonRounded>
           </Grid>
         </Grid>
       </CardActions>
