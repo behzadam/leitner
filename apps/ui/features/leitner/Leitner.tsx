@@ -8,7 +8,8 @@ const Item = styled(Paper)(({ theme }) => ({
   borderRadius: '0px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  border: 'none'
 }));
 
 const Leitner = (): JSX.Element => {
@@ -16,14 +17,13 @@ const Leitner = (): JSX.Element => {
   return (
     <Paper>
       <Stack
-        divider={<Divider orientation="horizontal" flexItem />}
         sx={{ margin: 'auto', borderRadius: '4px', overflow: 'hidden' }}
       >
-        <Item sx={{ height: 90 }}>5</Item>
-        <Item sx={{ height: 55 }}>4</Item>
-        <Item sx={{ height: 45 }}>3</Item>
-        <Item sx={{ height: 35 }}>2</Item>
-        <Item sx={{ height: 30 }}>1</Item>
+        <Item sx={{ height: 90, backgroundColor: '#ecfccb' }}>5</Item>
+        <Item sx={{ height: 55, backgroundColor: '#cffafe' }}>4</Item>
+        <Item sx={{ height: 45, backgroundColor: '#fffbeb' }}>3</Item>
+        <Item sx={{ height: 35, backgroundColor: '#f5f5f5' }}>2</Item>
+        <Item sx={{ height: 30, backgroundColor: '#fafafa' }}>1</Item>
       </Stack>
     </Paper>
   )
