@@ -5,7 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import { useState } from 'react';
 import FlashcardFormCreate from './Flashcard.form.create';
 import FlashcardFormEdit from './Flashcard.form.edit';
-import { createFlashcard, deleteFlashcard, updateFlashcard } from './flashcardSlice';
+import { createFlashcard, updateFlashcard } from './flashcardSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';

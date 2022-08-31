@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import QuizList from "@ui/features/quiz/QuizList";
 import Leitner from '@ui/features/leitner/Leitner';
 import { Grid } from '@mui/material';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const drawerWidth = 280;
 
@@ -38,7 +40,7 @@ export default function ResponsiveDrawer(props: Props) {
       <AppBar
         position="fixed"
       >
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -49,6 +51,11 @@ export default function ResponsiveDrawer(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
+            <Link href="/">
+              <IconButton color="inherit" size="small" sx={{ m  r: 2 }}>
+                <ArrowBackIcon />
+              </IconButton>
+            </Link>
             Quiz
           </Typography>
         </Toolbar>
