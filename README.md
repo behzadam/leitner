@@ -1,5 +1,27 @@
 # Leitner (WIP)
 
-The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in the 1970s. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. [Read more](Leitner System).
+This is my side project on the DDD approach and is not production ready yet.
 
-This project was generated using [Nx](https://nx.dev).
+### For now, The stack is
+
+- NestJS
+- NextJS
+- TypeScript
+- NX ( monorepo )
+- React Testing Library
+- React MUI ( Material UI Framework )
+
+### The planning for phase 1
+
+- Flashcards Management Area
+- Flashcards Quiz Area
+
+### The planning for phase 2
+
+- Flashcards Chrome Extension
+- Flashcards Upgrade UI
+
+### The planning for phase 3
+
+- Update the project with DDD approach
+- Update the tests with BDD approach
