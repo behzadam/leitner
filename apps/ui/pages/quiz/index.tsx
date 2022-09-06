@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,9 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import QuizList from "@ui/features/quiz/QuizList";
 import Leitner from '@ui/features/leitner/Leitner';
-import { Grid } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import TabPanel from '@ui/components/TabPanel';
 
 const drawerWidth = 280;
 
@@ -18,9 +18,14 @@ interface Props {
   window?: () => Window;
 }
 
-export default function ResponsiveDrawer(props: Props) {
+const ResponsiveDrawer = (props: Props): JSX.Element => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabChange = (_, newTabIndex) => {
+    setTabIndex(newTabIndex);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -28,8 +33,20 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <Box>
-      <Typography paragraph sx={{ fontSize: '13px' }}>Leitner box</Typography>
-      <Leitner />
+      <Tabs
+        value={tabIndex}
+        onChange={handleTabChange}
+        variant="fullWidth"
+      >
+        <Tab label="Leitner" value={0} sx={{ fontSize: 12 }} />
+        <Tab label="Calendar" value={1} sx={{ fontSize: 12 }} />
+      </Tabs>
+      <TabPanel name="quiz-sidebar-tabs" value={tabIndex} index={0}>
+        <Leitner />
+      </TabPanel>
+      <TabPanel name="quiz-sidebar-tabs" value={tabIndex} index={1}>
+        Item One
+      </TabPanel>
     </Box>
   );
 
@@ -52,7 +69,7 @@ export default function ResponsiveDrawer(props: Props) {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             <Link href="/">
-              <IconButton color="inherit" size="small" sx={{ m  r: 2 }}>
+              <IconButton color="inherit" size="small" sx={{ mr: 2 }}>
                 <ArrowBackIcon />
               </IconButton>
             </Link>
@@ -60,36 +77,46 @@ export default function ResponsiveDrawer(props: Props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-        }}
-      >
-        <Toolbar />
-        {drawer}
-      </Drawer>
+      <Box sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          <Toolbar />
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, zIndex: 1 },
+          }}
+          open
+        >
+          <Toolbar />
+          {drawer}
+        </Drawer>
+      </Box>
       <Box
-        sx={{ flexGrow: 1 }}
+        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Grid container spacing={3} maxWidth={'sm'} sx={{ margin: 'auto' }}>
-          <Grid item xs={9}>
-            <Typography paragraph sx={{ fontSize: '13px' }}>Flashcards</Typography>
-            <QuizList />
-          </Grid>
-          <Grid item xs={3}>
-            {drawer}
-          </Grid>
-        </Grid>
+        <Box maxWidth={'sm'} sx={{ margin: 'auto', px: 3 }}>
+          <Typography paragraph sx={{ fontSize: '13px' }}>Flashcards</Typography>
+          <QuizList />
+        </Box>
       </Box>
     </Box >
   );
 }
+
+export default ResponsiveDrawer;
