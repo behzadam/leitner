@@ -5,9 +5,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
 import Notification from '@ui/features/notification/Notification';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 import axios from "axios";
 import React from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const theme = createTheme({
@@ -63,9 +65,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
         <Provider store={store}>
-          <main>
-            <Component {...pageProps} />
-          </main>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <main>
+              <Component {...pageProps} />
+            </main>
+          </LocalizationProvider>
           <Notification />
         </Provider>
       </ThemeProvider>
