@@ -11,8 +11,9 @@ import { Box, Tab, Tabs } from '@mui/material';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TabPanel from '@ui/components/TabPanel';
+import ProgressCalendar from '@ui/features/progress/ProgressCalendar';
 
-const drawerWidth = 280;
+const drawerWidth = 380;
 
 interface Props {
   window?: () => Window;
@@ -21,7 +22,7 @@ interface Props {
 const ResponsiveDrawer = (props: Props): JSX.Element => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   const handleTabChange = (_, newTabIndex) => {
     setTabIndex(newTabIndex);
@@ -45,7 +46,7 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
         <Leitner />
       </TabPanel>
       <TabPanel name="quiz-sidebar-tabs" value={tabIndex} index={1}>
-        Item One
+        <ProgressCalendar />
       </TabPanel>
     </Box>
   );
@@ -77,7 +78,7 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+      <Box sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}>
         <Drawer
           container={container}
           variant="temporary"
@@ -87,7 +88,7 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
@@ -97,7 +98,7 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, zIndex: 1 },
           }}
           open
@@ -107,7 +108,7 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
         </Drawer>
       </Box>
       <Box
-        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, width: { md: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
         <Box maxWidth={'sm'} sx={{ margin: 'auto', px: 3 }}>

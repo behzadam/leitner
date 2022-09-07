@@ -1,4 +1,4 @@
-import { Divider, Paper, Stack } from "@mui/material";
+import { Paper, Stack } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -13,9 +13,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Leitner = (): JSX.Element => {
-
   return (
-    <Paper>
+    <Paper sx={{ maxWidth: '120px', mx: 'auto' }}>
       <Stack
         sx={{ margin: 'auto', borderRadius: '4px', overflow: 'hidden' }}
       >
