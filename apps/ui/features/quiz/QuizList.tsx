@@ -60,7 +60,7 @@ function QuizList({
       <Grid container sx={{ mt: 1 }}>
         <Grid sx={{ flex: 1 }}>
           <MobileStepper
-            sx={{ border: 'none' }}
+            sx={{ border: 'none', background: 'none' }}
             variant="text"
             steps={maxSteps}
             position="static"
