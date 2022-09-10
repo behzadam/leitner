@@ -43,6 +43,13 @@ const theme = createTheme({
           minHeight: 48
         }
       }
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#fafafa"
+        }
+      }
     }
   }
 });
