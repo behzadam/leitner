@@ -24,7 +24,7 @@ const theme = createTheme({
     secondary: {
       main: '#eab308',
     },
-    divider: 'rgba(0,0,0,0.06)',
+    divider: 'rgba(0,0,0,0.07)',
     success: {
       main: '#22c55e',
     },
@@ -36,20 +36,18 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          boxShadow: 'none',
-          border: '2px solid #2c2c2c',
-          backgroundColor: '#fff'
-        }
-      }
-    },
     MuiToolbar: {
       styleOverrides: {
         dense: {
           height: 48,
           minHeight: 48
+        }
+      }
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#fafafa"
         }
       }
     }

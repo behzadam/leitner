@@ -1,11 +1,11 @@
-import { Box, Card, CardActions, CardContent, Chip, Divider, Grid, IconButton, Typography } from "@mui/material";
-import CheckIcon from '@mui/icons-material/Check';
+import { Box, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import LockIcon from '@mui/icons-material/Lock';
-import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import { useState } from "react";
 import Show from "@ui/components/Show";
 import IconButtonRounded from "@ui/components/IconButtonRounded";
+import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
+import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
+import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
 type FlashcardItemProps = {
   onRemember?: (id: number, rememberedIt: boolean) => void
@@ -14,7 +14,7 @@ type FlashcardItemProps = {
 const FlashcardItem = ({
   onRemember
 }: FlashcardItemProps): JSX.Element => {
-  const [showBack, setShowBack] = useState<boolean>(true);
+  const [showBack, setShowBack] = useState<boolean>(false);
 
   const handleShowBack = (): void => {
     setShowBack(!showBack);
@@ -28,16 +28,6 @@ const FlashcardItem = ({
             Front
           </Typography>
         </Box>
-        <Divider sx={{ my: 2 }}>
-          <IconButton sx={{ border: 'none' }} onClick={handleShowBack} >
-            <Show when={showBack}>
-              <LockOpenTwoToneIcon color="info" />
-            </Show>
-            <Show when={!showBack}>
-              <LockIcon />
-            </Show>
-          </IconButton>
-        </Divider>
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', py: 2 }}>
           <Show when={showBack}>
             <Typography variant="body2">
@@ -48,14 +38,24 @@ const FlashcardItem = ({
       </CardContent>
       <CardActions>
         <Grid container sx={{ maxWidth: 200, mx: 'auto', py: 1 }}>
-          <Grid item xs={6} container justifyContent="center" alignItems="center">
-            <IconButtonRounded onClick={() => onRemember(1, false)} aria-label="skip" color="error">
+          <Grid item xs={4} container justifyContent="center" alignItems="center">
+            <IconButtonRounded onClick={() => onRemember(1, false)} aria-label="skip">
               <CloseIcon />
             </IconButtonRounded>
           </Grid>
-          <Grid item xs={6} container justifyContent="center" alignItems="center">
+          <Grid item xs={4} container justifyContent="center">
+            <IconButtonRounded onClick={handleShowBack} aria-label="show card back">
+              <Show when={showBack}>
+                <VisibilityTwoToneIcon color="info" />
+              </Show>
+              <Show when={!showBack}>
+                <VisibilityOffTwoToneIcon />
+              </Show>
+            </IconButtonRounded>
+          </Grid>
+          <Grid item xs={4} container justifyContent="center" alignItems="center">
             <IconButtonRounded onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
-              <CheckIcon />
+              <ThumbUpOffAltOutlinedIcon />
             </IconButtonRounded>
           </Grid>
         </Grid>

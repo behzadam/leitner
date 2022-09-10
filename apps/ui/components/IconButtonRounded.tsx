@@ -7,7 +7,8 @@ type IconButtonRoundedProps = IconButtonProps & {
 
 
 const ButtonRounded = styled(IconButton)<IconButtonRoundedProps>(() => ({
-  boxShadow: '0px 0px 0px 2px #2c2c2c inset',
+  boxShadow: '0px 0px 0px 2px #3c3c3c inset',
+  color: '#3c3c3c',
   "&.MuiIconButton-colorSuccess": {
     backgroundColor: '#10b981',
     color: '#2c2c2c'
