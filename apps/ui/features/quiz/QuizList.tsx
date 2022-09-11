@@ -9,6 +9,9 @@ import FlashcardItem from "@ui/features/flashcard/FlashcardItem";
 import { Grid, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import IconButtonRounded from '@ui/components/IconButtonRounded';
+import { bindKeyboard } from 'react-swipeable-views-utils';
+
+const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
 
 type QuizListProps = {
   items?: any[]
@@ -42,7 +45,7 @@ function QuizList({
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Paper>
-        <SwipeableViews
+        <BindKeyboardSwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={activeStep}
           onChangeIndex={handleStepChange}
@@ -55,7 +58,7 @@ function QuizList({
               ) : null}
             </div>
           ))}
-        </SwipeableViews>
+        </BindKeyboardSwipeableViews>
       </Paper>
       <Grid container sx={{ mt: 1 }}>
         <Grid sx={{ flex: 1 }}>
