@@ -9,6 +9,14 @@ import FlashcardItem from "@ui/features/flashcard/FlashcardItem";
 import { Grid, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import IconButtonRounded from '@ui/components/IconButtonRounded';
+import { bindKeyboard, autoPlay } from 'react-swipeable-views-utils';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import { useState } from 'react';
+import Show from '@ui/components/Show';
+
+const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(BindKeyboardSwipeableViews);
 
 type QuizListProps = {
   items?: any[]
@@ -20,7 +28,8 @@ function QuizList({
 }: QuizListProps) {
   console.log({ items })
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [autoplay, setAutoplay] = useState(false)
   const maxSteps = items.length;
 
   const handleNext = (): void => {
@@ -35,6 +44,10 @@ function QuizList({
     setActiveStep(step);
   };
 
+  const handleAutoPlay = (): void => {
+    setAutoplay(autoplay => !autoplay);
+  }
+
   const onRemember = (id: number, rememberedIt: boolean): void => {
     console.log('onRemember', id, rememberedIt)
   }
@@ -42,11 +55,12 @@ function QuizList({
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Paper>
-        <SwipeableViews
+        <AutoPlaySwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={activeStep}
           onChangeIndex={handleStepChange}
           enableMouseEvents
+          autoplay={autoplay}
         >
           {items.map((_, index) => (
             <div key={index}>
@@ -55,12 +69,12 @@ function QuizList({
               ) : null}
             </div>
           ))}
-        </SwipeableViews>
+        </AutoPlaySwipeableViews>
       </Paper>
       <Grid container sx={{ mt: 1 }}>
         <Grid sx={{ flex: 1 }}>
           <MobileStepper
-            sx={{ border: 'none' }}
+            sx={{ border: 'none', background: 'none' }}
             variant="text"
             steps={maxSteps}
             position="static"
@@ -90,6 +104,14 @@ function QuizList({
           />
         </Grid>
         <Grid sx={{ py: 1, ml: 'auto' }}>
+          <IconButtonRounded onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }}>
+            <Show when={!autoplay}>
+              <PlayArrowIcon />
+            </Show>
+            <Show when={autoplay}>
+              <PauseIcon />
+            </Show>
+          </IconButtonRounded>
           <IconButtonRounded size="medium">
             <AddIcon />
           </IconButtonRounded>
