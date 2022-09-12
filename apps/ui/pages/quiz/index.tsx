@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -12,6 +12,7 @@ import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TabPanel from '@ui/components/TabPanel';
 import ProgressCalendar from '@ui/features/progress/ProgressCalendar';
+import { NextPageWithLayout } from 'pages/_app';
 
 const drawerWidth = 380;
 
@@ -19,7 +20,7 @@ interface Props {
   window?: () => Window;
 }
 
-const ResponsiveDrawer = (props: Props): JSX.Element => {
+const Index: NextPageWithLayout = (props: Props): JSX.Element => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [tabIndex, setTabIndex] = useState<number>(0);
@@ -120,4 +121,4 @@ const ResponsiveDrawer = (props: Props): JSX.Element => {
   );
 }
 
-export default ResponsiveDrawer;
+export default Index;
