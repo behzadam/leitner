@@ -1,8 +1,10 @@
+import { Layout } from "@ui/types"
 import LayoutDashboard from "./LayoutDashboard"
+import LayoutNested from "./LayoutNested"
 
 type LayoutFactoryProps = {
   children?: React.ReactNode
-  layout?: string
+  layout?: Layout
 }
 
 const LayoutFactory = ({ layout, children }: LayoutFactoryProps): JSX.Element => {
@@ -12,6 +14,8 @@ const LayoutFactory = ({ layout, children }: LayoutFactoryProps): JSX.Element =>
     case 'nested':
       return <LayoutNested>{children}</LayoutNested>
     default:
-      break;
+      return <>{children}</>
   }
 }
+
+export default LayoutFactory;
