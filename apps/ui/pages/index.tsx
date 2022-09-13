@@ -1,7 +1,5 @@
-import DashboardLayout from '@ui/components/Layout/LayoutDashboard';
 import FlashcardListDemo from '@ui/features/flashcard/FlashcardListDemo'
-import { ReactElement } from 'react';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '@ui/types';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
@@ -9,8 +7,5 @@ const Index: NextPageWithLayout = (): JSX.Element => {
   );
 }
 
-Index.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
-}
-
+Index.layout = 'dashboard'
 export default Index;
