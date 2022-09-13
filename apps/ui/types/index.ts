@@ -1,17 +1,15 @@
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
 
 // API
 export type ApiStatus = 'IDLE' | 'PENDING' | 'SUCCEEDED' | 'FAILED';
 
-// NextJS
-// export type NextPageWithLayout = NextPage & {
-//   getLayout?: (page: ReactElement) => ReactNode;
-// };
+// Layout
+export type Layout = 'dashboard' | 'nested';
 
+// NextJS
 export type NextPageWithLayout = NextPage & {
-  layout?: string;
+  layout?: Layout;
 };
 
 export type AppPropsWithLayout = AppProps & {
