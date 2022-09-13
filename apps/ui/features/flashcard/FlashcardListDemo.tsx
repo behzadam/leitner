@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import InfoIcon from '@mui/icons-material/Info';
 import NoRows from '@ui/components/NoRows';
 import Link from 'next/link';
+import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
 
 const columns: GridColDef[] = [
   {
@@ -17,7 +18,8 @@ const columns: GridColDef[] = [
   },
   {
     field: 'back',
-    headerName: 'Back'
+    headerName: 'Back',
+    flex: 1
   },
   {
     field: "actions",
@@ -67,6 +69,7 @@ const rows = [
 const FlashcardListDemo = (): JSX.Element => {
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
+      <FlashcardCategoriesSelect />
       <DataGrid
         components={{
           NoRowsOverlay: NoRows,
