@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
@@ -11,11 +11,11 @@ import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AppPropsWithLayout } from '@ui/types';
 import { defaultTheme } from '../theme'
+import LayoutFactory from '@ui/components/Layout/LayoutFactory';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page)
   return (
     <React.Fragment>
       <Head>
@@ -25,11 +25,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <CssBaseline enableColorScheme />
         <Provider store={store}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <main>
-              {
-                getLayout(<Component {...pageProps} />)
-              }
-            </main>
+            <LayoutFactory layout={Component.layout}>
+              <Component {...pageProps} />
+            </LayoutFactory>
           </LocalizationProvider>
           <Notification />
         </Provider>

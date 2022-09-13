@@ -31,5 +31,16 @@ export const defaultTheme: ThemeOptions = createTheme({
         },
       },
     },
+    MuiToolbar: {
+      styleOverrides: {
+        regular: {
+          height: '48px',
+          minHeight: '48px',
+          '@media (min-width: 600px)': {
+            minHeight: '48px',
+          },
+        },
+      },
+    },
   },
 });

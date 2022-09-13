@@ -1,8 +1,10 @@
+type LayoutNestedProps = {
+  children?: React.ReactNode
+}
 
-
-const LayoutNested = (): JSX.Element => {
+const LayoutNested = ({ children }: LayoutNestedProps): JSX.Element => {
   return (
-    <p>LayoutNested</p>
+    <>{children}</>
   )
 }
 

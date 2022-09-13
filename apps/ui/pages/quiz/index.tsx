@@ -1,38 +1,18 @@
-import { ReactElement, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
+import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import QuizList from "@ui/features/quiz/QuizList";
 import Leitner from '@ui/features/leitner/Leitner';
-import { Box, Tab, Tabs } from '@mui/material';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Container, Tab, Tabs } from '@mui/material';
 import TabPanel from '@ui/components/TabPanel';
 import ProgressCalendar from '@ui/features/progress/ProgressCalendar';
-import { NextPageWithLayout } from 'pages/_app';
+import LayoutNestedWithDrawer from '@ui/components/Layout/LayoutNestedWithDrawer';
 
-const drawerWidth = 380;
-
-interface Props {
-  window?: () => Window;
-}
-
-const Index: NextPageWithLayout = (props: Props): JSX.Element => {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
+const Index = (): JSX.Element => {
   const [tabIndex, setTabIndex] = useState<number>(0);
 
   const handleTabChange = (_, newTabIndex) => {
     setTabIndex(newTabIndex);
   };
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   const drawer = (
     <Box>
       <Tabs
@@ -52,72 +32,13 @@ const Index: NextPageWithLayout = (props: Props): JSX.Element => {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar
-        position="fixed"
-      >
-        <Toolbar variant="dense">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            <Link href="/">
-              <IconButton color="inherit" size="small" sx={{ mr: 2 }}>
-                <ArrowBackIcon />
-              </IconButton>
-            </Link>
-            Quiz
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          <Toolbar />
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, zIndex: 1 },
-          }}
-          open
-        >
-          <Toolbar />
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        sx={{ flexGrow: 1, width: { md: `calc(100% - ${drawerWidth}px)` } }}
-      >
-        <Toolbar />
-        <Box maxWidth={'sm'} sx={{ margin: 'auto', px: 3 }}>
-          <Typography paragraph sx={{ fontSize: '13px' }}>Flashcards</Typography>
-          <QuizList />
-        </Box>
-      </Box>
-    </Box >
+    <LayoutNestedWithDrawer drawer={drawer}>
+      <Container maxWidth='sm'>
+        <Typography paragraph sx={{ fontSize: '13px' }}>Flashcards</Typography>
+        <QuizList />
+      </Container>
+    </LayoutNestedWithDrawer>
   );
 }
 
