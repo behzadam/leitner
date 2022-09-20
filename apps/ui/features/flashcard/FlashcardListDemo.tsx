@@ -83,6 +83,7 @@ const FlashcardListDemo = (): JSX.Element => {
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+        sx={{ backgroundColor: "white" }}
       />
     </Container>
   )
