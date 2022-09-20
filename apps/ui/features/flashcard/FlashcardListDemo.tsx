@@ -1,11 +1,10 @@
-import { Box, Container, IconButton, LinearProgress } from '@mui/material';
+import { Container, LinearProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import InfoIcon from '@mui/icons-material/Info';
 import NoRows from '@ui/components/NoRows';
-import Link from 'next/link';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
+import FlashcardListDemoDialog from './FlashcardListDemoDialog';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -20,6 +19,7 @@ const rows = [
 ];
 
 const FlashcardListDemo = (): JSX.Element => {
+  const [rowId, setRowId] = useState<number | null>(null);
   const columns: GridColDef[] = useMemo(() => [
     {
       field: 'id',
@@ -42,9 +42,13 @@ const FlashcardListDemo = (): JSX.Element => {
       minWidth: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => <FlashcardListDemoActions id={params.row.id} />
+      renderCell: (params) => <FlashcardListDemoActions id={params.row.id} setRowId={setRowId} />
     }
   ], [])
+
+  useEffect(() => {
+    console.log('rowId', rowId)
+  }, [rowId])
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
@@ -63,6 +67,7 @@ const FlashcardListDemo = (): JSX.Element => {
         experimentalFeatures={{ newEditingApi: true }}
         sx={{ backgroundColor: "white" }}
       />
+      <FlashcardListDemoDialog id={rowId} setRowId={setRowId} />
     </Container>
   )
 }
