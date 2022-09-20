@@ -4,55 +4,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import NoRows from '@ui/components/NoRows';
 import Link from 'next/link';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
-
-const columns: GridColDef[] = [
-  {
-    field: 'id',
-    headerName: 'ID',
-    width: 90
-  },
-  {
-    field: 'front',
-    headerName: 'Front',
-    width: 150
-  },
-  {
-    field: 'back',
-    headerName: 'Back',
-    flex: 1
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    minWidth: 120,
-    sortable: false,
-    disableColumnMenu: true,
-    renderCell: (params) => {
-      return (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Link
-            href={{
-              pathname: `/detail/[id]`,
-              query: { id: params.id }
-            }}
-          >
-            <a>
-              <IconButton>
-                <InfoIcon fontSize="small" />
-              </IconButton>
-            </a>
-          </Link>
-        </Box>
-      );
-    }
-  }
-]
+import { useMemo } from 'react';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -67,6 +19,55 @@ const rows = [
 ];
 
 const FlashcardListDemo = (): JSX.Element => {
+  const columns: GridColDef[] = useMemo(() => [
+    {
+      field: 'id',
+      headerName: 'ID',
+      width: 90
+    },
+    {
+      field: 'front',
+      headerName: 'Front',
+      width: 150
+    },
+    {
+      field: 'back',
+      headerName: 'Back',
+      flex: 1
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      minWidth: 120,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Link
+              href={{
+                pathname: `/detail/[id]`,
+                query: { id: params.id }
+              }}
+            >
+              <a>
+                <IconButton>
+                  <InfoIcon fontSize="small" />
+                </IconButton>
+              </a>
+            </Link>
+          </Box>
+        );
+      }
+    }
+  ], [])
+
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
       <FlashcardCategoriesSelect />
