@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 
 
 type FlashcardListDemoDialogProps = {
   id?: number;
   setRowId: (rowId: number) => void;
+  openDialog: boolean;
+  setOpenDialog: (value: boolean) => void;
 }
 
 const maxWidth = 'xs';
 const FlashcardListDemoDialog = ({
   id,
-  setRowId
+  openDialog,
+  setRowId,
+  setOpenDialog
 }: FlashcardListDemoDialogProps): JSX.Element => {
-  const [open, setOpen] = useState<boolean>(false);
-
   useEffect(() => {
     console.log('id', id)
     if (id) {
-      setOpen(true)
+      setOpenDialog(true)
     }
   }, [id])
 
   const handleClose = (): void => {
     console.log('handleClose')
-    setOpen(false);
+    setOpenDialog(false);
     setRowId(null)
   }
 
   return (
-    <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth={maxWidth}>
+    <Dialog onClose={handleClose} open={openDialog} fullWidth={true} maxWidth={maxWidth}>
       <DialogTitle>{id ? 'Edit' : 'New'} Flashcard</DialogTitle>
       <DialogContent>
         {
