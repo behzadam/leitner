@@ -4,7 +4,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import NoRows from '@ui/components/NoRows';
 import Link from 'next/link';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import FlashcardListDemoActions from './FlashcardListDemoActions';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -41,30 +42,7 @@ const FlashcardListDemo = (): JSX.Element => {
       minWidth: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => {
-        return (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Link
-              href={{
-                pathname: `/detail/[id]`,
-                query: { id: params.id }
-              }}
-            >
-              <a>
-                <IconButton>
-                  <InfoIcon fontSize="small" />
-                </IconButton>
-              </a>
-            </Link>
-          </Box>
-        );
-      }
+      renderCell: (params) => <FlashcardListDemoActions id={params.row.id} />
     }
   ], [])
 
