@@ -1,4 +1,4 @@
-import { Container, LinearProgress } from '@mui/material';
+import { Container, LinearProgress, Stack, Typography, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
@@ -20,6 +20,7 @@ const rows = [
 
 const FlashcardListDemo = (): JSX.Element => {
   const [rowId, setRowId] = useState<number | null>(null);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const columns: GridColDef[] = useMemo(() => [
     {
       field: 'id',
@@ -50,9 +51,18 @@ const FlashcardListDemo = (): JSX.Element => {
     console.log('rowId', rowId)
   }, [rowId])
 
+  const handleOpenDialog = (): void => {
+    setOpenDialog(open => !open)
+  }
+
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <FlashcardCategoriesSelect />
+      <Stack direction="row" justifyContent="space-between" spacing={1} sx={{ mb: 1, width: '100%' }}>
+        <FlashcardCategoriesSelect />
+        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
+          New
+        </Button>
+      </Stack>
       <DataGrid
         components={{
           NoRowsOverlay: NoRows,
@@ -67,7 +77,12 @@ const FlashcardListDemo = (): JSX.Element => {
         experimentalFeatures={{ newEditingApi: true }}
         sx={{ backgroundColor: "white" }}
       />
-      <FlashcardListDemoDialog id={rowId} setRowId={setRowId} />
+      <FlashcardListDemoDialog
+        id={rowId}
+        setRowId={setRowId}
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+      />
     </Container>
   )
 }
