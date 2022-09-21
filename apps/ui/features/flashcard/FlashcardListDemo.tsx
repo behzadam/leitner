@@ -59,7 +59,7 @@ const FlashcardListDemo = (): JSX.Element => {
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <FlashcardCategoriesSelect />
-        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
+        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained" disableElevation>
           New
         </Button>
       </Stack>
