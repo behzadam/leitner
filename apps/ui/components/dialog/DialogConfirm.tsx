@@ -8,15 +8,15 @@ export type DialogConfirmProps = {
   title?: string;
   open: boolean;
   onConfirm: (value: boolean) => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const DialogConfirm = ({
   title = 'Confirm',
   children,
   open = false,
-  onConfirm }: DialogConfirmProps
-): JSX.Element => {
+  onConfirm
+}: DialogConfirmProps): JSX.Element => {
   return (
     <Dialog
       open={open}
@@ -27,14 +27,14 @@ const DialogConfirm = ({
       <DialogContent>{children}</DialogContent>
       <DialogActions>
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={() => onConfirm(false)}
         >
           No
         </Button>
         <Button
           variant="contained"
-          color="error"
+          color="primary"
           onClick={() => {
             onConfirm(true);
           }}

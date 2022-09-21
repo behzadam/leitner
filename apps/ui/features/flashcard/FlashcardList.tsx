@@ -16,7 +16,7 @@ import useFlashcardList from './hooks/useFlashcardList';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNotification } from '@ui/features/notification/useNotification';
 import Link from 'next/link';
-import ConfirmDialog from '@ui/components/ConfirmDialog';
+import ConfirmDialog from '@ui/components/dialog/DialogConfirm';
 
 const FlashcardList = () => {
   const columns: GridColDef[] = [
