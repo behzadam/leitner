@@ -1,4 +1,4 @@
-import { Container, LinearProgress, Stack, Button, IconButton } from '@mui/material';
+import { Container, LinearProgress, Stack, Button, IconButton, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridSelectionModel } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
@@ -6,6 +6,7 @@ import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
 import FlashcardListDemoDialog from './FlashcardListDemoDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DialogConfirm from '@ui/components/dialog/DialogConfirm';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -21,7 +22,8 @@ const rows = [
 
 const FlashcardListDemo = (): JSX.Element => {
   const [rowId, setRowId] = useState<number | null>(null);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openFormDialog, setOpenFormDialog] = useState<boolean>(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
   const [disableDeleteButton, setDisableDeleteButton] = useState<boolean>(true);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
   const columns: GridColDef[] = useMemo(() => [
@@ -63,14 +65,24 @@ const FlashcardListDemo = (): JSX.Element => {
   }, [selectionModel])
 
   const handleOpenDialog = (): void => {
-    setOpenDialog(open => !open)
+    setOpenFormDialog(open => !open)
+  }
+
+  const handleDeleteRow = (confirmed: boolean): void => {
+    console.log('handleDeleteRow', confirmed)
+    setOpenConfirmDialog(false)
+  }
+
+  const handleShowConfirmDialog = (): void => {
+    console.log('handleShowConfirmDialog')
+    setOpenConfirmDialog(true)
   }
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
       <Stack direction="row" alignItems="center">
         <FlashcardCategoriesSelect sx={{ mb: 1, py: 0, minWidth: 130 }} size="small" />
-        <IconButton aria-label="delete" sx={{ ml: 1 }} size="small" color="error" disabled={disableDeleteButton}>
+        <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleShowConfirmDialog} size="small" color="error" disabled={disableDeleteButton}>
           <DeleteIcon />
         </IconButton>
         <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto' }} color="primary" variant="contained" disableElevation>
@@ -98,9 +110,12 @@ const FlashcardListDemo = (): JSX.Element => {
       <FlashcardListDemoDialog
         id={rowId}
         setRowId={setRowId}
-        openDialog={openDialog}
-        setOpenDialog={setOpenDialog}
+        openDialog={openFormDialog}
+        setOpenDialog={setOpenFormDialog}
       />
+      <DialogConfirm open={openConfirmDialog} onConfirm={handleDeleteRow}>
+        <Typography>Are you sure you want to delete?</Typography>
+      </DialogConfirm>
     </Container>
   )
 }
