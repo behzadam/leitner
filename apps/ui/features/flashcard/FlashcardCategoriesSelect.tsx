@@ -13,7 +13,7 @@ const FlashcardCategoriesSelect = ({ ...props }): JSX.Element => {
 
   return (
     <FormControl {...props}>
-      <InputLabel id="demo-select-small">Cards</InputLabel>
+      <InputLabel id="flashcar-categories-select">Cards</InputLabel>
       <Select
         labelId="flashcar-categories-select"
         id="flashcar-categories-select"
