@@ -57,7 +57,7 @@ const FlashcardListDemo = (): JSX.Element => {
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <Stack direction="row" justifyContent="space-between" spacing={1} sx={{ mb: 1, width: '100%' }}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <FlashcardCategoriesSelect />
         <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
           New
