@@ -13,7 +13,7 @@ const FlashcardCategoriesSelect = (): JSX.Element => {
 
   return (
     <FormControl sx={{ mb: 2, minWidth: 130 }} size="small">
-      <InputLabel id="demo-select-small">Category</InputLabel>
+      <InputLabel id="demo-select-small">Cards</InputLabel>
       <Select
         labelId="flashcar-categories-select"
         id="flashcar-categories-select"
