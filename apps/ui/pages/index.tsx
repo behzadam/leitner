@@ -1,9 +1,9 @@
-import FlashcardListDemo from '@ui/features/flashcard/FlashcardListDemo'
+import CategoryList from '@ui/features/category/CategoryList';
 import { NextPageWithLayout } from '@ui/types';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
-    <FlashcardListDemo />
+    <CategoryList />
   );
 }
 
