@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const FlashcardCategoriesSelect = (): JSX.Element => {
+const FlashcardCategoriesSelect = ({ ...props }): JSX.Element => {
   const [category, setCategory] = React.useState('1');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -12,8 +12,8 @@ const FlashcardCategoriesSelect = (): JSX.Element => {
   };
 
   return (
-    <FormControl sx={{ mb: 2, minWidth: 130 }} size="small">
-      <InputLabel id="demo-select-small">Category</InputLabel>
+    <FormControl {...props}>
+      <InputLabel id="demo-select-small">Cards</InputLabel>
       <Select
         labelId="flashcar-categories-select"
         id="flashcar-categories-select"

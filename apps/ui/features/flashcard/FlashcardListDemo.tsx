@@ -1,10 +1,11 @@
-import { Container, LinearProgress, Stack, Typography, Button } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Container, LinearProgress, Stack, Button, IconButton } from '@mui/material';
+import { DataGrid, GridColDef, GridSelectionModel } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
 import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
 import FlashcardListDemoDialog from './FlashcardListDemoDialog';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -21,6 +22,8 @@ const rows = [
 const FlashcardListDemo = (): JSX.Element => {
   const [rowId, setRowId] = useState<number | null>(null);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [disableDeleteButton, setDisableDeleteButton] = useState<boolean>(true);
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
   const columns: GridColDef[] = useMemo(() => [
     {
       field: 'id',
@@ -51,15 +54,26 @@ const FlashcardListDemo = (): JSX.Element => {
     console.log('rowId', rowId)
   }, [rowId])
 
+  useEffect(() => {
+    if (selectionModel.length > 0) {
+      setDisableDeleteButton(false)
+      return;
+    }
+    setDisableDeleteButton(true)
+  }, [selectionModel])
+
   const handleOpenDialog = (): void => {
     setOpenDialog(open => !open)
   }
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <Stack direction="row" justifyContent="space-between" spacing={1} sx={{ mb: 1, width: '100%' }}>
-        <FlashcardCategoriesSelect />
-        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto', mb: 1 }} color="primary" variant="contained">
+      <Stack direction="row" alignItems="center">
+        <FlashcardCategoriesSelect sx={{ mb: 1, py: 0, minWidth: 130 }} size="small" />
+        <IconButton aria-label="delete" sx={{ ml: 1 }} size="small" color="error" disabled={disableDeleteButton}>
+          <DeleteIcon />
+        </IconButton>
+        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto' }} color="primary" variant="contained" disableElevation>
           New
         </Button>
       </Stack>
@@ -76,6 +90,10 @@ const FlashcardListDemo = (): JSX.Element => {
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
         sx={{ backgroundColor: "white" }}
+        onSelectionModelChange={(newSelectionModel) => {
+          setSelectionModel(newSelectionModel);
+        }}
+        selectionModel={selectionModel}
       />
       <FlashcardListDemoDialog
         id={rowId}
