@@ -80,8 +80,10 @@ const FlashcardListDemo = (): JSX.Element => {
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <Stack direction="row" alignItems="center">
-        <FlashcardCategoriesSelect sx={{ mb: 1, minWidth: 130 }} size="small" />
+      <Stack direction="row" alignItems="center" sx={{ mb: 1 }}>
+        <Typography variant="h6" >
+          Flashcards
+        </Typography>
         <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleShowConfirmDialog} size="small" color="error" disabled={disableDeleteButton}>
           <DeleteIcon />
         </IconButton>
