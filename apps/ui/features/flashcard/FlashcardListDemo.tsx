@@ -1,4 +1,4 @@
-import { Container, LinearProgress, Stack, Button, IconButton, Typography } from '@mui/material';
+import { Container, LinearProgress, Stack, Button, IconButton, Typography, Box } from '@mui/material';
 import { DataGrid, GridColDef, GridSelectionModel } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
@@ -7,6 +7,7 @@ import FlashcardListDemoActions from './FlashcardListDemoActions';
 import FlashcardListDemoDialog from './FlashcardListDemoDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DialogConfirm from '@ui/components/dialog/DialogConfirm';
+import Link from 'next/link';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -87,9 +88,14 @@ const FlashcardListDemo = (): JSX.Element => {
         <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleShowConfirmDialog} size="small" color="error" disabled={disableDeleteButton}>
           <DeleteIcon />
         </IconButton>
-        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto' }} color="primary" variant="contained" disableElevation>
-          New
-        </Button>
+        <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
+          <Link href="/quiz">
+            <Button size="small" color="secondary" variant="contained" disableElevation>Quiz</Button>
+          </Link>
+          <Button size="small" onClick={handleOpenDialog} color="primary" variant="contained" disableElevation>
+            New
+          </Button>
+        </Stack>
       </Stack>
       <DataGrid
         components={{
