@@ -6,5 +6,5 @@ const Index = (): JSX.Element => {
   )
 }
 
-Index.layout = 'dashboard'
+Index.layout = 'nested'
 export default Index;
