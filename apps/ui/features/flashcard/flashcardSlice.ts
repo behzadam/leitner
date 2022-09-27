@@ -7,7 +7,6 @@ import { FlashcardListItemDto, PaginatedDto } from '@shared/types';
 import axios from 'axios';
 import { ApiStatus } from '@ui/types';
 import * as api from './Flashcard.api';
-import { S } from 'msw/lib/glossary-297d38ba';
 
 export const fetchFlashcards = createAsyncThunk(
   'flashcard/fetchFlashcards',
