@@ -4,15 +4,14 @@ import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import Link from "next/link";
 
 type FlashcardListDemoActionsParams = {
-  id: null | number;
-  setRowId: (rowId: number) => void;
+  currentRowId?: number;
+  setCurrentRowId: (id: number) => void;
 }
 
-const FlashcardListDemoActions = (
-  {
-    id,
-    setRowId
-  }: FlashcardListDemoActionsParams): JSX.Element => {
+const FlashcardListDemoActions = ({
+  currentRowId,
+  setCurrentRowId
+}: FlashcardListDemoActionsParams): JSX.Element => {
   return (
     <Stack
       direction="row"
@@ -21,8 +20,8 @@ const FlashcardListDemoActions = (
     >
       <Link
         href={{
-          pathname: `/detail/[id]`,
-          query: { id }
+          pathname: `/detail/[currentRowId]`,
+          query: { currentRowId }
         }}
       >
         <a>
@@ -31,7 +30,8 @@ const FlashcardListDemoActions = (
           </IconButton>
         </a>
       </Link>
-      <IconButton onClick={() => setRowId(id)}>
+      <IconButton onClick={() => setCurrentRowId(currentRowId)}>
+        {currentRowId}
         <EditTwoToneIcon fontSize="small" />
       </IconButton>
     </Stack >

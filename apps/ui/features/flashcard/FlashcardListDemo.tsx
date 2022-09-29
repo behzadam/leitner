@@ -1,12 +1,16 @@
-import { Container, LinearProgress, Stack, Button, IconButton, Typography } from '@mui/material';
+import { Container, LinearProgress, Stack, Button, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridSelectionModel } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
-import FlashcardCategoriesSelect from './FlashcardCategoriesSelect';
 import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
-import FlashcardListDemoDialog from './FlashcardListDemoDialog';
+import FlashcardFormEdit from './FlashcardEditDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DialogConfirm from '@ui/components/dialog/DialogConfirm';
+import Link from 'next/link';
+import FlashcardCreateDialog from './FlashcardCreateDialog';
+import FlashcardEditDialog from './FlashcardEditDialog';
+import Show from '@ui/components/Show';
+import useDialogConfirm from '@ui/components/dialog/useDialogConfirm';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -20,10 +24,65 @@ const rows = [
   { id: 9, front: 'Front 9', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
 ];
 
+const CreateFlashcard = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
+  return (
+    <>
+      <Button size="small" onClick={() => setOpen(true)} color="primary" variant="contained" disableElevation>
+        New
+      </Button>
+      <FlashcardCreateDialog open={open} onClose={() => setOpen(false)} />
+    </>
+  )
+}
+
+const EditFlashcard = ({
+  currentRowId,
+  setCurrentRowId
+}: {
+  currentRowId?: number,
+  setCurrentRowId: (id?: number) => void
+}): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!currentRowId) return setOpen(false);
+    setOpen(true);
+  }, [currentRowId])
+
+  const onClose = (): void => {
+    setCurrentRowId(null)
+    setOpen(false)
+  }
+
+  return (
+    <Show when={open}>
+      <FlashcardEditDialog id={currentRowId} open={open} onClose={onClose} />
+    </Show>
+  )
+}
+
+const FlashcardListDemoToolbar = (): JSX.Element => {
+  return (
+    <Stack direction="row" alignItems="center" sx={{ mb: 1 }}>
+      <Typography variant="h6" >
+        Flashcards
+      </Typography>
+      {/* <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleOpenDialogConfirm(true)} size="small" color="error" disabled={disableDeleteButton}>
+        <DeleteIcon />
+      </IconButton> */}
+      <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
+        <Link href="/quiz">
+          <Button size="small" color="secondary" variant="contained" disableElevation>Quiz</Button>
+        </Link>
+        <CreateFlashcard />
+      </Stack>
+    </Stack>
+  )
+}
+
 const FlashcardListDemo = (): JSX.Element => {
-  const [rowId, setRowId] = useState<number | null>(null);
-  const [openFormDialog, setOpenFormDialog] = useState<boolean>(false);
-  const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
+  const [currentRowId, setCurrentRowId] = useState<number | null>(null);
   const [disableDeleteButton, setDisableDeleteButton] = useState<boolean>(true);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
   const columns: GridColDef[] = useMemo(() => [
@@ -48,47 +107,37 @@ const FlashcardListDemo = (): JSX.Element => {
       minWidth: 120,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => <FlashcardListDemoActions id={params.row.id} setRowId={setRowId} />
+      renderCell: (params) => <FlashcardListDemoActions setCurrentRowId={setCurrentRowId} currentRowId={params.row.id} />
     }
   ], [])
 
-  useEffect(() => {
-    console.log('rowId', rowId)
-  }, [rowId])
+  const { open } = useDialogConfirm()
+  const handleConfirm = async () => {
+    const isConfirmed = await open();
 
-  useEffect(() => {
-    if (selectionModel.length > 0) {
-      setDisableDeleteButton(false)
-      return;
+    if (isConfirmed) {
+      console.log("handleConfirm Confirmed", isConfirmed)
+    } else {
+      console.log("handleConfirm Declined", isConfirmed)
     }
-    setDisableDeleteButton(true)
-  }, [selectionModel])
-
-  const handleOpenDialog = (): void => {
-    setOpenFormDialog(open => !open)
   }
 
-  const handleDeleteRow = (confirmed: boolean): void => {
-    console.log('handleDeleteRow', confirmed)
-    setOpenConfirmDialog(false)
-  }
+  // useEffect(() => {
+  //   if (selectionModel.length > 0) {
+  //     setDisableDeleteButton(false)
+  //     return;
+  //   }
+  //   setDisableDeleteButton(true)
+  // }, [selectionModel])
 
-  const handleShowConfirmDialog = (): void => {
-    console.log('handleShowConfirmDialog')
-    setOpenConfirmDialog(true)
-  }
+  // const handleDeleteRow = (confirmed: boolean): void => {
+  //   console.log('handleDeleteRow', confirmed)
+  // }
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <Stack direction="row" alignItems="center">
-        <FlashcardCategoriesSelect sx={{ mb: 1, minWidth: 130 }} size="small" />
-        <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleShowConfirmDialog} size="small" color="error" disabled={disableDeleteButton}>
-          <DeleteIcon />
-        </IconButton>
-        <Button size="small" onClick={handleOpenDialog} sx={{ ml: 'auto' }} color="primary" variant="contained" disableElevation>
-          New
-        </Button>
-      </Stack>
+      <Button color="secondary" onClick={handleConfirm}>Dialog</Button>
+      <FlashcardListDemoToolbar />
       <DataGrid
         components={{
           NoRowsOverlay: NoRows,
@@ -107,15 +156,10 @@ const FlashcardListDemo = (): JSX.Element => {
         }}
         selectionModel={selectionModel}
       />
-      <FlashcardListDemoDialog
-        id={rowId}
-        setRowId={setRowId}
-        openDialog={openFormDialog}
-        setOpenDialog={setOpenFormDialog}
+      <EditFlashcard
+        currentRowId={currentRowId}
+        setCurrentRowId={setCurrentRowId}
       />
-      <DialogConfirm open={openConfirmDialog} onConfirm={handleDeleteRow}>
-        <Typography>Are you sure you want to delete?</Typography>
-      </DialogConfirm>
     </Container>
   )
 }
