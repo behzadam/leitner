@@ -3,24 +3,24 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
+import useDialogConfirm from './useDialogConfirm';
+import { useEffect } from 'react';
 
 export type DialogConfirmProps = {
-  title?: string;
-  open: boolean;
-  onConfirm: (value: boolean) => void;
+  title: string;
   children?: React.ReactNode;
 }
 
 const DialogConfirm = ({
-  title = 'Confirm',
-  children,
-  open = false,
-  onConfirm
+  title = '',
+  children
 }: DialogConfirmProps): JSX.Element => {
+  const { isOpened, confirm, decline } = useDialogConfirm();
+
   return (
     <Dialog
-      open={open}
-      onClose={() => onConfirm(false)}
+      open={isOpened}
+      onClose={decline}
       aria-labelledby="confirm-dialog"
     >
       <DialogTitle id="confirm-dialog">{title}</DialogTitle>
@@ -28,16 +28,14 @@ const DialogConfirm = ({
       <DialogActions>
         <Button
           variant="outlined"
-          onClick={() => onConfirm(false)}
+          onClick={decline}
         >
           No
         </Button>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => {
-            onConfirm(true);
-          }}
+          onClick={confirm}
         >
           Yes
         </Button>
