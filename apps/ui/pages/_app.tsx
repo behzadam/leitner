@@ -12,6 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AppPropsWithLayout } from '@ui/types';
 import { defaultTheme } from '../theme'
 import LayoutFactory from '@ui/components/Layout/LayoutFactory';
+import DialogConfirm from '@ui/components/dialog/DialogConfirm';
+import { Typography } from '@mui/material';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -30,6 +32,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             </LayoutFactory>
           </LocalizationProvider>
           <Notification />
+          <DialogConfirm title={'title'}>
+            <Typography>Are you sure you want to delete?</Typography>
+          </DialogConfirm>
         </Provider>
       </ThemeProvider>
     </React.Fragment>
