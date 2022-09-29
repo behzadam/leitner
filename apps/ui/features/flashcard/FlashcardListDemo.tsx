@@ -10,6 +10,7 @@ import Link from 'next/link';
 import FlashcardCreateDialog from './FlashcardCreateDialog';
 import FlashcardEditDialog from './FlashcardEditDialog';
 import Show from '@ui/components/Show';
+import useDialogConfirm from '@ui/components/dialog/useDialogConfirm';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -110,6 +111,16 @@ const FlashcardListDemo = (): JSX.Element => {
     }
   ], [])
 
+  const { open } = useDialogConfirm()
+  const handleConfirm = async () => {
+    const isConfirmed = await open();
+
+    if (isConfirmed) {
+      console.log("handleConfirm Confirmed", isConfirmed)
+    } else {
+      console.log("handleConfirm Declined", isConfirmed)
+    }
+  }
 
   // useEffect(() => {
   //   if (selectionModel.length > 0) {
@@ -125,6 +136,7 @@ const FlashcardListDemo = (): JSX.Element => {
 
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
+      <Button color="secondary" onClick={handleConfirm}>Dialog</Button>
       <FlashcardListDemoToolbar />
       <DataGrid
         components={{
@@ -148,9 +160,6 @@ const FlashcardListDemo = (): JSX.Element => {
         currentRowId={currentRowId}
         setCurrentRowId={setCurrentRowId}
       />
-      {/* <DialogConfirm open={openConfirmDialog} onConfirm={handleDeleteRow}>
-          <Typography>Are you sure you want to delete?</Typography>
-        </DialogConfirm> */}
     </Container>
   )
 }
