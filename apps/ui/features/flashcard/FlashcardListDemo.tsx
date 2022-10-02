@@ -1,16 +1,14 @@
-import { Container, LinearProgress, Stack, Button, Typography } from '@mui/material';
+import { Container, LinearProgress, Stack, Button, Typography, IconButton } from '@mui/material';
 import { DataGrid, GridColDef, GridSelectionModel } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
-import FlashcardFormEdit from './FlashcardEditDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DialogConfirm from '@ui/components/dialog/DialogConfirm';
 import Link from 'next/link';
 import FlashcardCreateDialog from './FlashcardCreateDialog';
 import FlashcardEditDialog from './FlashcardEditDialog';
 import Show from '@ui/components/Show';
-import useDialogConfirm from '@ui/components/dialog/useDialogConfirm';
+import useFlashcardDelete from './useFlashcardDelete';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -62,19 +60,34 @@ const EditFlashcard = ({
   )
 }
 
+const DeleteFlashcards = (): JSX.Element => {
+  const [disableButton, setDisableButton] = useState<boolean>(true);
+  const { handleDeleteRows } = useFlashcardDelete();
+
+  return (
+    <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleDeleteRows} size="small" color="error" disabled={disableButton}>
+      <DeleteIcon />
+    </IconButton>
+  )
+}
+
+const RedirectToQuiz = (): JSX.Element => {
+  return (
+    <Link href="/quiz">
+      <Button size="small" color="secondary" variant="contained" disableElevation>Quiz</Button>
+    </Link>
+  )
+}
+
 const FlashcardListDemoToolbar = (): JSX.Element => {
   return (
     <Stack direction="row" alignItems="center" sx={{ mb: 1 }}>
       <Typography variant="h6" >
         Flashcards
       </Typography>
-      {/* <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleOpenDialogConfirm(true)} size="small" color="error" disabled={disableDeleteButton}>
-        <DeleteIcon />
-      </IconButton> */}
+      <DeleteFlashcards />
       <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
-        <Link href="/quiz">
-          <Button size="small" color="secondary" variant="contained" disableElevation>Quiz</Button>
-        </Link>
+        <RedirectToQuiz />
         <CreateFlashcard />
       </Stack>
     </Stack>
@@ -83,7 +96,6 @@ const FlashcardListDemoToolbar = (): JSX.Element => {
 
 const FlashcardListDemo = (): JSX.Element => {
   const [currentRowId, setCurrentRowId] = useState<number | null>(null);
-  const [disableDeleteButton, setDisableDeleteButton] = useState<boolean>(true);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
   const columns: GridColDef[] = useMemo(() => [
     {
@@ -111,32 +123,8 @@ const FlashcardListDemo = (): JSX.Element => {
     }
   ], [])
 
-  const { open } = useDialogConfirm()
-  const handleConfirm = async () => {
-    const isConfirmed = await open();
-
-    if (isConfirmed) {
-      console.log("handleConfirm Confirmed", isConfirmed)
-    } else {
-      console.log("handleConfirm Declined", isConfirmed)
-    }
-  }
-
-  // useEffect(() => {
-  //   if (selectionModel.length > 0) {
-  //     setDisableDeleteButton(false)
-  //     return;
-  //   }
-  //   setDisableDeleteButton(true)
-  // }, [selectionModel])
-
-  // const handleDeleteRow = (confirmed: boolean): void => {
-  //   console.log('handleDeleteRow', confirmed)
-  // }
-
   return (
     <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-      <Button color="secondary" onClick={handleConfirm}>Dialog</Button>
       <FlashcardListDemoToolbar />
       <DataGrid
         components={{
