@@ -5,10 +5,10 @@ import { useMemo, useState, useEffect } from 'react';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from 'next/link';
-import FlashcardCreateDialog from './FlashcardCreateDialog';
-import FlashcardEditDialog from './FlashcardEditDialog';
+import FlashcardCreateDialog from '../FlashcardCreateDialog';
+import FlashcardEditDialog from '../FlashcardEditDialog';
 import Show from '@ui/components/Show';
-import useFlashcardDelete from './useFlashcardDelete';
+import useFlashcardDelete from '../hooks/useFlashcardDelete';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },

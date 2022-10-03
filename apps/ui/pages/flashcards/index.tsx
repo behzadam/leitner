@@ -1,4 +1,4 @@
-import FlashcardListDemo from '@ui/features/flashcard/FlashcardListDemo';
+import FlashcardListDemo from '@ui/features/flashcard/list/FlashcardListDemo';
 
 const Index = (): JSX.Element => {
   return (
