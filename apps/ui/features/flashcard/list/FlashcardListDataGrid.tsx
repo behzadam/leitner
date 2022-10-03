@@ -19,7 +19,7 @@ const rows = [
 
 
 const FlashcardListDataGrid = (): JSX.Element => {
-  const { setCurrentRows, setCurrentRow } = useFlashcardListDispatchContext()
+  const { setCurrentRows } = useFlashcardListDispatchContext();
   //#region Data Grid Columns
   const columns: GridColDef[] = useMemo(() => [
     {
@@ -63,8 +63,7 @@ const FlashcardListDataGrid = (): JSX.Element => {
       experimentalFeatures={{ newEditingApi: true }}
       sx={{ backgroundColor: "white" }}
       onSelectionModelChange={(newSelectionModel) => {
-        // setCurrentRows(newSelectionModel);
-        console.log('onSelectionModelChange')
+        setCurrentRows(newSelectionModel as number[]);
       }}
     // selectionModel={selectionModel}
     />
