@@ -2,16 +2,16 @@ import { Divider, IconButton, Stack } from "@mui/material";
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import Link from "next/link";
+import { useFlashcardListDispatchContext } from './FlashcardListDemo';
 
 type FlashcardListDemoActionsParams = {
-  currentRowId?: number;
-  setCurrentRowId: (id: number) => void;
+  id?: number;
 }
 
 const FlashcardListDemoActions = ({
-  currentRowId,
-  setCurrentRowId
+  id = null
 }: FlashcardListDemoActionsParams): JSX.Element => {
+  const { setCurrentRow } = useFlashcardListDispatchContext()
   return (
     <Stack
       direction="row"
@@ -20,8 +20,8 @@ const FlashcardListDemoActions = ({
     >
       <Link
         href={{
-          pathname: `/detail/[currentRowId]`,
-          query: { currentRowId }
+          pathname: `/detail/[id]`,
+          query: { id }
         }}
       >
         <a>
@@ -30,8 +30,7 @@ const FlashcardListDemoActions = ({
           </IconButton>
         </a>
       </Link>
-      <IconButton onClick={() => setCurrentRowId(currentRowId)}>
-        {currentRowId}
+      <IconButton onClick={() => setCurrentRow(id)}>
         <EditTwoToneIcon fontSize="small" />
       </IconButton>
     </Stack >
