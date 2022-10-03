@@ -70,7 +70,7 @@ const FlashcardListDemo = (): JSX.Element => {
   return (
     <FlashcardListProvider>
       <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
-        {/* <FlashcardListToolbar /> */}
+        <FlashcardListToolbar />
         <FlashcardListDataGrid />
       </Container>
     </FlashcardListProvider>
