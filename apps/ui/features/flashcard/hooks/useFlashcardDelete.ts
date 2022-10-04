@@ -1,6 +1,6 @@
 import useDialogConfirm from '@ui/components/dialog/useDialogConfirm';
 
-const useFlashcardDelete = () => {
+export const useFlashcardDelete = () => {
   const { open } = useDialogConfirm();
 
   const handleDeleteRows = async (): Promise<void> => {
@@ -16,5 +16,3 @@ const useFlashcardDelete = () => {
     handleDeleteRows,
   };
 };
-
-export default useFlashcardDelete;
