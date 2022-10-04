@@ -10,10 +10,10 @@ const FlashcardListToolbar = (): JSX.Element => {
         Flashcards
       </Typography>
       <FlashcardListDelete />
-      {/* <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
+      <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
         <FlashcardListQuiz />
         <FlashcardListCreate />
-      </Stack> */}
+      </Stack>
     </Stack>
   )
 }
