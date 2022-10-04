@@ -1,8 +1,9 @@
+import { LinearProgress } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import NoRows from '@ui/components/NoRows';
 import { useMemo } from 'react';
-import { LinearProgress } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-; import NoRows from "@ui/components/NoRows";
-import { useFlashcardListDispatchContext } from './FlashcardListDemo';
+
+import { useFlashcardListEventContext } from '../hooks';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
 
 const rows = [
@@ -19,7 +20,7 @@ const rows = [
 
 
 const FlashcardListDataGrid = (): JSX.Element => {
-  const { setCurrentRows } = useFlashcardListDispatchContext();
+  const { setCurrentRows } = useFlashcardListEventContext();
   //#region Data Grid Columns
   const columns: GridColDef[] = useMemo(() => [
     {

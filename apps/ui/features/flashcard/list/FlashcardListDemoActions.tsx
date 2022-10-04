@@ -1,17 +1,18 @@
-import { Divider, IconButton, Stack } from "@mui/material";
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
-import Link from "next/link";
-import { useFlashcardListDispatchContext } from './FlashcardListDemo';
+import { Divider, IconButton, Stack } from '@mui/material';
+import Link from 'next/link';
+
+import { useFlashcardListEventContext } from '../hooks';
 
 type FlashcardListDemoActionsParams = {
   id?: number;
-}
+};
 
 const FlashcardListDemoActions = ({
   id = null
 }: FlashcardListDemoActionsParams): JSX.Element => {
-  const { setCurrentRow } = useFlashcardListDispatchContext()
+  const { setCurrentRow } = useFlashcardListEventContext()
   return (
     <Stack
       direction="row"

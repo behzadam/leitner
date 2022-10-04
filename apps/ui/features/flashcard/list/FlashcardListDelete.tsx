@@ -3,8 +3,8 @@ import { IconButton } from '@mui/material';
 import Show from '@ui/components/Show';
 import { useEffect, useState } from 'react';
 
-import useFlashcardDelete from '../hooks/useFlashcardDelete';
-import { useFlashcardListContext } from './FlashcardListDemo';
+import { useFlashcardDelete, useFlashcardListContext } from '../hooks';
+
 
 const FlashcardListDelete = (): JSX.Element => {
   const { currentRows } = useFlashcardListContext();
