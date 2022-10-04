@@ -1,26 +1,30 @@
-import { IconButton } from "@mui/material";
-import { useState, useEffect } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-import useFlashcardDelete from "../hooks/useFlashcardDelete";
-import { useFlashcardListContext } from "./FlashcardListDemo";
+import { IconButton } from '@mui/material';
+import Show from '@ui/components/Show';
+import { useEffect, useState } from 'react';
+
+import useFlashcardDelete from '../hooks/useFlashcardDelete';
+import { useFlashcardListContext } from './FlashcardListDemo';
 
 const FlashcardListDelete = (): JSX.Element => {
   const { currentRows } = useFlashcardListContext();
-  const [disableButton, setDisableButton] = useState<boolean>(true);
+  const [showDeleteButton, setShowDeleteButton] = useState<boolean>(false);
   const { handleDeleteRows } = useFlashcardDelete();
 
   useEffect(() => {
     if (currentRows.length > 0) {
-      setDisableButton(false)
+      setShowDeleteButton(true)
     } else {
-      setDisableButton(true)
+      setShowDeleteButton(false)
     }
   }, [currentRows])
 
   return (
-    <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleDeleteRows} size="small" color="error" disabled={disableButton}>
-      <DeleteIcon />
-    </IconButton>
+    <Show when={showDeleteButton}>
+      <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleDeleteRows} size="small">
+        <DeleteIcon sx={{ fontSize: 18 }} />
+      </IconButton>
+    </Show>
   )
 }
 
