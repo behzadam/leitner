@@ -1,7 +1,8 @@
 import { LinearProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
+import FlashcardFormEditDialog from '../form/FlashcardFormEditDialog';
 
 import { useFlashcardListEventContext } from '../hooks';
 import FlashcardListDemoActions from './FlashcardListDemoActions';
@@ -50,24 +51,27 @@ const FlashcardListDataGrid = (): JSX.Element => {
   //#endregion
 
   return (
-    <DataGrid
-      components={{
-        NoRowsOverlay: NoRows,
-        LoadingOverlay: LinearProgress,
-      }}
-      rows={rows}
-      columns={columns}
-      pageSize={6}
-      rowsPerPageOptions={[6]}
-      checkboxSelection
-      disableSelectionOnClick
-      experimentalFeatures={{ newEditingApi: true }}
-      sx={{ backgroundColor: "white" }}
-      onSelectionModelChange={(newSelectionModel) => {
-        setCurrentRows(newSelectionModel as number[]);
-      }}
-    // selectionModel={selectionModel}
-    />
+    <Fragment>
+      <DataGrid
+        components={{
+          NoRowsOverlay: NoRows,
+          LoadingOverlay: LinearProgress,
+        }}
+        rows={rows}
+        columns={columns}
+        pageSize={6}
+        rowsPerPageOptions={[6]}
+        checkboxSelection
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+        sx={{ backgroundColor: "white" }}
+        onSelectionModelChange={(newSelectionModel) => {
+          setCurrentRows(newSelectionModel as number[]);
+        }}
+      // selectionModel={selectionModel}
+      />
+      <FlashcardFormEditDialog />
+    </Fragment>
   )
 }
 
