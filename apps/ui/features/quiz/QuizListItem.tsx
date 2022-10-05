@@ -1,19 +1,18 @@
-import { Box, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
-import Show from "@ui/components/Show";
-import IconButtonRounded from "@ui/components/IconButtonRounded";
+import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
-import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
+import { Box, Card, CardActions, CardContent, Divider, Grid, IconButton, Typography } from '@mui/material';
+import Show from '@ui/components/Show';
+import { useState } from 'react';
 
-type FlashcardItemProps = {
+type QuizListItemProps = {
   onRemember?: (id: number, rememberedIt: boolean) => void
 }
 
-const FlashcardItem = ({
+const QuizListItem = ({
   onRemember
-}: FlashcardItemProps): JSX.Element => {
+}: QuizListItemProps): JSX.Element => {
   const [showBack, setShowBack] = useState<boolean>(false);
 
   const handleShowBack = (): void => {
@@ -21,42 +20,43 @@ const FlashcardItem = ({
   }
 
   return (
-    <Card sx={{ minWidth: 275, border: 'none' }}>
-      <CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', py: 4 }}>
+    <Card sx={{ border: 'none' }}>
+      <CardContent sx={{ minHeight: '300px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', p: 2 }}>
           <Typography sx={{ fontSize: 16 }} variant="h6" component="div">
-            Front
+            In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', py: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', p: 2 }}>
           <Show when={showBack}>
             <Typography variant="body2">
-              back
+              In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
             </Typography>
           </Show>
         </Box>
       </CardContent>
+      <Divider variant="middle" />
       <CardActions>
         <Grid container sx={{ maxWidth: 200, mx: 'auto', py: 1 }}>
           <Grid item xs={4} container justifyContent="center" alignItems="center">
-            <IconButtonRounded onClick={() => onRemember(1, false)} aria-label="skip">
+            <IconButton onClick={() => onRemember(1, false)} aria-label="skip">
               <CloseIcon />
-            </IconButtonRounded>
+            </IconButton>
           </Grid>
           <Grid item xs={4} container justifyContent="center">
-            <IconButtonRounded onClick={handleShowBack} aria-label="show card back">
+            <IconButton onClick={handleShowBack} aria-label="show card back">
               <Show when={showBack}>
                 <VisibilityTwoToneIcon color="info" />
               </Show>
               <Show when={!showBack}>
                 <VisibilityOffTwoToneIcon />
               </Show>
-            </IconButtonRounded>
+            </IconButton>
           </Grid>
           <Grid item xs={4} container justifyContent="center" alignItems="center">
-            <IconButtonRounded onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
+            <IconButton onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
               <ThumbUpOffAltOutlinedIcon />
-            </IconButtonRounded>
+            </IconButton>
           </Grid>
         </Grid>
       </CardActions>
@@ -64,4 +64,4 @@ const FlashcardItem = ({
   )
 }
 
-export default FlashcardItem;
+export default QuizListItem;
