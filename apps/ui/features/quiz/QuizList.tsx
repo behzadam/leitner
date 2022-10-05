@@ -1,19 +1,15 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
+import AddIcon from '@mui/icons-material/Add';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import FlashcardItem from "@ui/features/flashcard/FlashcardItem";
-import { Grid, Paper } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import IconButtonRounded from '@ui/components/IconButtonRounded';
-import { bindKeyboard, autoPlay } from 'react-swipeable-views-utils';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import { useState } from 'react';
+import { Chip, Grid, IconButton, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+import MobileStepper from '@mui/material/MobileStepper';
+import { useTheme } from '@mui/material/styles';
 import Show from '@ui/components/Show';
+import { useState } from 'react';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay, bindKeyboard } from 'react-swipeable-views-utils';
+import QuizListItem from './QuizListItem';
 
 const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
 const AutoPlaySwipeableViews = autoPlay(BindKeyboardSwipeableViews);
@@ -65,7 +61,7 @@ function QuizList({
           {items.map((_, index) => (
             <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
-                <FlashcardItem onRemember={(id, value) => onRemember(id, value)} />
+                <QuizListItem onRemember={(id, value) => onRemember(id, value)} />
               ) : null}
             </div>
           ))}
@@ -80,7 +76,7 @@ function QuizList({
             position="static"
             activeStep={activeStep}
             nextButton={
-              <IconButtonRounded
+              <IconButton
                 size="medium"
                 onClick={handleNext}
                 disabled={activeStep === maxSteps - 1}
@@ -90,31 +86,29 @@ function QuizList({
                 ) : (
                   <KeyboardArrowRight />
                 )}
-              </IconButtonRounded>
+              </IconButton>
             }
             backButton={
-              <IconButtonRounded size="medium" onClick={handleBack} disabled={activeStep === 0}>
+              <IconButton size="medium" onClick={handleBack} disabled={activeStep === 0}>
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowRight />
                 ) : (
                   <KeyboardArrowLeft />
                 )}
-              </IconButtonRounded>
+              </IconButton>
             }
           />
         </Grid>
         <Grid sx={{ py: 1, ml: 'auto' }}>
-          <IconButtonRounded onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }}>
-            <Show when={!autoplay}>
-              <PlayArrowIcon />
-            </Show>
-            <Show when={autoplay}>
-              <PauseIcon />
-            </Show>
-          </IconButtonRounded>
-          <IconButtonRounded size="medium">
+          <Show when={!autoplay}>
+            <Chip variant="filled" label="Start" onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }} />
+          </Show>
+          <Show when={autoplay}>
+            <Chip variant="filled" label="Pause" onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }} />
+          </Show>
+          <IconButton color="default" size="medium">
             <AddIcon />
-          </IconButtonRounded>
+          </IconButton>
         </Grid>
       </Grid>
     </Box>
