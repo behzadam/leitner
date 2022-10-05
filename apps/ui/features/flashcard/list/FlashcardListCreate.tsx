@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { Fragment, useState } from 'react';
 
-import FlashcardCreateDialog from '../FlashcardCreateDialog';
+import FlashcardFormCreateDialog from '../form/FlashcardFormCreateDialog';
 
 const FlashcardListCreate = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
@@ -10,7 +10,7 @@ const FlashcardListCreate = (): JSX.Element => {
       <Button size="small" onClick={() => setOpen(true)} color="primary" variant="contained" disableElevation>
         New
       </Button>
-      <FlashcardCreateDialog open={open} onClose={() => setOpen(false)} />
+      <FlashcardFormCreateDialog open={open} onClose={() => setOpen(false)} />
     </Fragment>
   )
 }

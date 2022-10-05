@@ -1,4 +1,6 @@
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogContent } from '@mui/material';
+
+import FlashcardFormCreate from './FlashcardFormCreate';
 
 const maxWidth = 'xs';
 
@@ -7,21 +9,18 @@ type FlashcardCreateDialogProps = {
   onClose: () => void;
 }
 
-const FlashcardCreateDialog = ({
-  open = false,
+const FlashcardFormCreateDialog = ({
+  open = true,
   onClose
 }: FlashcardCreateDialogProps): JSX.Element => {
 
   return (
     <Dialog onClose={onClose} open={open} fullWidth={true} maxWidth={maxWidth}>
-      <DialogTitle>Add Flashcard</DialogTitle>
-      <DialogContent>
-        {
-          <p>Flashcard Form Create</p>
-        }
+      <DialogContent sx={{ p: 0 }}>
+        <FlashcardFormCreate />
       </DialogContent>
     </Dialog>
   )
 }
 
-export default FlashcardCreateDialog;
+export default FlashcardFormCreateDialog;
