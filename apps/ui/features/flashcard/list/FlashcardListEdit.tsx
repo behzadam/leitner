@@ -1,6 +1,6 @@
 import Show from "@ui/components/Show";
 import { useEffect, useState } from "react";
-import FlashcardEditDialog from "../FlashcardEditDialog";
+import FlashcardEditDialog from "../form/FlashcardEditDialog";
 
 const FlashcardListEdit = ({
   currentRowId,
