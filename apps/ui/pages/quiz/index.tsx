@@ -8,7 +8,7 @@ import QuizListToolbar from '@ui/features/quiz/QuizListToolbar';
 const Index = (): JSX.Element => {
   return (
     <LayoutNestedFull>
-      <Container maxWidth='sm'>
+      <Container maxWidth='sm' sx={{ mt: -4 }}>
         <QuizListToolbar />
         <QuizList />
       </Container>
