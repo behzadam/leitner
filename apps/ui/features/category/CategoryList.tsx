@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import { Paper, Container, Typography, Box } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import { Box, Container, Paper } from '@mui/material';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
 import { useState } from 'react';
-import Link from 'next/link';
+import CategoryListItem from './CategoryListItem';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -50,16 +49,10 @@ const CategoryList = (): JSX.Element => {
   }
   return (
     <Container maxWidth="sm">
-      <Grid container sx={{ mt: 4 }} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container sx={{ mt: 4 }} spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 8 }}>
         {categories.map((cat, index) => (
           <Grid xs={2} sm={4} md={4} key={index}>
-            <Link href="/flashcards">
-              <a>
-                <Item>
-                  <Typography variant="body2" sx={{ ml: 1 }}>{cat.name}</Typography>
-                </Item>
-              </a>
-            </Link>
+            <CategoryListItem />
           </Grid>
         ))}
         <Grid xs={2} sm={4} md={4}>
