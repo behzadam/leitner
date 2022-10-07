@@ -13,7 +13,7 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   },
   'a > svg': {
     fontSize: 10,
-    marginRight: 2
+    marginRight: 3
   }
 }));
 
