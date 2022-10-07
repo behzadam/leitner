@@ -8,7 +8,7 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     color: theme.palette.grey[600],
-    fontSize: 10,
+    fontSize: 11,
     textDecoration: 'none',
   },
   'a > svg': {
