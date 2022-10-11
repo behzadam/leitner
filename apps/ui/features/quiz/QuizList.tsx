@@ -26,6 +26,10 @@ const ChipPlayButton = styled(Chip)<ChipProps>(({ theme }) => ({
   paddingRight: 4.2
 }))
 
+const ChipPauseButton = styled(Chip)<ChipProps>(({ theme }) => ({
+  boxShadow: 'inset 0px 0px 0px 2px rgba(0,0,0,0.1)'
+}))
+
 
 function QuizList({
   items = Array.of(1, 2, 3, 4, 5, 6, 7, 8)
@@ -112,7 +116,7 @@ function QuizList({
             <ChipPlayButton variant="filled" label="Start" onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }} />
           </Show>
           <Show when={autoplay}>
-            <Chip variant="filled" label="Pause" onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }} />
+            <ChipPauseButton variant="filled" label="Pause" onClick={handleAutoPlay} size="medium" sx={{ mr: 1 }} />
           </Show>
           <IconButton color="default" size="medium">
             <AddIcon />
