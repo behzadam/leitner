@@ -1,20 +1,8 @@
-import { Container, Paper } from '@mui/material';
-import { experimentalStyled as styled } from '@mui/material/styles';
+import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+
 import CategoryAddButton from './CategoryAddButton';
 import CategoryListItem from './CategoryListItem';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  alignItems: 'center',
-  justifyContent: 'center',
-  display: 'flex',
-  textDecoration: 'none'
-}));
 
 const CategoryList = (): JSX.Element => {
   const categories: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9,]
