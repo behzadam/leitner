@@ -1,14 +1,19 @@
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CloseIcon from '@mui/icons-material/Close';
-import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
-import { Box, Card, CardActions, CardContent, Divider, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardActions, CardContent, Divider, Grid, IconButton, IconButtonProps, styled, Typography } from '@mui/material';
 import Show from '@ui/components/Show';
 import { useState } from 'react';
 
 type QuizListItemProps = {
   onRemember?: (id: number, rememberedIt: boolean) => void
 }
+
+const IconButtonOk = styled(IconButton)<IconButtonProps>(({ theme }) => ({
+  boxShadow: 'inset 0px 0px 0px 2px',
+  backgroundColor: '#f0fdf4'
+}))
 
 const QuizListItem = ({
   onRemember
@@ -54,9 +59,9 @@ const QuizListItem = ({
             </IconButton>
           </Grid>
           <Grid item xs={4} container justifyContent="center" alignItems="center">
-            <IconButton onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
-              <ThumbUpOffAltOutlinedIcon />
-            </IconButton>
+            <IconButtonOk onClick={() => onRemember(1, true)} aria-label="remember it" color="success">
+              <CheckRoundedIcon />
+            </IconButtonOk>
           </Grid>
         </Grid>
       </CardActions>
