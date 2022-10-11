@@ -1,5 +1,5 @@
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import PieChartOutlineRoundedIcon from '@mui/icons-material/PieChartOutlineRounded';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 import { Box, Stack, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
@@ -26,10 +26,10 @@ const QuizListToolbar = (): JSX.Element => {
         <Typography variant="overline">List</Typography>
       </Item>
       <Item sx={{ mx: 'auto' }}>
-        <Typography variant="overline" component="h6">Flashcard</Typography>
+        <Typography variant="overline" component="h6"><strong>Flashcard</strong></Typography>
       </Item>
       <Item>
-        <PieChartOutlineRoundedIcon sx={{ fontSize: 12, mr: 0.5 }} />
+        <ArrowForwardRoundedIcon sx={{ fontSize: 12, mr: 0.5 }} />
         <Typography variant="overline">Stat</Typography>
       </Item>
     </Stack>
