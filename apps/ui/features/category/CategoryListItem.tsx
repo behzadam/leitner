@@ -26,7 +26,7 @@ const CategoryListItem = (): JSX.Element => {
       <CardActions>
         <Stack direction="row" justifyContent="space-between" sx={{ fontSize: 11, width: '100%' }}>
           <Item>
-            <Link href="#">
+            <Link href="/flashcards">
               <a>
                 <StyleRoundedIcon />
                 List
@@ -42,7 +42,7 @@ const CategoryListItem = (): JSX.Element => {
             </Link>
           </Item>
           <Item>
-            <Link href="#">
+            <Link href="/quiz">
               <a>
                 <QuizRoundedIcon />
                 Quiz
