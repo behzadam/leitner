@@ -1,20 +1,20 @@
 import { Paper } from "@mui/material";
-import { CalendarPicker, PickersDay, PickersDayProps } from "@mui/x-date-pickers"
+import { CalendarPicker, PickersDay, PickersDayProps } from "@mui/x-date-pickers";
 import moment, { Moment } from "moment";
 import { useState } from "react";
 
 type ProgressCalendar = {
   startDate?: string;
-  daysWithLearning?: moment.Moment[];
+  daysWithLearning?: string[];
 }
 
 const ProgressCalendar = ({
   startDate = '2022-08-06',
   daysWithLearning = [
-    moment('2022-08-06'),
-    moment('2022-08-07'),
-    moment('2022-08-08'),
-    moment('2022-08-09')
+    moment('2022-10-12').format('MM-DD-YYYY'),
+    moment('2022-10-11').format('MM-DD-YYYY'),
+    moment('2022-10-10').format('MM-DD-YYYY'),
+    moment('2022-10-09').format('MM-DD-YYYY')
   ]
 }: ProgressCalendar): JSX.Element => {
   const [date, setDate] = useState<Moment | null>(moment());
@@ -24,13 +24,16 @@ const ProgressCalendar = ({
     selectedDates: Array<moment.Moment | null>,
     pickersDayProps: PickersDayProps<moment.Moment>
   ): JSX.Element => {
+    console.log('day:', day.format('MM-DD-YYYY'), 'saved:', daysWithLearning[0])
+
     return (
       <PickersDay
         {...pickersDayProps}
-        selected={daysWithLearning.includes(day)}
+        selected={daysWithLearning.includes(day.format('MM-DD-YYYY'))}
         sx={{
-          [`&&.${daysWithLearning.includes(day)}`]: {
-            backgroundColor: "green"
+          '&.Mui-selected': {
+            backgroundColor: '#ecfeff',
+            color: '#0e7490'
           }
         }}
       />
