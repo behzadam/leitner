@@ -10,7 +10,7 @@ export const defaultTheme: ThemeOptions = createTheme({
       main: '#2c2c2c',
     },
     secondary: {
-      main: '#eab308',
+      main: '#e4e5e8',
     },
     divider: 'rgba(0,0,0,0.07)',
     success: {
