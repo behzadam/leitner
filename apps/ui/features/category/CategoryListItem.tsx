@@ -34,7 +34,7 @@ const CategoryListItem = (): JSX.Element => {
             </Link>
           </Item>
           <Item>
-            <Link href="#">
+            <Link href="/stat">
               <a>
                 <PieChartRoundedIcon />
                 Stat
