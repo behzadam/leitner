@@ -1,5 +1,7 @@
+import LayoutDashboard from '@ui/components/Layout/LayoutDashboard';
 import CategoryList from '@ui/features/category/CategoryList';
 import { NextPageWithLayout } from '@ui/types';
+import { ReactElement } from 'react';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
@@ -7,5 +9,10 @@ const Index: NextPageWithLayout = (): JSX.Element => {
   );
 }
 
-Index.layout = 'dashboard'
+Index.layout = function layout(page: ReactElement) {
+  return (
+    <LayoutDashboard>{page}</LayoutDashboard>
+  )
+}
+
 export default Index;

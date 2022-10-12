@@ -1,23 +1,23 @@
-import Head from 'next/head';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import Notification from '@ui/features/notification/Notification';
+import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
-import Notification from '@ui/features/notification/Notification';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
+import { Typography } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import DialogConfirm from '@ui/components/dialog/DialogConfirm';
+import { AppPropsWithLayout } from '@ui/types';
 import axios from "axios";
 import React from 'react';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AppPropsWithLayout } from '@ui/types';
-import { defaultTheme } from '../theme'
-import LayoutFactory from '@ui/components/Layout/LayoutFactory';
-import DialogConfirm from '@ui/components/dialog/DialogConfirm';
-import { Typography } from '@mui/material';
+import { defaultTheme } from '../theme';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
+  const layout = Component.layout ?? ((page) => page)
   return (
     <React.Fragment>
       <Head>
@@ -27,9 +27,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <CssBaseline enableColorScheme />
         <Provider store={store}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <LayoutFactory layout={Component.layout}>
-              <Component {...pageProps} />
-            </LayoutFactory>
+            {layout(<Component {...pageProps} />)}
           </LocalizationProvider>
           <Notification />
           <DialogConfirm title={'title'}>
