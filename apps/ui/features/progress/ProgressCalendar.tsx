@@ -32,8 +32,8 @@ const ProgressCalendar = ({
         selected={daysWithLearning.includes(day.format('MM-DD-YYYY'))}
         sx={{
           '&.Mui-selected': {
-            backgroundColor: '#ecfeff',
-            color: '#0e7490'
+            backgroundColor: '#eff6ff',
+            color: '#2563eb'
           }
         }}
       />
