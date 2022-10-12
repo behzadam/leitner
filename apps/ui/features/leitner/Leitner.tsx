@@ -1,37 +1,48 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
 import StyleTwoToneIcon from '@mui/icons-material/StyleTwoTone';
+import { Box, BoxProps, Paper, Stack, styled, Typography } from '@mui/material';
 
-const Item = styled(CardContent)(({ theme }) => ({
-  marginBottom: '10px'
+const Item = styled(Box)<BoxProps>(() => ({
+  minWidth: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  border: '2px solid rgba(0,0,0,0.05)',
+  paddingTop: '1em',
+  paddingBottom: '1em',
+  paddingLeft: '0.6em',
+  paddingRight: '0.6em',
+  borderRadius: '0.6em'
 }));
 
 const Leitner = (): JSX.Element => {
-  const leitnerBox = new Array(5).fill(0);
-  const leitnerBoxColors = ['#9ca3af', '#fde68a', '#fdba74', '#60a5fa', '#14b8a6'];
+  const leitnerBox = [
+    { box: 5, color: '#14b8a6' },
+    { box: 4, color: '#60a5fa' },
+    { box: 3, color: '#fdba74' },
+    { box: 2, color: '#fde68a' },
+    { box: 1, color: '#9ca3af' }
+  ]
+
   return (
-    <Stack
-      sx={{ margin: 'auto', borderRadius: '0px', overflow: 'hidden' }}
-    >
-      {
-        leitnerBox.map((_, index) => {
-          return (
-            <Card variant="outlined" key={index} sx={{ marginBottom: 1 }}>
-              <CardContent>
-                <Stack
-                  direction="row"
-                  alignItems="center">
-                  <StyleTwoToneIcon sx={{ mr: 2, color: leitnerBoxColors[index] }} />
-                  <Typography variant="caption">Cards: {index + 1}</Typography>
-                  <Typography variant="caption" sx={{ ml: 2 }}>Ready: {index + 3}</Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          )
-        })
-      }
-      <Typography variant="caption">Items: 110</Typography>
-    </Stack >
+    <Paper sx={{ p: 2 }}>
+      <Stack
+        spacing={1}
+        sx={{ margin: 'auto', borderRadius: '0px', overflow: 'hidden' }}
+      >
+        <Typography variant="overline" sx={{ textAlign: 'center' }}>Leitner System</Typography>
+        {
+          leitnerBox.map((_, index) => {
+            return (
+              <Item key={index}>
+                <StyleTwoToneIcon sx={{ mr: 0.5, color: leitnerBox[index].color }} />
+                <Typography variant="caption" sx={{ mr: 1, color: leitnerBox[index].color }}>Box {leitnerBox[index].box}</Typography>
+                <Typography variant="caption" sx={{ ml: 1 }}>Cards: {index + 1}</Typography>
+              </Item>
+            )
+          })
+        }
+        <Typography variant="caption" sx={{ textAlign: 'center' }}>Items: 110</Typography>
+      </Stack>
+    </Paper>
   )
 }
 
