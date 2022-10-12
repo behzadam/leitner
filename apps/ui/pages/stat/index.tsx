@@ -7,12 +7,12 @@ const Index = (): JSX.Element => {
 
   return (
     <LayoutNested>
-      <Container maxWidth="md">
+      <Container maxWidth="sm" sx={{ mx: 'auto' }}>
         <Grid container spacing={2} sx={{ mt: 4 }}>
-          <Grid item>
+          <Grid item xs={12} sm={7}>
             <ProgressCalendar />
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={5}>
             <Leitner />
           </Grid>
         </Grid>
