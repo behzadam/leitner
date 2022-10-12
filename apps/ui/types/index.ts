@@ -1,6 +1,7 @@
 import { Store } from '@reduxjs/toolkit';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
+import { ReactElement, ReactNode } from 'react';
 
 export type ThunkExtraArguments = {
   store: Store;
@@ -13,8 +14,11 @@ export type ApiStatus = 'IDLE' | 'PENDING' | 'SUCCEEDED' | 'FAILED';
 export type Layout = 'dashboard' | 'nested';
 
 // NextJS
-export type NextPageWithLayout = NextPage & {
-  layout?: Layout;
+export type NextPageWithLayout<
+  P = Record<string, never>,
+  IP = P
+> = NextPage<P, IP> & {
+  layout?: (page: ReactElement) => ReactNode;
 };
 
 export type AppPropsWithLayout = AppProps & {
