@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Fab, FabProps, styled } from "@mui/material";
 import { Fragment, useState } from 'react';
-import CategoryFormCreate from './CategoryFormCreate';
+import CategoryFormCreate from '../CategoryFormCreate';
 
 const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
   position: 'fixed',
@@ -10,7 +10,7 @@ const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
   transform: 'translate(-50%, 0)'
 }));
 
-const CategoryAddButton = (): JSX.Element => {
+const CategoryListAddButton = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleAddCategory = (): void => {
@@ -32,4 +32,4 @@ const CategoryAddButton = (): JSX.Element => {
   )
 }
 
-export default CategoryAddButton;
+export default CategoryListAddButton;

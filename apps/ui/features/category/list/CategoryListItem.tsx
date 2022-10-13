@@ -20,10 +20,12 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
 }));
 
 type CategoryListItemProps = {
-  id?: number,
+  id?: number;
+  onEdit: (id?: number) => void;
+  onDelete: (id?: number) => void;
 }
 
-const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
+const CategoryListItem = ({ id, onEdit, onDelete }: CategoryListItemProps): JSX.Element => {
   console.log({ id })
   return (
     <Card>
@@ -33,17 +35,13 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
           <Box sx={{ ml: 'auto' }}>
             <IconButton
               size="small"
-              onClick={() => {
-                console.info("I'm a button.");
-              }}
+              onClick={onDelete}
             >
               <DeleteIcon sx={{ fontSize: 13 }} />
             </IconButton>
             <IconButton
               size="small"
-              onClick={() => {
-                console.info("I'm a button.");
-              }}
+              onClick={() => onEdit(id)}
             >
               <EditIcon sx={{ fontSize: 13 }} />
             </IconButton>
