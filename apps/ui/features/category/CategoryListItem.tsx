@@ -1,7 +1,9 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import PieChartRoundedIcon from '@mui/icons-material/PieChartRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
-import { Button, ButtonProps, Card, CardActions, CardContent, Link, Stack, styled, Typography } from "@mui/material";
+import { Box, Button, ButtonProps, Card, CardActions, CardContent, IconButton, Link, Stack, styled, Typography } from '@mui/material';
 
 const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   'a': {
@@ -17,11 +19,36 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   }
 }));
 
-const CategoryListItem = (): JSX.Element => {
+type CategoryListItemProps = {
+  id?: number,
+}
+
+const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
+  console.log({ id })
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <Typography variant="overline">Flashcard Name</Typography>
+      <CardContent>
+        <Stack direction="row" alignItems="center">
+          <Typography variant="overline">Flashcard Name</Typography>
+          <Box sx={{ ml: 'auto' }}>
+            <IconButton
+              size="small"
+              onClick={() => {
+                console.info("I'm a button.");
+              }}
+            >
+              <DeleteIcon sx={{ fontSize: 13 }} />
+            </IconButton>
+            <IconButton
+              size="small"
+              onClick={() => {
+                console.info("I'm a button.");
+              }}
+            >
+              <EditIcon sx={{ fontSize: 13 }} />
+            </IconButton>
+          </Box>
+        </Stack>
       </CardContent>
       <CardActions>
         <Stack direction="row" justifyContent="space-between" sx={{ fontSize: 11, width: '100%' }}>
