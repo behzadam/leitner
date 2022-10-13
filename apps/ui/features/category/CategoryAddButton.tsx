@@ -1,31 +1,34 @@
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
-import { Button, styled } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import { Fab, FabProps, styled } from "@mui/material";
+import { Fragment, useState } from 'react';
+import CategoryFormCreate from './CategoryFormCreate';
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  ...theme.typography.body2,
-  width: '100%',
-  padding: theme.spacing(1.7),
-  textAlign: 'center',
-  alignItems: 'center',
-  justifyContent: 'center',
-  display: 'flex',
-  borderRadius: '5px',
-  borderWidth: '1px',
-  borderStyle: 'dashed',
-  borderColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ddd',
-  cursor: 'pointer'
+const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
+  position: 'fixed',
+  bottom: '16px',
+  left: '50%',
+  transform: 'translate(-50%, 0)'
 }));
 
 const CategoryAddButton = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false)
 
   const handleAddCategory = (): void => {
-    console.log("handleAddCategory")
+    console.log("handleAddCategory");
+    setOpen(true);
+  }
+
+  const onClose = (): void => {
+    setOpen(false);
   }
 
   return (
-    <StyledButton onClick={handleAddCategory}>
-      <AddTwoToneIcon />
-    </StyledButton>
+    <Fragment>
+      <CategoryFormCreate open={open} onClose={onClose} />
+      <FabButton color="primary" size="medium" aria-label="add category" onClick={handleAddCategory}>
+        <AddIcon />
+      </FabButton>
+    </Fragment>
   )
 }
 
