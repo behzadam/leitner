@@ -10,6 +10,7 @@ import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay, bindKeyboard } from 'react-swipeable-views-utils';
 import QuizListItem from './QuizListItem';
+import QuizListToolbar from './QuizListToolbar';
 
 const BindKeyboardSwipeableViews = bindKeyboard(SwipeableViews);
 const AutoPlaySwipeableViews = autoPlay(BindKeyboardSwipeableViews);
@@ -62,6 +63,7 @@ function QuizList({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <QuizListToolbar />
       <Paper>
         <AutoPlaySwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
