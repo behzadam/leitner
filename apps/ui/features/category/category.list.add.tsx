@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Fab, FabProps, styled } from "@mui/material";
 import { Fragment, useState } from 'react';
-import CategoryFormCreate from '../CategoryFormCreate';
+import CategoryFormCreate from './category.dialog.create';
 
 const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
   position: 'fixed',
