@@ -1,9 +1,7 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import PieChartRoundedIcon from '@mui/icons-material/PieChartRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
-import { Box, Button, ButtonProps, Card, CardActions, CardContent, IconButton, Link, Stack, styled, Typography } from '@mui/material';
+import { Box, Button, ButtonProps, Card, CardActions, CardContent, Link, Stack, styled, Typography } from '@mui/material';
 
 const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   'a': {
@@ -33,7 +31,7 @@ const CategoryListItem = ({ id, onEdit, onDelete }: CategoryListItemProps): JSX.
         <Stack direction="row" alignItems="center">
           <Typography variant="overline">Flashcard Name</Typography>
           <Box sx={{ ml: 'auto' }}>
-            <IconButton
+            {/* <IconButton
               size="small"
               onClick={onDelete}
             >
@@ -44,7 +42,7 @@ const CategoryListItem = ({ id, onEdit, onDelete }: CategoryListItemProps): JSX.
               onClick={() => onEdit(id)}
             >
               <EditIcon sx={{ fontSize: 13 }} />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Stack>
       </CardContent>
