@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Fab, FabProps, styled } from "@mui/material";
-import { Fragment, useState } from 'react';
+import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
+import { Fragment } from 'react';
 import CategoryFormCreate from './category.dialog.create';
 
 const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
@@ -11,21 +12,17 @@ const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
 }));
 
 const CategoryListAddButton = (): JSX.Element => {
-  const [open, setOpen] = useState<boolean>(false)
-
-  const handleAddCategory = (): void => {
-    console.log("handleAddCategory");
-    setOpen(true);
-  }
-
-  const onClose = (): void => {
-    setOpen(false);
-  }
-
+  const { onOpenDialog } = useDialogEvent();
+  console.log('CategoryListAddButton');
   return (
     <Fragment>
-      <CategoryFormCreate open={open} onClose={onClose} />
-      <FabButton color="primary" size="medium" aria-label="add category" onClick={handleAddCategory}>
+      <FabButton
+        color="primary"
+        size="medium"
+        aria-label="add category"
+        onClick={() => onOpenDialog({
+          content: <CategoryFormCreate />
+        })}>
         <AddIcon />
       </FabButton>
     </Fragment>
