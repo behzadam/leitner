@@ -3,13 +3,13 @@ import { createContext, ReactNode, useContext, useMemo, useReducer } from 'react
 import Show from "../Show";
 
 export type DialogOptions = {
-  title?: string,
-  content?: ReactNode
+  title?: string;
+  content?: ReactNode;
 }
 
 export type DialogState = {
-  open: boolean,
-  options?: DialogOptions
+  open: boolean;
+  options?: DialogOptions;
 }
 
 export type DialogAction =
