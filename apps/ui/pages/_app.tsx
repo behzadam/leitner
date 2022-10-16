@@ -6,9 +6,8 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
 
-import { Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import DialogConfirm from '@ui/components/dialog/DialogConfirm';
+import DialogProvider from '@ui/components/dialog/dialog.provider';
 import { AppPropsWithLayout } from '@ui/types';
 import axios from "axios";
 import React from 'react';
@@ -25,15 +24,17 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline enableColorScheme />
-        <Provider store={store}>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            {layout(<Component {...pageProps} />)}
-          </LocalizationProvider>
-          <Notification />
-          <DialogConfirm title={'title'}>
+        <DialogProvider>
+          <Provider store={store}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              {layout(<Component {...pageProps} />)}
+            </LocalizationProvider>
+            <Notification />
+            {/* <DialogConfirm title={'title'}>
             <Typography>Are you sure you want to delete?</Typography>
-          </DialogConfirm>
-        </Provider>
+          </DialogConfirm> */}
+          </Provider>
+        </DialogProvider>
       </ThemeProvider>
     </React.Fragment>
   );
