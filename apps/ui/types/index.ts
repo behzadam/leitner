@@ -24,3 +24,5 @@ export type NextPageWithLayout<
 export type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
+export type Optional<T, K extends keyof T> = Partial<T> & Omit<T, K>;
