@@ -1,37 +1,27 @@
 import { DialogContentText } from '@mui/material';
 import Button from '@mui/material/Button';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
+import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Show from '../Show';
+import { useConfirmContext } from './confirm.provider';
 import useConfirm from './use-confirm';
 
-export type ConfirmProps = Omit<DialogProps, 'open | onClose'> & {
-  message?: string;
-  open: boolean;
-}
-
-const Confirm = (props: ConfirmProps): JSX.Element => {
-  const {
-    message,
-    open = false,
-    children
-  } = props;
-
+const Confirm = (): JSX.Element => {
   const { confirm, decline } = useConfirm()
+  const { isOpened, options } = useConfirmContext();
+
   return (
     <Dialog
-      open={open}
+      open={isOpened}
       onClose={decline}
       aria-labelledby="confirm-dialog"
     >
-      <DialogTitle id="confirm-dialog">Confirm</DialogTitle>
-      <Show when={message}>
-        <DialogContentText>{message}</DialogContentText>
+      <Show when={options.title}>
+        <DialogTitle id="confirm-dialog">{options.title}</DialogTitle>
       </Show>
-      <Show when={children}>
-        <DialogContent>{children}</DialogContent>
+      <Show when={options.message}>
+        <DialogContentText>{options.message}</DialogContentText>
       </Show>
       <DialogActions>
         <Button
