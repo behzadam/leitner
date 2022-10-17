@@ -1,9 +1,9 @@
-import { createContext, ReactNode, useContext, useMemo, useReducer } from 'react';
+import { createContext, useContext, useMemo, useReducer } from 'react';
 import Confirm from "./confirm";
 
 export type ConfirmOptions = {
+  title?: string;
   message?: string;
-  content?: ReactNode;
   resolve?: (value: boolean) => void;
 }
 
@@ -26,8 +26,8 @@ export type ConfirmEvent = {
 }
 
 const initialOptions: ConfirmOptions = {
+  title: 'Confirm',
   message: null,
-  content: null,
   resolve: null
 }
 
@@ -81,7 +81,7 @@ const ConfirmProvider = ({ children }: { children?: React.ReactNode }): JSX.Elem
     <ConfirmContext.Provider value={state}>
       <ConfirmEvent.Provider value={dispatchContext}>
         {children}
-        <Confirm open={state.isOpened} />
+        <Confirm />
       </ConfirmEvent.Provider>
     </ConfirmContext.Provider>
   )
