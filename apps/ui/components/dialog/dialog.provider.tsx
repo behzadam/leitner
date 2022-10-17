@@ -14,7 +14,7 @@ export type DialogState = {
 
 export type DialogAction =
   | { type: 'DIALOG_OPEN', payload?: DialogOptions }
-  | { type: 'DIALOG_CLOSE', payload?: DialogOptions }
+  | { type: 'DIALOG_CLOSE' }
 
 export type DialogEvent = {
   onOpenDialog: (options?: DialogOptions) => void;
@@ -36,7 +36,7 @@ const reducer = (state: DialogState, action: DialogAction): DialogState => {
     case 'DIALOG_OPEN':
       return { ...state, open: true, options: action.payload }
     case 'DIALOG_CLOSE':
-      return { ...state, open: false, options: action.payload }
+      return { ...state, open: false, options: initialOptions }
     default:
       return state;
   }
@@ -55,7 +55,7 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
     }
 
     const onCloseDialog = (): void => {
-      dispatch({ type: 'DIALOG_CLOSE', payload: initialOptions })
+      dispatch({ type: 'DIALOG_CLOSE' })
     }
 
     return {

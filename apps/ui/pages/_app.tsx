@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store/index';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import ConfirmProvider from '@ui/components/confirm/confirm.provider';
 import DialogProvider from '@ui/components/dialog/dialog.provider';
 import { AppPropsWithLayout } from '@ui/types';
 import axios from "axios";
@@ -25,15 +26,14 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline enableColorScheme />
         <DialogProvider>
-          <Provider store={store}>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-              {layout(<Component {...pageProps} />)}
-            </LocalizationProvider>
-            <Notification />
-            {/* <DialogConfirm title={'title'}>
-            <Typography>Are you sure you want to delete?</Typography>
-          </DialogConfirm> */}
-          </Provider>
+          <ConfirmProvider>
+            <Provider store={store}>
+              <LocalizationProvider dateAdapter={AdapterMoment}>
+                {layout(<Component {...pageProps} />)}
+              </LocalizationProvider>
+              <Notification />
+            </Provider>
+          </ConfirmProvider>
         </DialogProvider>
       </ThemeProvider>
     </React.Fragment>
