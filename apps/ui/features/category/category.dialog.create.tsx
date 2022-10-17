@@ -3,11 +3,11 @@ import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
 
 
 const CategoryFormCreate = (): JSX.Element => {
-  const { onCloseDialog } = useDialogEvent();
+  const { onClose } = useDialogEvent();
 
   const onSubmit = (): void => {
     console.log('create form onSubmit')
-    onCloseDialog()
+    onClose()
   }
 
   return (

@@ -12,7 +12,7 @@ const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
 }));
 
 const CategoryListAddButton = (): JSX.Element => {
-  const { onOpenDialog } = useDialogEvent();
+  const { onOpen } = useDialogEvent();
   console.log('CategoryListAddButton');
   return (
     <Fragment>
@@ -20,7 +20,7 @@ const CategoryListAddButton = (): JSX.Element => {
         color="primary"
         size="medium"
         aria-label="add category"
-        onClick={() => onOpenDialog({
+        onClick={() => onOpen({
           content: <CategoryFormCreate />
         })}>
         <AddIcon />

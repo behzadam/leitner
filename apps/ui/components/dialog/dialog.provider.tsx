@@ -8,7 +8,7 @@ export type DialogOptions = {
 }
 
 export type DialogState = {
-  open: boolean;
+  isOpened: boolean;
   options?: DialogOptions;
 }
 
@@ -17,8 +17,8 @@ export type DialogAction =
   | { type: 'DIALOG_CLOSE' }
 
 export type DialogEvent = {
-  onOpenDialog: (options?: DialogOptions) => void;
-  onCloseDialog: () => void;
+  onOpen: (options?: DialogOptions) => void;
+  onClose: () => void;
 }
 
 const initialOptions: DialogOptions = {
@@ -27,16 +27,16 @@ const initialOptions: DialogOptions = {
 }
 
 const initialState: DialogState = {
-  open: false,
+  isOpened: false,
   options: { ...initialOptions }
 }
 
 const reducer = (state: DialogState, action: DialogAction): DialogState => {
   switch (action.type) {
     case 'DIALOG_OPEN':
-      return { ...state, open: true, options: action.payload }
+      return { ...state, isOpened: true, options: action.payload }
     case 'DIALOG_CLOSE':
-      return { ...state, open: false, options: initialOptions }
+      return { ...state, isOpened: false, options: initialOptions }
     default:
       return state;
   }
@@ -49,25 +49,25 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const dispatchContext = useMemo(() => {
-    const onOpenDialog = ({ content, title }: DialogOptions = initialOptions): void => {
-      const options: DialogOptions = Object.assign({}, { content, title })
+    const onOpen = (options: Partial<DialogOptions> = initialOptions): void => {
       dispatch({ type: 'DIALOG_OPEN', payload: options })
     }
 
-    const onCloseDialog = (): void => {
+    const onClose = (): void => {
       dispatch({ type: 'DIALOG_CLOSE' })
     }
 
     return {
-      onOpenDialog,
-      onCloseDialog
+      onOpen,
+      onClose
     }
   }, [])
+
   return (
     <DialogContext.Provider value={state}>
       <DialogEvent.Provider value={dispatchContext}>
         {children}
-        <Dialog open={state.open} onClose={dispatchContext.onCloseDialog}>
+        <Dialog open={state.isOpened} onClose={dispatchContext.onClose}>
           <Show when={state.options?.title}>
             <DialogTitle>{state.options?.title}</DialogTitle>
           </Show>
