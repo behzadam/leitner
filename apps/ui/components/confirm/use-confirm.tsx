@@ -14,13 +14,13 @@ const useConfirm = () => {
   };
 
   const onAcceptConfirm = async (): Promise<void> => {
-    dialog.onAcceptConfirm();
     options.resolve?.(true);
+    dialog.onAcceptConfirm();
   }
 
   const onDeclineConfirm = async (): Promise<void> => {
-    dialog.onDeclineConfirm();
     options.resolve?.(false);
+    dialog.onDeclineConfirm();
   }
 
   return {
