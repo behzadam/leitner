@@ -1,4 +1,4 @@
-import { DialogContentText } from '@mui/material';
+import { DialogContent, DialogContentText } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,32 +8,34 @@ import { useConfirmContext } from './confirm.provider';
 import useConfirm from './use-confirm';
 
 const Confirm = (): JSX.Element => {
-  const { confirm, decline } = useConfirm()
+  const { onAcceptConfirm, onDeclineConfirm } = useConfirm()
   const { isOpened, options } = useConfirmContext();
 
   return (
     <Dialog
       open={isOpened}
-      onClose={decline}
+      onClose={onDeclineConfirm}
       aria-labelledby="confirm-dialog"
     >
       <Show when={options.title}>
         <DialogTitle id="confirm-dialog">{options.title}</DialogTitle>
       </Show>
-      <Show when={options.message}>
-        <DialogContentText>{options.message}</DialogContentText>
-      </Show>
-      <DialogActions>
+      <DialogContent>
+        <Show when={options.message}>
+          <DialogContentText>{options.message}</DialogContentText>
+        </Show>
+      </DialogContent>
+      <DialogActions sx={{ p: 2 }}>
         <Button
           variant="outlined"
-          onClick={decline}
+          onClick={onDeclineConfirm}
         >
           No
         </Button>
         <Button
           variant="contained"
           color="primary"
-          onClick={confirm}
+          onClick={onAcceptConfirm}
         >
           Yes
         </Button>

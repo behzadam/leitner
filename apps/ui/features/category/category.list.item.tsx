@@ -16,6 +16,7 @@ import {
   styled,
   Typography
 } from '@mui/material';
+import useConfirm from '@ui/components/confirm/use-confirm';
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
 import CategoryFormEdit from './category.dialog.edit';
 
@@ -40,6 +41,7 @@ type CategoryListItemProps = {
 const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
   console.log({ id })
   const { onOpenDialog } = useDialogEvent();
+  const { onOpenConfirm } = useConfirm();
 
   const onEdit = (): void => {
     console.log('onEdit', id)
@@ -48,8 +50,17 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
     })
   }
 
-  const onDelete = (): void => {
+  const onDelete = async (): Promise<void> => {
     console.log('onDelete', id)
+    const confirmed = await onOpenConfirm({
+      title: 'Delete',
+      message: 'Are you sure you want to delete this item?'
+    });
+    if (confirmed) {
+      console.log('onDelete is confirmed')
+    } else {
+      console.log('onDelete is not confirmed')
+    }
   }
 
   return (

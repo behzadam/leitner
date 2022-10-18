@@ -20,7 +20,7 @@ export type ConfirmAction =
   | { type: 'CONFIRM_DECLINED' }
 
 export type ConfirmEvent = {
-  onOpenConfirm: (options?: ConfirmOptions) => void;
+  onOpenConfirm: (options?: Partial<ConfirmOptions>) => void;
   onDeclineConfirm: () => void;
   onAcceptConfirm: () => void;
 }
