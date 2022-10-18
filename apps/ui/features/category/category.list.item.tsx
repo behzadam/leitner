@@ -34,15 +34,36 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   }
 }));
 
-type CategoryListItemProps = {
-  id?: number;
-}
 
-const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
-  console.log({ id })
-  const { onOpenDialog } = useDialogEvent();
+const DeleteButtonWithConfirm = ({ id }: { id?: number }): JSX.Element => {
   const { onOpenConfirm } = useConfirm();
 
+  const onDelete = async (): Promise<void> => {
+    console.log('onDelete')
+    const confirmed = await onOpenConfirm({
+      title: 'Delete',
+      message: 'Are you sure you want to delete this item?'
+    });
+
+    if (confirmed) {
+      console.log('onDelete is confirmed', id)
+    } else {
+      console.log('onDelete is not confirmed', id)
+    }
+  }
+
+  return (
+    <IconButton
+      size="small"
+      onClick={onDelete}
+    >
+      <DeleteIcon sx={{ fontSize: 15 }} />
+    </IconButton>
+  )
+}
+
+const EditButtonWithDialog = ({ id }: { id?: number }): JSX.Element => {
+  const { onOpenDialog } = useDialogEvent();
   const onEdit = (): void => {
     console.log('onEdit', id)
     onOpenDialog({
@@ -50,18 +71,22 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
     })
   }
 
-  const onDelete = async (): Promise<void> => {
-    console.log('onDelete', id)
-    const confirmed = await onOpenConfirm({
-      title: 'Delete',
-      message: 'Are you sure you want to delete this item?'
-    });
-    if (confirmed) {
-      console.log('onDelete is confirmed')
-    } else {
-      console.log('onDelete is not confirmed')
-    }
-  }
+  return (
+    <IconButton
+      size="medium"
+      onClick={onEdit}
+    >
+      <EditIcon sx={{ fontSize: 15 }} />
+    </IconButton>
+  )
+}
+
+type CategoryListItemProps = {
+  id?: number;
+}
+
+const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
+  console.log({ id })
 
   return (
     <Card>
@@ -69,18 +94,8 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
         <Stack direction="row" alignItems="center">
           <Typography variant="overline">Flashcard Name</Typography>
           <Box sx={{ ml: 'auto' }}>
-            <IconButton
-              size="small"
-              onClick={onDelete}
-            >
-              <DeleteIcon sx={{ fontSize: 15 }} />
-            </IconButton>
-            <IconButton
-              size="medium"
-              onClick={onEdit}
-            >
-              <EditIcon sx={{ fontSize: 15 }} />
-            </IconButton>
+            <DeleteButtonWithConfirm id={id} />
+            <EditButtonWithDialog id={id} />
           </Box>
         </Stack>
       </CardContent>
