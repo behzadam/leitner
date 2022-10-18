@@ -1,7 +1,22 @@
+import EditIcon from '@mui/icons-material/Edit';
 import PieChartRoundedIcon from '@mui/icons-material/PieChartRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
-import { Box, Button, ButtonProps, Card, CardActions, CardContent, Link, Stack, styled, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  Link,
+  Stack,
+  styled,
+  Typography
+} from '@mui/material';
+import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
+import CategoryFormEdit from './category.dialog.edit';
 
 const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   'a': {
@@ -23,8 +38,17 @@ type CategoryListItemProps = {
   onDelete: (id?: number) => void;
 }
 
-const CategoryListItem = ({ id, onEdit, onDelete }: CategoryListItemProps): JSX.Element => {
+const CategoryListItem = ({ id, onDelete }: CategoryListItemProps): JSX.Element => {
   console.log({ id })
+  const { onOpen } = useDialogEvent();
+
+  const onEdit = (): void => {
+    console.log('onEdit', id)
+    onOpen({
+      content: <CategoryFormEdit id={id} />
+    })
+  }
+
   return (
     <Card>
       <CardContent>
@@ -36,13 +60,13 @@ const CategoryListItem = ({ id, onEdit, onDelete }: CategoryListItemProps): JSX.
               onClick={onDelete}
             >
               <DeleteIcon sx={{ fontSize: 13 }} />
-            </IconButton>
-            <IconButton
-              size="small"
-              onClick={() => onEdit(id)}
-            >
-              <EditIcon sx={{ fontSize: 13 }} />
             </IconButton> */}
+            <IconButton
+              size="medium"
+              onClick={onEdit}
+            >
+              <EditIcon sx={{ fontSize: 15 }} />
+            </IconButton>
           </Box>
         </Stack>
       </CardContent>
