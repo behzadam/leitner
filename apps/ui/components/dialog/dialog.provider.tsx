@@ -17,8 +17,8 @@ export type DialogAction =
   | { type: 'DIALOG_CLOSE' }
 
 export type DialogEvent = {
-  onOpen: (options?: DialogOptions) => void;
-  onClose: () => void;
+  onOpenDialog: (options?: DialogOptions) => void;
+  onCloseDialog: () => void;
 }
 
 const initialOptions: DialogOptions = {
@@ -49,17 +49,17 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const dispatchContext = useMemo(() => {
-    const onOpen = (options: Partial<DialogOptions> = initialOptions): void => {
+    const onOpenDialog = (options: Partial<DialogOptions> = initialOptions): void => {
       dispatch({ type: 'DIALOG_OPEN', payload: options })
     }
 
-    const onClose = (): void => {
+    const onCloseDialog = (): void => {
       dispatch({ type: 'DIALOG_CLOSE' })
     }
 
     return {
-      onOpen,
-      onClose
+      onOpenDialog,
+      onCloseDialog
     }
   }, [])
 
@@ -67,7 +67,7 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
     <DialogContext.Provider value={state}>
       <DialogEvent.Provider value={dispatchContext}>
         {children}
-        <Dialog open={state.isOpened} onClose={dispatchContext.onClose}>
+        <Dialog open={state.isOpened} onClose={dispatchContext.onCloseDialog}>
           <Show when={state.options?.title}>
             <DialogTitle>{state.options?.title}</DialogTitle>
           </Show>

@@ -6,10 +6,10 @@ type CategoryFormEdit = {
 }
 
 const CategoryFormEdit = ({ id }: CategoryFormEdit): JSX.Element => {
-  const { onClose } = useDialogEvent()
+  const { onCloseDialog } = useDialogEvent()
   const onSubmit = (): void => {
     console.log('edit form onSubmit')
-    onClose()
+    onCloseDialog()
   }
 
   return (
@@ -27,7 +27,7 @@ const CategoryFormEdit = ({ id }: CategoryFormEdit): JSX.Element => {
         <Typography variant="body1">Flashcard</Typography>
         <TextField id="category" label="Name" variant="outlined" defaultValue={id} />
         <Stack spacing={2} direction="row" justifyContent="center">
-          <Button type="button" sx={{ flex: 1 }} onClick={onClose}>Cancel</Button>
+          <Button type="button" sx={{ flex: 1 }} onClick={onCloseDialog}>Cancel</Button>
           <Button type="submit" sx={{ flex: 1 }} variant="contained">Save</Button>
         </Stack>
       </Stack>

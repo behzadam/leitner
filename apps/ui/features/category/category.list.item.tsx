@@ -1,3 +1,4 @@
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PieChartRoundedIcon from '@mui/icons-material/PieChartRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
@@ -34,19 +35,21 @@ const Item = styled(Button)<ButtonProps>(({ theme }) => ({
 
 type CategoryListItemProps = {
   id?: number;
-  onEdit: (id?: number) => void;
-  onDelete: (id?: number) => void;
 }
 
-const CategoryListItem = ({ id, onDelete }: CategoryListItemProps): JSX.Element => {
+const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
   console.log({ id })
-  const { onOpen } = useDialogEvent();
+  const { onOpenDialog } = useDialogEvent();
 
   const onEdit = (): void => {
     console.log('onEdit', id)
-    onOpen({
+    onOpenDialog({
       content: <CategoryFormEdit id={id} />
     })
+  }
+
+  const onDelete = (): void => {
+    console.log('onDelete', id)
   }
 
   return (
@@ -55,12 +58,12 @@ const CategoryListItem = ({ id, onDelete }: CategoryListItemProps): JSX.Element 
         <Stack direction="row" alignItems="center">
           <Typography variant="overline">Flashcard Name</Typography>
           <Box sx={{ ml: 'auto' }}>
-            {/* <IconButton
+            <IconButton
               size="small"
               onClick={onDelete}
             >
-              <DeleteIcon sx={{ fontSize: 13 }} />
-            </IconButton> */}
+              <DeleteIcon sx={{ fontSize: 15 }} />
+            </IconButton>
             <IconButton
               size="medium"
               onClick={onEdit}
