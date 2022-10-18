@@ -1,31 +1,18 @@
-import { ConfirmOptions, useConfirmContext, useConfirmEvent } from "./confirm.provider";
+import { ConfirmOptions, useConfirmEvent } from "./confirm.provider";
 
 const useConfirm = () => {
-  const dialog = useConfirmEvent();
-  const { options } = useConfirmContext();
+  const { onOpen } = useConfirmEvent();
 
   const onOpenConfirm = async (
     options?: Partial<ConfirmOptions>
   ): Promise<boolean> => {
     return new Promise((resolve) => {
-      dialog.onOpenConfirm({ ...options, resolve: resolve });
+      onOpen({ ...options, resolve: resolve });
     });
   }
 
-  const onAcceptConfirm = async (): Promise<void> => {
-    options.resolve?.(true);
-    dialog.onAcceptConfirm();
-  }
-
-  const onDeclineConfirm = async (): Promise<void> => {
-    options.resolve?.(false);
-    dialog.onDeclineConfirm();
-  }
-
   return {
-    onOpenConfirm,
-    onAcceptConfirm,
-    onDeclineConfirm
+    onOpenConfirm
   }
 }
 
