@@ -20,9 +20,9 @@ export type ConfirmAction =
   | { type: 'CONFIRM_DECLINED' }
 
 export type ConfirmEvent = {
-  onOpen: (options?: ConfirmOptions) => void;
-  onDecline: () => void;
-  onConfirm: () => void;
+  onOpenConfirm: (options?: ConfirmOptions) => void;
+  onDeclineConfirm: () => void;
+  onAcceptConfirm: () => void;
 }
 
 const initialOptions: ConfirmOptions = {
@@ -58,22 +58,22 @@ const ConfirmProvider = ({ children }: { children?: React.ReactNode }): JSX.Elem
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const dispatchContext = useMemo(() => {
-    const onOpen = (options: Partial<ConfirmOptions>): void => {
+    const onOpenConfirm = (options: Partial<ConfirmOptions>): void => {
       dispatch({ type: 'CONFIRM_OPENED', payload: { ...options } })
     }
 
-    const onDecline = (): void => {
+    const onDeclineConfirm = (): void => {
       dispatch({ type: 'CONFIRM_DECLINED' })
     }
 
-    const onConfirm = (): void => {
+    const onAcceptConfirm = (): void => {
       dispatch({ type: 'CONFIRM_CONFIRMED' })
     }
 
     return {
-      onOpen,
-      onDecline,
-      onConfirm
+      onOpenConfirm,
+      onDeclineConfirm,
+      onAcceptConfirm
     }
   }, [])
 

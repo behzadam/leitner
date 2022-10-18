@@ -1,32 +1,32 @@
 import { useConfirmContext, useConfirmEvent } from "./confirm.provider";
 
 const useConfirm = () => {
-  const { onOpen, onDecline, onConfirm } = useConfirmEvent();
+  const dialog = useConfirmEvent();
   const { options } = useConfirmContext();
 
-  const openConfirm = (): Promise<boolean> => {
+  const onOpenConfirm = (): Promise<boolean> => {
     return new Promise((resolve) => {
-      onOpen({
+      dialog.onOpenConfirm({
         resolve: resolve,
         message: "confirm"
       });
     });
   };
 
-  const confirm = async (): Promise<void> => {
-    onConfirm();
+  const onAcceptConfirm = async (): Promise<void> => {
+    dialog.onAcceptConfirm();
     options.resolve?.(true);
   }
 
-  const decline = async (): Promise<void> => {
-    onDecline();
+  const onDeclineConfirm = async (): Promise<void> => {
+    dialog.onDeclineConfirm();
     options.resolve?.(false);
   }
 
   return {
-    openConfirm,
-    confirm,
-    decline
+    onOpenConfirm,
+    onAcceptConfirm,
+    onDeclineConfirm
   }
 }
 
