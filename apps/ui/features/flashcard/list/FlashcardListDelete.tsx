@@ -2,14 +2,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import Show from '@ui/components/Show';
 import { useEffect, useState } from 'react';
-
-import { useFlashcardDelete, useFlashcardListContext } from '../hooks';
+import { useFlashcardListContext } from '../hooks';
+import { useFlashcardDelete } from '../use-flashcard-delete';
 
 
 const FlashcardListDelete = (): JSX.Element => {
   const { currentRows } = useFlashcardListContext();
   const [showDeleteButton, setShowDeleteButton] = useState<boolean>(false);
-  const { handleDeleteRows } = useFlashcardDelete();
+  const { onDelete } = useFlashcardDelete();
 
   useEffect(() => {
     if (currentRows.length > 0) {
@@ -21,7 +21,7 @@ const FlashcardListDelete = (): JSX.Element => {
 
   return (
     <Show when={showDeleteButton}>
-      <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={handleDeleteRows} size="small">
+      <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={() => onDelete(1)} size="small">
         <DeleteIcon sx={{ fontSize: 18 }} />
       </IconButton>
     </Show>
