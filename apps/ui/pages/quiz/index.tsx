@@ -1,12 +1,12 @@
 import { Container } from '@mui/material';
-import LayoutNestedFull from '@ui/components/layout/layout-nested-full';
+import LayoutNested from '@ui/components/layout/layout-nested';
 import QuizList from '@ui/features/quiz/QuizList';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
-    <Container maxWidth='sm' sx={{ mt: -4 }}>
+    <Container maxWidth='sm' sx={{ mt: 4 }}>
       <QuizList />
     </Container>
   );
@@ -14,7 +14,7 @@ const Index: NextPageWithLayout = (): JSX.Element => {
 
 Index.layout = function layout(page: ReactElement) {
   return (
-    <LayoutNestedFull>{page}</LayoutNestedFull>
+    <LayoutNested>{page}</LayoutNested>
   )
 }
 
