@@ -2,8 +2,8 @@ import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useMemo } from 'react';
 
-import CategoryListAddButton from './category.list.add';
-import CategoryListItem from './category.list.item';
+import CategoryListAddButton from './category-add';
+import CategoryListItem from './category-list-item';
 
 const CategoryList = (): JSX.Element => {
   const categories: number[] = useMemo(() => {

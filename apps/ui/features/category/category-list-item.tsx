@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import useConfirm from '@ui/components/confirm/use-confirm';
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
-import CategoryFormEdit from './category.dialog.edit';
+import CategoryFormEdit from './category-edit';
 
 const Item = styled(Button)<ButtonProps>(({ theme }) => ({
   'a': {
