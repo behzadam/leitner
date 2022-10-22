@@ -1,12 +1,16 @@
-import { AppBar, Box, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useRouter } from 'next/router'
+import { AppBar, Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
+import { useRouter } from 'next/router';
 
 type LayoutNestedProps = {
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  title?: string
 }
 
-const LayoutNested = ({ children }: LayoutNestedProps): JSX.Element => {
+const LayoutNested = ({
+  children,
+  title = 'Back'
+}: LayoutNestedProps): JSX.Element => {
   const router = useRouter();
   const handleClick = (): void => {
     console.log("back", { router })
@@ -18,11 +22,11 @@ const LayoutNested = ({ children }: LayoutNestedProps): JSX.Element => {
         position="fixed"
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            <IconButton onClick={handleClick} size="small" sx={{ mr: 2 }}>
-              <ArrowBackIcon sx={{ color: 'white' }} />
+          <Typography variant="body1" noWrap component="div">
+            <IconButton onClick={handleClick} size="medium" sx={{ mr: 1 }}>
+              <ArrowBackIcon sx={{ color: 'white', fontSize: '1rem' }} />
             </IconButton>
-            Quiz
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
