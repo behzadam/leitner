@@ -1,4 +1,4 @@
-import LayoutDashboard from '@ui/components/Layout/LayoutDashboard';
+import LayoutDashboard from '@ui/components/layout/layout-dashboard';
 import CategoryList from '@ui/features/category/category-list';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';

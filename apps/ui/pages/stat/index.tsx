@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import LayoutNested from '@ui/components/Layout/LayoutNested';
+import LayoutNested from '@ui/components/layout/layout-nested';
 import Leitner from '@ui/features/leitner/Leitner';
 import ProgressCalendar from '@ui/features/progress/ProgressCalendar';
 import { NextPageWithLayout } from '@ui/types';

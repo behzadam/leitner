@@ -1,4 +1,4 @@
-import LayoutNested from '@ui/components/Layout/LayoutNested';
+import LayoutNested from '@ui/components/layout/layout-nested';
 import FlashcardListDemo from '@ui/features/flashcard/list/FlashcardListDemo';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
