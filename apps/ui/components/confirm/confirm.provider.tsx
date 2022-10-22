@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useReducer } from 'react';
-import Confirm from "./confirm";
+
+import Confirm from './confirm';
 
 export type ConfirmOptions = {
   title?: string;
@@ -39,13 +40,13 @@ const initialState: ConfirmState = {
 const reducer = (state: ConfirmState, action: ConfirmAction): ConfirmState => {
   switch (action.type) {
     case 'CONFIRM_OPENED':
-      return { ...state, isOpened: true, options: { ...action.payload } }
+      return { ...initialState, isOpened: true, options: { ...action.payload } }
     case 'CONFIRM_DECLINED':
-      return { ...initialState, isDeclined: true }
+      return { ...initialState, isDeclined: true, options: { ...state.options } }
     case 'CONFIRM_CONFIRMED':
-      return { ...initialState, isConfirmed: true }
+      return { ...initialState, isConfirmed: true, options: { ...state.options } }
     default:
-      return state;
+      return initialState;
   }
 }
 
@@ -55,17 +56,11 @@ export const ConfirmEvent = createContext<ConfirmEvent>({} as ConfirmEvent);
 const ConfirmProvider = ({ children }: { children?: React.ReactNode }): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const dispatchContext = useMemo(() => {
+  const dispatchEvent = useMemo(() => {
     const onOpen = (options: Partial<ConfirmOptions>): void => {
-      dispatch({ type: 'CONFIRM_OPENED', payload: { ...options } })
+      dispatch({ type: 'CONFIRM_OPENED', payload: options })
     }
 
-    return {
-      onOpen
-    }
-  }, [])
-
-  const dispatchEvents = useMemo(() => {
     const onDeclineConfirm = (): void => {
       dispatch({ type: 'CONFIRM_DECLINED' });
       state.options?.resolve?.(false);
@@ -77,21 +72,23 @@ const ConfirmProvider = ({ children }: { children?: React.ReactNode }): JSX.Elem
     }
 
     return {
-      onDeclineConfirm,
-      onAcceptConfirm
+      onOpen,
+      onAcceptConfirm,
+      onDeclineConfirm
     }
-  }, [])
+  }, [state])
+
 
   return (
     <ConfirmContext.Provider value={state}>
-      <ConfirmEvent.Provider value={dispatchContext}>
+      <ConfirmEvent.Provider value={dispatchEvent}>
         {children}
         <Confirm
           open={state.isOpened}
           title={state.options.title}
           message={state.options.message}
-          confirm={dispatchEvents.onAcceptConfirm}
-          decline={dispatchEvents.onDeclineConfirm}
+          confirm={dispatchEvent.onAcceptConfirm}
+          decline={dispatchEvent.onDeclineConfirm}
         />
       </ConfirmEvent.Provider>
     </ConfirmContext.Provider>
