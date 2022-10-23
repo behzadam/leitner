@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import { Fragment, useMemo } from 'react';
 
-import FlashcardListDemoActions from './flashcard-list-actions';
+import FlashcardListActions from './flashcard-list-actions';
 import { useFlashcardListEventContext } from './use-flashcard-list-event-context';
 
 const rows = [
@@ -41,10 +41,10 @@ const FlashcardListDataGrid = (): JSX.Element => {
     {
       field: "actions",
       headerName: "Actions",
-      minWidth: 120,
+      minWidth: 80,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => <FlashcardListDemoActions id={params.row.id} />
+      renderCell: (params) => <FlashcardListActions id={params.row.id} />
     }
   ], [])
   //#endregion
@@ -67,7 +67,6 @@ const FlashcardListDataGrid = (): JSX.Element => {
         onSelectionModelChange={(newSelectionModel) => {
           setCurrentRows(newSelectionModel as number[]);
         }}
-      // selectionModel={selectionModel}
       />
     </Fragment>
   )
