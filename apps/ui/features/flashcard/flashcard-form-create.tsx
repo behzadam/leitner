@@ -29,7 +29,7 @@ const FlashcardFormCreate = (): JSX.Element => {
       >
         <FlashcardTextField variant="outlined" placeholder="Front" />
         <FlashcardTextField variant="outlined" placeholder="Back" />
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', mt: 2 }}>
           <Button type="button" onClick={onCancel} sx={{ borderRadius: 0, py: 2, flex: 1 }}>Cancel</Button>
           <Button type="submit" variant="contained" sx={{ borderRadius: 0, py: 2, flex: 1 }}>Save</Button>
         </Box>
