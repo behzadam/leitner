@@ -3,7 +3,13 @@ import { useForm } from 'react-hook-form';
 import FlashcardFormActions from './flashcard-form-actions';
 import FlashcardTextField from './flashcard-form-editor';
 
-const FlashcardFormEdit = (): JSX.Element => {
+type FlashcardFormEditTypes = {
+  id?: number
+}
+
+const FlashcardFormEdit = ({
+  id
+}: FlashcardFormEditTypes): JSX.Element => {
   const {
     handleSubmit,
     formState: { errors },
