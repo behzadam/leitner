@@ -3,12 +3,14 @@ import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
 
 import FlashcardFormCreate from './flashcard-form-create';
 
-const FlashcardListCreate = (): JSX.Element => {
+const FlashcardListActionCreate = (): JSX.Element => {
   const { onOpenDialog } = useDialogEvent();
 
   const onCreate = (): void => {
     onOpenDialog({
-      content: <FlashcardFormCreate />
+      content: <FlashcardFormCreate />,
+      fullWidth: true,
+      maxWidth: 'xs'
     })
   }
 
@@ -19,4 +21,4 @@ const FlashcardListCreate = (): JSX.Element => {
   )
 }
 
-export default FlashcardListCreate;
+export default FlashcardListActionCreate;
