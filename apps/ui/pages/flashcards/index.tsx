@@ -1,11 +1,11 @@
 import LayoutNested from '@ui/components/layout/layout-nested';
-import FlashcardListDemo from '@ui/features/flashcard/flashcard-list';
+import FlashcardList from '@ui/features/flashcard/flashcard-list';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
-    <FlashcardListDemo />
+    <FlashcardList />
   )
 }
 

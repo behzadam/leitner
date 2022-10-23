@@ -4,7 +4,7 @@ import FlashcardListToolbar from './flashcard-lis-toolbar';
 import FlashcardListDataGrid from './flashcard-list-data-grid';
 import FlashcardListProvider from './flashcard-list.provider';
 
-const FlashcardListDemo = (): JSX.Element => {
+const FlashcardList = (): JSX.Element => {
   return (
     <FlashcardListProvider>
       <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
@@ -15,4 +15,4 @@ const FlashcardListDemo = (): JSX.Element => {
   )
 }
 
-export default FlashcardListDemo;
+export default FlashcardList;
