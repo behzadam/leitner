@@ -1,40 +1,44 @@
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import { Divider, IconButton, Stack } from '@mui/material';
-import Link from 'next/link';
-import { useFlashcardListEventContext } from './use-flashcard-list-event-context';
+import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
+import FlashcardFormEdit from './flashcard-form-edit';
+
+
+const FlashcardListActionsEdit = ({ id }: { id?: number }): JSX.Element => {
+  const { onOpenDialog } = useDialogEvent();
+
+  const handleEdit = (): void => {
+    onOpenDialog({
+      content: <FlashcardFormEdit id={id} />,
+      fullWidth: true,
+      maxWidth: 'xs'
+    })
+  }
+
+  return (
+    <IconButton onClick={handleEdit}>
+      <EditTwoToneIcon fontSize="small" />
+    </IconButton>
+  )
+}
 
 type FlashcardListActionsParams = {
   id?: number;
 };
 
-const FlashcardListDemoActions = ({
+const FlashcardListActions = ({
   id = null
 }: FlashcardListActionsParams): JSX.Element => {
-  const { setCurrentRow } = useFlashcardListEventContext()
+
   return (
     <Stack
       direction="row"
       spacing={1}
       divider={<Divider orientation="vertical" flexItem />}
     >
-      <Link
-        href={{
-          pathname: `/detail/[id]`,
-          query: { id }
-        }}
-      >
-        <a>
-          <IconButton>
-            <InfoTwoToneIcon fontSize="small" />
-          </IconButton>
-        </a>
-      </Link>
-      <IconButton onClick={() => setCurrentRow(id)}>
-        <EditTwoToneIcon fontSize="small" />
-      </IconButton>
+      <FlashcardListActionsEdit id={id} />
     </Stack >
   )
 }
 
-export default FlashcardListDemoActions;
+export default FlashcardListActions;
