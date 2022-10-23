@@ -1,8 +1,8 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Dialog, DialogContent, DialogProps, DialogTitle } from "@mui/material";
 import { createContext, ReactNode, useContext, useMemo, useReducer } from 'react';
 import Show from "../Show";
 
-export type DialogOptions = {
+export type DialogOptions = Partial<Omit<DialogProps, 'open | close | children'>> & {
   title?: string;
   content?: ReactNode;
 }
@@ -67,7 +67,12 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
     <DialogContext.Provider value={state}>
       <DialogEvent.Provider value={dispatchContext}>
         {children}
-        <Dialog open={state.isOpened} onClose={dispatchContext.onCloseDialog}>
+        <Dialog
+          open={state.isOpened}
+          onClose={dispatchContext.onCloseDialog}
+          fullWidth={state.options.fullWidth}
+          maxWidth={state.options.maxWidth}
+        >
           <Show when={state.options?.title}>
             <DialogTitle>{state.options?.title}</DialogTitle>
           </Show>
