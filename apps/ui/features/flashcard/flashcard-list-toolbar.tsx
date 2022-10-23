@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import FlashcardListCreate from "./flashcard-list-action-create";
+import FlashcardListActionCreate from "./flashcard-list-action-create";
 import FlashcardListActionDelete from "./flashcard-list-action-delete";
 import FlashcardListQuiz from "./flashcard-list-action-quiz";
 
@@ -12,7 +12,7 @@ const FlashcardListToolbar = (): JSX.Element => {
       <FlashcardListActionDelete />
       <Stack direction="row" alignItems="center" spacing={1} sx={{ ml: 'auto' }}>
         <FlashcardListQuiz />
-        <FlashcardListCreate />
+        <FlashcardListActionCreate />
       </Stack>
     </Stack>
   )
