@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 
-const FlashcardListQuiz = (): JSX.Element => {
+const FlashcardListActionQuiz = (): JSX.Element => {
   return (
     <Link href="/quiz">
       <Button size="small" color="secondary" variant="contained" disableElevation>Quiz</Button>
@@ -9,4 +9,4 @@ const FlashcardListQuiz = (): JSX.Element => {
   )
 }
 
-export default FlashcardListQuiz;
+export default FlashcardListActionQuiz;
