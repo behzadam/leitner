@@ -1,5 +1,6 @@
-import { Box, Button, Divider, Stack } from '@mui/material';
+import { Box, Divider, Stack } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import FlashcardFormActions from './flashcard-form-actions';
 import FlashcardTextField from './flashcard-form-editor';
 
 const FlashcardFormCreate = (): JSX.Element => {
@@ -29,10 +30,7 @@ const FlashcardFormCreate = (): JSX.Element => {
       >
         <FlashcardTextField variant="outlined" placeholder="Front" />
         <FlashcardTextField variant="outlined" placeholder="Back" />
-        <Box sx={{ display: 'flex', mt: 2 }}>
-          <Button type="button" onClick={onCancel} sx={{ borderRadius: 0, py: 2, flex: 1 }}>Cancel</Button>
-          <Button type="submit" variant="contained" sx={{ borderRadius: 0, py: 2, flex: 1 }}>Save</Button>
-        </Box>
+        <FlashcardFormActions />
       </Stack>
     </Box>
   )
