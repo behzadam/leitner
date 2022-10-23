@@ -1,6 +1,6 @@
-import { Button } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import { IconButton } from "@mui/material";
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
-
 import FlashcardFormCreate from './flashcard-form-create';
 
 const FlashcardListActionCreate = (): JSX.Element => {
@@ -15,9 +15,9 @@ const FlashcardListActionCreate = (): JSX.Element => {
   }
 
   return (
-    <Button size="small" onClick={onCreate} color="primary" variant="contained" disableElevation>
-      New
-    </Button>
+    <IconButton size="medium" onClick={onCreate} >
+      <AddRoundedIcon />
+    </IconButton>
   )
 }
 
