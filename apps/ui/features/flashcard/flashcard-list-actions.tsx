@@ -2,16 +2,15 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import { Divider, IconButton, Stack } from '@mui/material';
 import Link from 'next/link';
+import { useFlashcardListEventContext } from './use-flashcard-list-event-context';
 
-import { useFlashcardListEventContext } from './hooks';
-
-type FlashcardListDemoActionsParams = {
+type FlashcardListActionsParams = {
   id?: number;
 };
 
 const FlashcardListDemoActions = ({
   id = null
-}: FlashcardListDemoActionsParams): JSX.Element => {
+}: FlashcardListActionsParams): JSX.Element => {
   const { setCurrentRow } = useFlashcardListEventContext()
   return (
     <Stack

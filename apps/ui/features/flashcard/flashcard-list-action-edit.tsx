@@ -1,7 +1,7 @@
 import Show from "@ui/components/Show";
 import { useEffect, useState } from "react";
 
-const FlashcardListEdit = ({
+const FlashcardListActionEdit = ({
   currentRowId,
   setCurrentRowId
 }: {
@@ -27,4 +27,4 @@ const FlashcardListEdit = ({
   )
 }
 
-export default FlashcardListEdit;
+export default FlashcardListActionEdit;

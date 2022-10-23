@@ -2,10 +2,9 @@ import { LinearProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import NoRows from '@ui/components/NoRows';
 import { Fragment, useMemo } from 'react';
-import FlashcardFormEditDialog from '../FlashcardFormEditDialog';
 
 import FlashcardListDemoActions from './flashcard-list-actions';
-import { useFlashcardListEventContext } from './hooks';
+import { useFlashcardListEventContext } from './use-flashcard-list-event-context';
 
 const rows = [
   { id: 1, front: 'Front 1', back: 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.' },
@@ -70,7 +69,6 @@ const FlashcardListDataGrid = (): JSX.Element => {
         }}
       // selectionModel={selectionModel}
       />
-      <FlashcardFormEditDialog />
     </Fragment>
   )
 }

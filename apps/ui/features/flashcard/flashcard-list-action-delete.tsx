@@ -6,7 +6,7 @@ import { useFlashcardDelete } from './use-flashcard-delete';
 import { useFlashcardListContext } from './use-flashcard-list-context';
 
 
-const FlashcardListDelete = (): JSX.Element => {
+const FlashcardListActionDelete = (): JSX.Element => {
   const { currentRows } = useFlashcardListContext();
   const [showDeleteButton, setShowDeleteButton] = useState<boolean>(false);
   const { onDelete } = useFlashcardDelete();
@@ -28,4 +28,4 @@ const FlashcardListDelete = (): JSX.Element => {
   )
 }
 
-export default FlashcardListDelete;
+export default FlashcardListActionDelete;
