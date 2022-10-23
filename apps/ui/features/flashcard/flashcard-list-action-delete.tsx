@@ -2,8 +2,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import Show from '@ui/components/Show';
 import { useEffect, useState } from 'react';
-import { useFlashcardListContext } from '../hooks';
-import { useFlashcardDelete } from '../use-flashcard-delete';
+import { useFlashcardDelete } from './use-flashcard-delete';
+import { useFlashcardListContext } from './use-flashcard-list-context';
 
 
 const FlashcardListDelete = (): JSX.Element => {

@@ -3,7 +3,7 @@ import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
 import { Divider, IconButton, Stack } from '@mui/material';
 import Link from 'next/link';
 
-import { useFlashcardListEventContext } from '../hooks';
+import { useFlashcardListEventContext } from './hooks';
 
 type FlashcardListDemoActionsParams = {
   id?: number;

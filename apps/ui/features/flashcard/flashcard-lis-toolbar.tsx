@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
-import FlashcardListCreate from "./FlashcardListCreate";
-import FlashcardListDelete from "./FlashcardListDelete";
-import FlashcardListQuiz from "./FlashcardListQuiz";
+import FlashcardListCreate from "./flashcard-list-action-create";
+import FlashcardListDelete from "./flashcard-list-action-delete";
+import FlashcardListQuiz from "./flashcard-list-action-quiz";
 
 const FlashcardListToolbar = (): JSX.Element => {
   return (

@@ -1,8 +1,8 @@
 import { Container } from '@mui/material';
 
-import FlashcardListProvider from '../provider/FlashcardListProvider';
-import FlashcardListDataGrid from './FlashcardListDataGrid';
-import FlashcardListToolbar from './FlashcardListToolbar';
+import FlashcardListToolbar from './flashcard-lis-toolbar';
+import FlashcardListDataGrid from './flashcard-list-data-grid';
+import FlashcardListProvider from './flashcard-list.provider';
 
 const FlashcardListDemo = (): JSX.Element => {
   return (
