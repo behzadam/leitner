@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store/index';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import ConfirmProvider from '@ui/components/confirm/confirm.provider';
+import ConfirmProvider from '@ui/components/confirm/confirm-provider';
 import DialogProvider from '@ui/components/dialog/dialog.provider';
 import { AppPropsWithLayout } from '@ui/types';
 import axios from "axios";

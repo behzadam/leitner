@@ -1,4 +1,4 @@
-import { ConfirmOptions, useConfirmEvent } from "./confirm.provider";
+import { ConfirmOptions, useConfirmEvent } from "./confirm-provider";
 
 const useConfirm = () => {
   const { onOpen } = useConfirmEvent();
