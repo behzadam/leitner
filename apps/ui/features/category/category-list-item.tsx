@@ -1,8 +1,5 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import PieChartRoundedIcon from '@mui/icons-material/PieChartRounded';
-import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
-import StyleRoundedIcon from '@mui/icons-material/StyleRounded';
 import {
   Box,
   Button,
@@ -10,14 +7,15 @@ import {
   Card,
   CardActions,
   CardContent,
-  IconButton,
-  Link,
-  Stack,
+  IconButton, Stack,
   styled,
   Typography
 } from '@mui/material';
 import useConfirm from '@ui/components/confirm/use-confirm';
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
+import FlashcardListActionCreate from '../flashcard/flashcard-list-action-create';
+import FlashcardListActionQuiz from '../flashcard/flashcard-list-action-quiz';
+import FlashcardListActionStat from '../flashcard/flashcard-list-action-stat';
 import CategoryFormEdit from './category-edit';
 
 const Item = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -101,30 +99,9 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
       </CardContent>
       <CardActions>
         <Stack direction="row" justifyContent="space-between" sx={{ fontSize: 11, width: '100%' }}>
-          <Item>
-            <Link href="/flashcards">
-              <a>
-                <StyleRoundedIcon />
-                List
-              </a>
-            </Link>
-          </Item>
-          <Item>
-            <Link href="/stat">
-              <a>
-                <PieChartRoundedIcon />
-                Stat
-              </a>
-            </Link>
-          </Item>
-          <Item>
-            <Link href="/quiz">
-              <a>
-                <QuizRoundedIcon />
-                Quiz
-              </a>
-            </Link>
-          </Item>
+          <FlashcardListActionStat />
+          <FlashcardListActionQuiz />
+          <FlashcardListActionCreate />
         </Stack>
       </CardActions>
     </Card>
