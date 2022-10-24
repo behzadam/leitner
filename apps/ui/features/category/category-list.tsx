@@ -12,7 +12,7 @@ const CategoryList = (): JSX.Element => {
 
   return (
     <Container maxWidth="md" sx={{ paddingBottom: 11 }}>
-      <Grid container sx={{ mt: 4 }} spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 8, lg: 12 }}>
+      <Grid container sx={{ mt: 4 }} spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 8, lg: 8 }}>
         {categories.map((_, index) => (
           <Grid xs={2} sm={4} md={4} key={`category-list-item-${index}`}>
             <CategoryListItem id={index} />
