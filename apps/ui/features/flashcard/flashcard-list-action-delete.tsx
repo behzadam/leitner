@@ -1,4 +1,4 @@
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { IconButton } from '@mui/material';
 import Show from '@ui/components/Show';
 import { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ const FlashcardListActionDelete = (): JSX.Element => {
   return (
     <Show when={showDeleteButton}>
       <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={() => onDelete(1)} size="small">
-        <DeleteIcon sx={{ fontSize: 18 }} />
+        <DeleteTwoToneIcon />
       </IconButton>
     </Show>
   )
