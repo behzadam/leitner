@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import LayoutNested from '@ui/components/layout/layout-nested';
-import QuizList from '@ui/features/quiz/QuizList';
+import QuizList from '@ui/features/quiz/quiz-list';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
