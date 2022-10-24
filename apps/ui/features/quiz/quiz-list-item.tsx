@@ -10,7 +10,7 @@ type QuizListItemProps = {
   onRemember?: (id: number, rememberedIt: boolean) => void
 }
 
-const IconButtonOk = styled(IconButton)<IconButtonProps>(({ theme }) => ({
+const IconButtonOk = styled(IconButton)<IconButtonProps>(() => ({
   boxShadow: 'inset 0px 0px 0px 2px',
   backgroundColor: '#f0fdf4'
 }))
