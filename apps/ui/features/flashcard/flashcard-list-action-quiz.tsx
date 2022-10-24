@@ -1,4 +1,4 @@
-import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
+import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
 import { IconButton } from "@mui/material";
 import Link from "next/link";
 
@@ -6,7 +6,7 @@ const FlashcardListActionQuiz = (): JSX.Element => {
   return (
     <Link href="/quiz">
       <IconButton size="medium">
-        <PlayArrowOutlinedIcon />
+        <PlayCircleOutlineOutlinedIcon />
       </IconButton>
     </Link>
   )
