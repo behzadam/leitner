@@ -1,4 +1,4 @@
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { IconButton } from '@mui/material';
 import useConfirm from "@ui/components/confirm/use-confirm";
 
@@ -28,7 +28,7 @@ const CategoryListActionDelete = ({ id }: CategoryListActionDeleteProps): JSX.El
       size="medium"
       onClick={onDelete}
     >
-      <DeleteTwoToneIcon />
+      <DeleteOutlineOutlinedIcon />
     </IconButton>
   )
 }

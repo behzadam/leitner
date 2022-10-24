@@ -1,4 +1,4 @@
-import LeaderboardTwoToneIcon from '@mui/icons-material/LeaderboardTwoTone';
+import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined';
 import { IconButton } from "@mui/material";
 import Link from "next/link";
 
@@ -6,7 +6,7 @@ const FlashcardListActionStat = (): JSX.Element => {
   return (
     <Link href="/quiz">
       <IconButton size="medium">
-        <LeaderboardTwoToneIcon />
+        <PieChartOutlineOutlinedIcon />
       </IconButton>
     </Link>
   )

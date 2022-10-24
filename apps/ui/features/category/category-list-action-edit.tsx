@@ -1,4 +1,4 @@
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { IconButton } from "@mui/material";
 import { useDialogEvent } from "@ui/components/dialog/dialog.provider";
 import CategoryFormEdit from "./category-edit";
@@ -24,7 +24,7 @@ const CategoryListActionEdit = ({
       size="medium"
       onClick={onEdit}
     >
-      <EditTwoToneIcon />
+      <EditOutlinedIcon />
     </IconButton>
   )
 }
