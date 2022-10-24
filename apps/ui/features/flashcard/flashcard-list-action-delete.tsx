@@ -21,7 +21,7 @@ const FlashcardListActionDelete = (): JSX.Element => {
 
   return (
     <Show when={showDeleteButton}>
-      <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={() => onDelete(1)} size="small">
+      <IconButton aria-label="delete" sx={{ ml: 1 }} onClick={() => onDelete(1)}>
         <DeleteOutlineOutlinedIcon />
       </IconButton>
     </Show>
