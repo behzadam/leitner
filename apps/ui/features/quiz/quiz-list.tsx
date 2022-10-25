@@ -1,6 +1,7 @@
-import { Grid } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import QuizListActions from './quiz-list-actions';
+import QuizListItemActions from './quiz-list-item-actions';
 import QuizListStepper from './quiz-list-stepper';
 
 import QuizListSwipeable from './quiz-list-swipeable';
@@ -24,7 +25,10 @@ function QuizList({
     <QuizProvider>
       <Box sx={{ flexGrow: 1 }}>
         <QuizListToolbar />
-        <QuizListSwipeable items={items} />
+        <Paper>
+          <QuizListSwipeable items={items} />
+          <QuizListItemActions />
+        </Paper>
         <Grid container sx={{ mt: 1 }}>
           <Grid sx={{ flex: 1 }}>
             <QuizListStepper items={items} />
