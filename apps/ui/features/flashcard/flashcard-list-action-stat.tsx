@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const FlashcardListActionStat = (): JSX.Element => {
   return (
-    <Link href="/quiz">
+    <Link href="/stat">
       <IconButton size="medium">
         <PieChartOutlineOutlinedIcon />
       </IconButton>
