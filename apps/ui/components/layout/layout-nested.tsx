@@ -11,9 +11,10 @@ const LayoutNested = ({
   children,
   title = 'Back'
 }: LayoutNestedProps): JSX.Element => {
+
   const router = useRouter();
   const handleClick = (): void => {
-    console.log("back", { router })
+    router.back();
   }
 
   return (
