@@ -1,9 +1,10 @@
 import StyleIcon from '@mui/icons-material/Style';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import LayoutLogout from './layout-logout';
 
 type DashboardLayoutProps = {
   children?: React.ReactNode
@@ -23,7 +24,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: 'flex',
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.2rem',
@@ -33,6 +34,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             >
               Memory
             </Typography>
+            <Box sx={{ ml: 'auto' }}>
+              <LayoutLogout />
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
