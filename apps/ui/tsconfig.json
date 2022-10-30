@@ -13,6 +13,7 @@
     "incremental": true,
     "skipLibCheck": true,
     "types": ["jest", "node"],
+    "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
       "@shared/types": ["../../libs/types/src/index.ts"],
