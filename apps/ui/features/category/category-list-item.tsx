@@ -4,7 +4,7 @@ import {
   CardActions,
   CardContent, Stack, Typography
 } from '@mui/material';
-import Link from '@ui/components/link/link';
+import LinkWithoutUnderline from '@ui/components/link/LinkNoUnderline';
 import CategoryListActions from './category-list-actions';
 
 type CategoryListItemProps = {
@@ -18,10 +18,10 @@ const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
     <Card>
       <CardContent>
         <Stack direction="row" alignItems="center">
-          <Link href="/flashcards">
+          <LinkWithoutUnderline href="/flashcards">
             <Typography variant="overline">Flashcard Name</Typography>
             <OpenInNewTwoToneIcon sx={{ fontSize: 10, ml: 1 }} />
-          </Link>
+          </LinkWithoutUnderline>
         </Stack>
       </CardContent>
       <CardActions>

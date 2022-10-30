@@ -10,13 +10,13 @@ const CustomLink = styled(MuiLink)<LinkProps>(() => ({
   }
 }));
 
-const Link = forwardRef((props: any, ref: any) => {
+const LinkWithoutUnderline = forwardRef((props: any, ref: any) => {
   const { href } = props;
   return <NextLink href={href} passHref >
     <CustomLink ref={ref} {...props} />
   </NextLink>
 })
 
-Link.displayName = 'CustomLink';
+LinkWithoutUnderline.displayName = 'LinkWithoutUnderline';
 
-export default Link;
+export default LinkWithoutUnderline;
