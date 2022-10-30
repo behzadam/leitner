@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { useQuizContext, useQuizEvent } from './quiz-provider';
 
 type QuizListStepperType = {
-  items?: any[]
+  items: any[]
 }
 
 const QuizListStepper = ({
