@@ -25,7 +25,7 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
   },
 }));
 
-const NoRows = () => {
+const PlaceholderNoRow = () => {
   return (
     <StyledGridOverlay>
       <svg
@@ -73,4 +73,4 @@ const NoRows = () => {
 }
 
 
-export default NoRows;
+export default PlaceholderNoRow;

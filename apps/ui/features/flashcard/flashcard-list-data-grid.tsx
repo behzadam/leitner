@@ -1,6 +1,6 @@
 import { LinearProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import NoRows from '@ui/components/NoRows';
+import PlaceholderNoRow from '@ui/components/placeholder/placeholder-no-row';
 import { Fragment, useMemo } from 'react';
 
 import FlashcardListActions from './flashcard-list-actions';
@@ -53,7 +53,7 @@ const FlashcardListDataGrid = (): JSX.Element => {
     <Fragment>
       <DataGrid
         components={{
-          NoRowsOverlay: NoRows,
+          NoRowsOverlay: PlaceholderNoRow,
           LoadingOverlay: LinearProgress,
         }}
         rows={rows}
