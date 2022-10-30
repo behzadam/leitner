@@ -21,13 +21,15 @@ const QuizDeck = (): JSX.Element => {
     from: {
       x: 0,
       y: -100,
-      shadow: 1
+      scale: 0,
+      shadow: 0
     },
     to: {
       x: 0,
-      y: i * -1,
+      y: i * -2,
       delay: i * 10,
-      shadow: 15
+      scale: 1,
+      shadow: i < 3 ? 5 : 0
     }
   }))
 
@@ -38,8 +40,10 @@ const QuizDeck = (): JSX.Element => {
       if (index !== i) return;
       const isGone = gone.has(index);
       const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
+      const scale = active ? 1.05 : 1;
       return {
         x,
+        scale,
         delay: undefined,
         config: { friction: 50, tension: active ? 800 : isGone ? 200 : 500 },
       }
@@ -48,8 +52,16 @@ const QuizDeck = (): JSX.Element => {
 
   return (
     <Container>
-      {props.map(({ x, y }, i) => (
-        <QuizCard key={i} x={x} y={y} {...bind(i)} />
+      {props.map(({ x, y, scale, shadow }, i) => (
+        <QuizCard
+          key={i}
+          {...bind(i)}
+          style={{
+            x,
+            y,
+            scale,
+            boxShadow: shadow.to(s => `rgba(0, 0, 0, 0.05) 0px ${s}px ${2 * s}px 0px`),
+          }} />
       ))}
     </Container>
   )
