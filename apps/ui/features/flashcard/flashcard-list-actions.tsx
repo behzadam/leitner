@@ -2,11 +2,11 @@ import { Divider, Stack } from '@mui/material';
 import FlashcardListActionsEdit from './flashcard-list-action-edit';
 
 type FlashcardListActionsParams = {
-  id?: number;
+  id: number;
 };
 
 const FlashcardListActions = ({
-  id = null
+  id
 }: FlashcardListActionsParams): JSX.Element => {
 
   return (

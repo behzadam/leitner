@@ -9,11 +9,11 @@ export type DialogOptions = Partial<Omit<DialogProps, 'open | close | children'>
 
 export type DialogState = {
   isOpened: boolean;
-  options?: DialogOptions;
+  options: DialogOptions;
 }
 
 export type DialogAction =
-  | { type: 'DIALOG_OPEN', payload?: DialogOptions }
+  | { type: 'DIALOG_OPEN', payload: DialogOptions }
   | { type: 'DIALOG_CLOSE' }
 
 export type DialogEvent = {
@@ -22,8 +22,8 @@ export type DialogEvent = {
 }
 
 const initialOptions: DialogOptions = {
-  title: null,
-  content: null
+  title: '',
+  content: ''
 }
 
 const initialState: DialogState = {
@@ -73,11 +73,11 @@ const DialogProvider = ({ children }: { children?: React.ReactNode }): JSX.Eleme
           fullWidth={state.options.fullWidth}
           maxWidth={state.options.maxWidth}
         >
-          <Show when={state.options?.title}>
-            <DialogTitle>{state.options?.title}</DialogTitle>
+          <Show when={state.options.title}>
+            <DialogTitle>{state.options.title}</DialogTitle>
           </Show>
           <DialogContent>
-            {state.options?.content}
+            {state.options.content}
           </DialogContent>
         </Dialog>
       </DialogEvent.Provider>

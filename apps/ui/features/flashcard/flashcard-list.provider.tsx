@@ -6,7 +6,7 @@ export type FlashcardListState = {
 }
 
 export type FlashcardListAction =
-  | { type: 'setCurrentRow', row: number | null }
+  | { type: 'setCurrentRow', row?: number }
   | { type: 'setCurrentRows', rows: number[] };
 
 export type FlashcardListEvent = {
@@ -15,8 +15,7 @@ export type FlashcardListEvent = {
 }
 
 export const initialState: FlashcardListState = {
-  currentRows: [],
-  currentRow: null
+  currentRows: []
 }
 
 const reducer = (state: FlashcardListState, action: FlashcardListAction): FlashcardListState => {

@@ -12,7 +12,7 @@ export type ConfirmState = {
   isOpened: boolean;
   isConfirmed: boolean;
   isDeclined: boolean;
-  options?: ConfirmOptions;
+  options: ConfirmOptions;
 }
 
 export type ConfirmAction =
@@ -25,8 +25,8 @@ export type ConfirmEvent = {
 }
 
 const initialOptions: ConfirmOptions = {
-  title: undefined,
-  message: undefined,
+  title: '',
+  message: '',
   resolve: undefined
 }
 
