@@ -2,6 +2,13 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 
+export type Flashcard = {
+  id: number;
+  front: string;
+  back?: string;
+  isReady: boolean;
+};
+
 // API
 export type ApiStatus = 'IDLE' | 'PENDING' | 'SUCCEEDED' | 'FAILED';
 
