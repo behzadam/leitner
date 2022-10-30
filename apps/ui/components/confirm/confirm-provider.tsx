@@ -25,9 +25,9 @@ export type ConfirmEvent = {
 }
 
 const initialOptions: ConfirmOptions = {
-  title: null,
-  message: null,
-  resolve: null
+  title: undefined,
+  message: undefined,
+  resolve: undefined
 }
 
 const initialState: ConfirmState = {
