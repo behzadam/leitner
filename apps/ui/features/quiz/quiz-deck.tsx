@@ -15,18 +15,20 @@ const Container = styled(Box)<BoxProps>(() => ({
 
 const cards = Array.of(1, 2, 3, 4, 5, 6, 7, 8)
 
-const to = (i: number) => ({
-  x: 0,
-  y: i * -1,
-  delay: i * 10,
-})
-const from = (_i: number) => ({ x: 0, y: -100 })
-
 const QuizDeck = (): JSX.Element => {
   const [gone] = useState(() => new Set())
   const [props, api] = useSprings(cards.length, i => ({
-    ...to(i),
-    from: from(i),
+    from: {
+      x: 0,
+      y: -100,
+      shadow: 1
+    },
+    to: {
+      x: 0,
+      y: i * -1,
+      delay: i * 10,
+      shadow: 15
+    }
   }))
 
   const bind = useDrag(({ args: [index], active, movement: [mx], direction: [xDir], velocity: [vx] }) => {
