@@ -4,7 +4,7 @@ import {
   CardActions,
   CardContent, Stack, Typography
 } from '@mui/material';
-import Link from '@ui/components/link/Link';
+import Link from '@ui/components/link/link';
 import CategoryListActions from './category-list-actions';
 
 type CategoryListItemProps = {
