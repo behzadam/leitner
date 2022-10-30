@@ -1,7 +1,8 @@
 import { Box, BoxProps, styled } from '@mui/material';
 import { useSprings } from '@react-spring/web';
+import { Flashcard } from '@ui/types';
 import { useDrag } from '@use-gesture/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import QuizCard from './quiz-card';
 
 const Container = styled(Box)<BoxProps>(() => ({
@@ -13,11 +14,19 @@ const Container = styled(Box)<BoxProps>(() => ({
   alignItems: 'center'
 }));
 
-const cards = Array.of(1, 2, 3, 4, 5, 6, 7, 8)
+type QuizDeckType = {
+  cards: Flashcard[]
+}
 
-const QuizDeck = (): JSX.Element => {
+const QuizDeck = ({ cards }: QuizDeckType): JSX.Element => {
+  const memoizedCards = useMemo(() => {
+    return {
+      cards
+    }
+  }, [cards])
+
   const [gone] = useState(() => new Set())
-  const [props, api] = useSprings(cards.length, i => ({
+  const [props, api] = useSprings(memoizedCards.cards.length, i => ({
     from: {
       x: 0,
       y: -100,
@@ -40,6 +49,7 @@ const QuizDeck = (): JSX.Element => {
       if (index !== i) return;
       const isGone = gone.has(index);
       const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
+      cards[i].isReady = isGone;
       const scale = active ? 1.05 : 1;
       return {
         x,
