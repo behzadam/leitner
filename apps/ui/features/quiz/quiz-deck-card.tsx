@@ -3,14 +3,14 @@ import { animated } from '@react-spring/web';
 
 const Deck = animated(styled(Box)<BoxProps>(() => ({
   position: 'absolute',
-  width: '280px',
-  height: '373px',
+  maxWidth: '320px',
+  aspectRatio: '3 / 4',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   padding: '1.5rem',
   backgroundColor: 'white',
-  borderRadius: '0.3rem'
+  borderRadius: '1.5rem'
 })));
 
 const DeckContent = styled(Box)<BoxProps>(() => ({
@@ -19,11 +19,11 @@ const DeckContent = styled(Box)<BoxProps>(() => ({
 }));
 
 
-const QuizCard = ({ ...props }): JSX.Element => {
+const QuizDeckCard = ({ ...props }): JSX.Element => {
   return (
     <Deck {...props}>
       <DeckContent>
-        <Typography variant="body2">
+        <Typography variant="body1">
           In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
         </Typography>
       </DeckContent>
@@ -31,4 +31,4 @@ const QuizCard = ({ ...props }): JSX.Element => {
   )
 }
 
-export default QuizCard;
+export default QuizDeckCard;
