@@ -3,7 +3,7 @@ import { useSprings } from '@react-spring/web';
 import { Flashcard } from '@ui/types';
 import { useDrag } from '@use-gesture/react';
 import { useMemo, useState } from 'react';
-import QuizCard from './quiz-card';
+import QuizDeckCard from './quiz-deck-card';
 
 const Container = styled(Box)<BoxProps>(() => ({
   width: '100vw',
@@ -11,7 +11,8 @@ const Container = styled(Box)<BoxProps>(() => ({
   overflow: 'hidden',
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  backgroundColor: '#e5ded0'
 }));
 
 type QuizDeckType = {
@@ -63,7 +64,7 @@ const QuizDeck = ({ cards }: QuizDeckType): JSX.Element => {
   return (
     <Container>
       {props.map(({ x, y, scale, shadow }, i) => (
-        <QuizCard
+        <QuizDeckCard
           key={i}
           {...bind(i)}
           style={{
