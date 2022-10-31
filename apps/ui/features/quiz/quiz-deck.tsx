@@ -3,6 +3,7 @@ import { useSprings } from '@react-spring/web';
 import { Flashcard } from '@ui/types';
 import { useDrag } from '@use-gesture/react';
 import { useMemo, useState } from 'react';
+import QuizActions from './quiz-actions';
 import QuizDeckCard from './quiz-deck-card';
 
 const Container = styled(Box)<BoxProps>(() => ({
@@ -12,7 +13,8 @@ const Container = styled(Box)<BoxProps>(() => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#e5ded0'
+  flexDirection: 'column',
+  backgroundColor: '#d4d4d4'
 }));
 
 type QuizDeckType = {
@@ -63,17 +65,29 @@ const QuizDeck = ({ cards }: QuizDeckType): JSX.Element => {
 
   return (
     <Container>
-      {props.map(({ x, y, scale, shadow }, i) => (
-        <QuizDeckCard
-          key={i}
-          {...bind(i)}
-          style={{
-            x,
-            y,
-            scale,
-            boxShadow: shadow.to(s => `rgba(0, 0, 0, 0.05) 0px ${s}px ${2 * s}px 0px`),
-          }} />
-      ))}
+      <Box sx={{
+        width: 340,
+        aspectRatio: '3 / 4',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        {props.map(({ x, y, scale, shadow }, i) => (
+          <QuizDeckCard
+            key={i}
+            {...bind(i)}
+            style={{
+              x,
+              y,
+              scale,
+              boxShadow: shadow.to(s => `rgba(0, 0, 0, 0.05) 0px ${s}px ${2 * s}px 0px`),
+            }} />
+        ))}
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <QuizActions />
+      </Box>
     </Container>
   )
 }
