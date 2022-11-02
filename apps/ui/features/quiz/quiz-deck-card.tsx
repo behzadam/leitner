@@ -3,19 +3,21 @@ import { animated } from '@react-spring/web';
 
 const Deck = animated(styled(Box)<BoxProps>(() => ({
   position: 'absolute',
-  maxWidth: '320px',
-  aspectRatio: '3 / 4',
+  aspectRatio: '0.8',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  cursor: 'grab',
   padding: '1.5rem',
   backgroundColor: 'white',
-  borderRadius: '1.5rem'
+  borderRadius: '1.5rem',
+  userSelect: 'none'
 })));
 
 const DeckContent = styled(Box)<BoxProps>(() => ({
   willChange: 'transform',
-  touchAction: 'none'
+  touchAction: 'none',
+  userSelect: 'auto'
 }));
 
 
