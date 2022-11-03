@@ -24,8 +24,11 @@ const FlipCardContent = animated(styled(Box)<BoxProps>(() => ({
   touchAction: 'none',
   position: 'absolute',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
+  padding: '1.5rem',
+  textAlign: 'center',
   willChange: 'transform, opacity'
 })));
 
@@ -53,7 +56,10 @@ const QuizDeckCard = ({ ...props }): JSX.Element => {
           opacity: opacity.to(op => 1 - op),
           transform
         }}>
-        <p>Front</p>
+        <strong>Front</strong>
+        <p>
+          Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
+        </p>
       </FlipCardContent>
       <FlipCardContent
         style={{
@@ -61,7 +67,10 @@ const QuizDeckCard = ({ ...props }): JSX.Element => {
           transform,
           rotateY: '180deg'
         }}>
-        <p>Back</p>
+        <strong>Back</strong>
+        <p>
+          Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
+        </p>
       </FlipCardContent>
       <FlipCardAction onClick={handleToggleCard}>
         <Show when={!flipped}>
