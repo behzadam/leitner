@@ -4,7 +4,7 @@ import QuizActions from './quiz-actions';
 import QuizDeck from './quiz-deck';
 import QuizProvider from './quiz-provider';
 
-const Wrapper = styled(Box)<BoxProps>(() => ({
+const QuizWrapper = styled(Box)<BoxProps>(() => ({
   width: '100vw',
   display: 'flex',
   flexDirection: 'column',
@@ -20,7 +20,7 @@ const Wrapper = styled(Box)<BoxProps>(() => ({
   backgroundColor: '#d4d4d4'
 }));
 
-const Inner = styled(Box)<BoxProps>(() => ({
+const QuizInner = styled(Box)<BoxProps>(() => ({
   aspectRatio: '0.8',
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(350px,1fr))',
@@ -28,7 +28,7 @@ const Inner = styled(Box)<BoxProps>(() => ({
   backgroundColor: 'red'
 }));
 
-const QuizList = (): JSX.Element => {
+const QuizContainer = (): JSX.Element => {
   const cards: Flashcard[] = [
     { id: 1, front: 'Front card 1', back: 'Back card 1', isReady: true },
     { id: 2, front: 'Front card 2', back: 'Back card 2', isReady: true },
@@ -42,16 +42,16 @@ const QuizList = (): JSX.Element => {
   ]
   return (
     <QuizProvider>
-      <Wrapper>
-        <Inner>
+      <QuizWrapper>
+        <QuizInner>
           <QuizDeck cards={cards} />
-        </Inner>
+        </QuizInner>
         <Box sx={{ mt: 2 }}>
           <QuizActions />
         </Box>
-      </Wrapper>
+      </QuizWrapper>
     </QuizProvider>
   );
 }
 
-export default QuizList;
+export default QuizContainer;

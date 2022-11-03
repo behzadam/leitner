@@ -1,11 +1,11 @@
 import LayoutNested from '@ui/components/layout/layout-nested';
-import QuizList from '@ui/features/quiz/quiz-list';
+import QuizContainer from '@ui/features/quiz/quiz-container';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
 const Index: NextPageWithLayout = (): JSX.Element => {
   return (
-    <QuizList />
+    <QuizContainer />
   );
 }
 
