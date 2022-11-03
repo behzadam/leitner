@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { ReactNode } from 'react';
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -25,7 +26,11 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
   },
 }));
 
-const PlaceholderNoRow = () => {
+type PlaceholderNoRowProps = {
+  text?: ReactNode
+}
+
+const PlaceholderNoRow = ({ text = 'No Data' }: PlaceholderNoRowProps) => {
   return (
     <StyledGridOverlay>
       <svg
@@ -67,7 +72,7 @@ const PlaceholderNoRow = () => {
           </g>
         </g>
       </svg>
-      <Box sx={{ mt: 1 }}>No Rows</Box>
+      <Box sx={{ mt: 1 }}>{text}</Box>
     </StyledGridOverlay>
   );
 }
