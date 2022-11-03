@@ -30,7 +30,8 @@ const FlipCardContent = animated(styled(Box)<BoxProps>(() => ({
 })));
 
 const FlipCardAction = styled(IconButton)<IconButtonProps>(() => ({
-  marginTop: 'auto'
+  marginTop: 'auto',
+  marginBottom: '1rem'
 }))
 
 const QuizDeckCard = ({ ...props }): JSX.Element => {
