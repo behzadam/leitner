@@ -39,7 +39,10 @@ const QuizDeck = ({ cards }: QuizDeckType): JSX.Element => {
       if (index !== i) return;
       const isGone = gone.has(index);
       const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
+
+      //Todo: should replace with store card item
       cards[i].isReady = isGone;
+
       const scale = active ? 1.05 : 1;
       return {
         x,
