@@ -1,9 +1,8 @@
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { Box, BoxProps, IconButton, IconButtonProps, styled } from '@mui/material';
+import { Box, BoxProps, styled } from '@mui/material';
 import { animated, useSpring } from '@react-spring/web';
-import Show from '@ui/components/Show';
+import { Flashcard } from '@ui/types';
 import { useState } from 'react';
+
 
 const FlipCard = animated(styled(Box)<BoxProps>(() => ({
   width: '100%',
@@ -32,12 +31,14 @@ const FlipCardContent = animated(styled(Box)<BoxProps>(() => ({
   willChange: 'transform, opacity'
 })));
 
-const FlipCardAction = styled(IconButton)<IconButtonProps>(() => ({
-  marginTop: 'auto',
-  marginBottom: '1rem'
-}))
+type QuizDeckCardProps = {
+  card: Flashcard
+}
 
-const QuizDeckCard = ({ ...props }): JSX.Element => {
+const QuizDeckCard = ({
+  card,
+  ...props
+}: QuizDeckCardProps): JSX.Element => {
   const [flipped, setFlipped] = useState<boolean>(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -56,7 +57,7 @@ const QuizDeckCard = ({ ...props }): JSX.Element => {
           opacity: opacity.to(op => 1 - op),
           transform
         }}>
-        <strong>Front</strong>
+        <strong>Front: {card.id}</strong>
         <p>
           Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
         </p>
@@ -72,14 +73,6 @@ const QuizDeckCard = ({ ...props }): JSX.Element => {
           Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
         </p>
       </FlipCardContent>
-      <FlipCardAction onClick={handleToggleCard}>
-        <Show when={!flipped}>
-          <RemoveRedEyeOutlinedIcon />
-        </Show>
-        <Show when={flipped}>
-          <VisibilityOffOutlinedIcon />
-        </Show>
-      </FlipCardAction>
     </FlipCard>
   )
 }
