@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { Flashcard } from '@ui/types';
 
-type State = {
+type QuizState = {
   cards: Flashcard[];
 };
 
-const initialState: State = {
+const initialState: QuizState = {
   cards: [
     {
       id: 1,
@@ -68,15 +68,12 @@ const quizSlice = createSlice({
   name: 'quizSlice',
   initialState,
   reducers: {
-    onFlipped(state: State, action: PayloadAction<Flashcard>) {
+    onFlipped(state: QuizState) {
       console.log('onSwiped', state?.cards.length);
     },
 
-    onSwiped(state: State, action: PayloadAction<number>) {
-      const index = state.cards.findIndex(
-        ({ id }) => id === action.payload
-      );
-      state.cards[index].isReady = !state.cards[index].isReady;
+    onSwiped(state: QuizState) {
+      state.cards = state.cards.slice();
     },
   },
 });
