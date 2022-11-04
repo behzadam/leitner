@@ -5,9 +5,12 @@ import {
 } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
+import quizReducer from '@ui/features/quiz/quiz-slice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    quiz: quizReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
