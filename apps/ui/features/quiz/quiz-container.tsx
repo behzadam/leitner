@@ -1,8 +1,7 @@
 import { Box, BoxProps, styled } from '@mui/material';
 import PlaceholderNoRow from '@ui/components/placeholder/placeholder-no-row';
-import { useAppSelector } from '@ui/store/index';
+import { RootState, useAppSelector } from '@ui/store/index';
 import QuizDeck from './quiz-deck';
-import QuizProvider from './quiz-provider';
 import QuizToolbox from './quiz-toolbox';
 
 const QuizWrapper = styled(Box)<BoxProps>(() => ({
@@ -32,19 +31,17 @@ const QuizInner = styled(Box)<BoxProps>(() => ({
 }));
 
 const QuizContainer = (): JSX.Element => {
-  const quizState = useAppSelector(state => state.quiz)
+  const quizState = useAppSelector<RootState>(state => state.quiz)
   return (
-    <QuizProvider>
-      <QuizWrapper>
-        <QuizInner>
-          <PlaceholderNoRow />
-          <QuizDeck cards={quizState.cards} />
-        </QuizInner>
-        <Box sx={{ mt: 2 }}>
-          <QuizToolbox />
-        </Box>
-      </QuizWrapper>
-    </QuizProvider>
+    <QuizWrapper>
+      <QuizInner>
+        <PlaceholderNoRow />
+        <QuizDeck cards={quizState.cards} />
+      </QuizInner>
+      <Box sx={{ mt: 2 }}>
+        <QuizToolbox />
+      </Box>
+    </QuizWrapper>
   );
 }
 
