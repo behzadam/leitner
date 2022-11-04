@@ -31,12 +31,12 @@ const QuizInner = styled(Box)<BoxProps>(() => ({
 }));
 
 const QuizContainer = (): JSX.Element => {
-  const quizState = useAppSelector<RootState>(state => state.quiz)
+  const state = useAppSelector<RootState>(state => state)
   return (
     <QuizWrapper>
       <QuizInner>
         <PlaceholderNoRow />
-        <QuizDeck cards={quizState.cards} />
+        <QuizDeck cards={state.quiz.cards} />
       </QuizInner>
       <Box sx={{ mt: 2 }}>
         <QuizToolbox />
