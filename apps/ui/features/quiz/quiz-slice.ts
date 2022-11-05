@@ -1,5 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  current,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import { RootState } from '@ui/store/index';
 import { Flashcard } from '@ui/types';
+import { SwipeProps } from './quiz-types';
 
 type QuizState = {
   cards: Flashcard[];
@@ -72,11 +78,19 @@ const quizSlice = createSlice({
       console.log('onSwiped', state?.cards.length);
     },
 
-    onSwiped(state: QuizState) {
-      state.cards = state.cards.slice();
+    onSwiped(state: QuizState, action: PayloadAction<SwipeProps>) {
+      console.log('onSwiped', current(state));
+      return {
+        ...state,
+        cards: state.cards.filter(
+          (item) => item.id !== action.payload.id
+        ),
+      };
     },
   },
 });
+export const selectFlashcards = (state: RootState) =>
+  state.quiz.cards;
 
 export const { onFlipped, onSwiped } = quizSlice.actions;
 export default quizSlice.reducer;
