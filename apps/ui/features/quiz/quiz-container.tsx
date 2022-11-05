@@ -1,8 +1,10 @@
 import { Box, BoxProps, styled } from '@mui/material';
 import PlaceholderNoRow from '@ui/components/placeholder/placeholder-no-row';
-import { RootState, useAppSelector } from '@ui/store/index';
+import { useAppDispatch, useAppSelector } from '@ui/store/index';
 import QuizDeck from './quiz-deck';
+import { onSwiped, selectFlashcards } from './quiz-slice';
 import QuizToolbox from './quiz-toolbox';
+import { SwipeProps } from './quiz-types';
 
 const QuizWrapper = styled(Box)<BoxProps>(() => ({
   width: '100vw',
@@ -31,12 +33,18 @@ const QuizInner = styled(Box)<BoxProps>(() => ({
 }));
 
 const QuizContainer = (): JSX.Element => {
-  const state = useAppSelector<RootState>(state => state)
+  const cards = useAppSelector(selectFlashcards);
+  const dispatch = useAppDispatch()
+  console.log('QuizContainer render');
+  const handleSwiped = (props: SwipeProps): void => {
+    console.log('setCurrentItem', props)
+    dispatch(onSwiped(props))
+  }
   return (
     <QuizWrapper>
       <QuizInner>
         <PlaceholderNoRow />
-        <QuizDeck cards={state.quiz.cards} />
+        <QuizDeck cards={cards} onSwiped={handleSwiped} />
       </QuizInner>
       <Box sx={{ mt: 2 }}>
         <QuizToolbox />
