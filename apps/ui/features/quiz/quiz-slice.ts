@@ -1,6 +1,6 @@
 import {
+  createSelector,
   createSlice,
-  current,
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { RootState } from '@ui/store/index';
@@ -17,55 +17,55 @@ const initialState: QuizState = {
       id: 1,
       front: 'Front card 1',
       back: 'Back card 1',
-      isReady: true,
+      remembered: false,
     },
     {
       id: 2,
       front: 'Front card 2',
       back: 'Back card 2',
-      isReady: true,
+      remembered: false,
     },
     {
       id: 3,
       front: 'Front card 3',
       back: 'Back card 3',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 4,
       front: 'Front card 4',
       back: 'Back card 4',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 5,
       front: 'Front card 5',
       back: 'Back card 5',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 6,
       front: 'Front card 6',
       back: 'Back card 6',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 7,
       front: 'Front card 7',
       back: 'Back card 7',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 8,
       front: 'Front card 8',
       back: 'Back card 8',
-      isReady: true,
+      remembered: true,
     },
     {
       id: 9,
       front: 'Front card 9',
       back: 'Back card 9',
-      isReady: true,
+      remembered: true,
     },
   ],
 };
@@ -75,22 +75,25 @@ const quizSlice = createSlice({
   initialState,
   reducers: {
     onFlipped(state: QuizState) {
-      console.log('onSwiped', state?.cards.length);
+      console.log('onFlipped');
     },
 
     onSwiped(state: QuizState, action: PayloadAction<SwipeProps>) {
-      console.log('onSwiped', current(state));
-      return {
-        ...state,
-        cards: state.cards.filter(
-          (item) => item.id !== action.payload.id
-        ),
-      };
+      // TODO: should update database
+      console.log('onSwiped');
     },
   },
 });
-export const selectFlashcards = (state: RootState) =>
+
+export const selectFlashcards = (state: RootState): Flashcard[] =>
   state.quiz.cards;
+
+export const selectUnrememberedFlashcards = createSelector(
+  selectFlashcards,
+  (cards): Flashcard[] => {
+    return cards.filter((item) => item.remembered === false);
+  }
+);
 
 export const { onFlipped, onSwiped } = quizSlice.actions;
 export default quizSlice.reducer;
