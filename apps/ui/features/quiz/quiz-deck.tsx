@@ -43,10 +43,9 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           if (isGone) {
             const id: number = cards[index].id;
             const direction: SwipeDirection = isNegative(x) ? 'left' : 'right';
-            if (direction === 'left') {
-              onSwiped({ id, direction });
-            }
+            onSwiped({ id, direction });
           }
+
           return {
             x,
             config: { friction: 50, tension: active ? 800 : isGone ? 200 : 500 },
