@@ -4,13 +4,18 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { IconButton, Stack } from "@mui/material";
 import Show from '@ui/components/Show';
+import { useAppDispatch } from '@ui/store/index';
 import { useState } from 'react';
+import { cardFlipped } from './quiz-slice';
+
 
 const QuizDeckActions = (): JSX.Element => {
+  const dispatch = useAppDispatch()
   const [flipped, setFlipped] = useState<boolean>(false);
 
   const handleFlipped = (): void => {
-    setFlipped(flipped => !flipped)
+    setFlipped(flipped => !flipped);
+    dispatch(cardFlipped());
   }
 
   const handleRemember = (): void => {
@@ -38,3 +43,4 @@ const QuizDeckActions = (): JSX.Element => {
 }
 
 export default QuizDeckActions;
+
