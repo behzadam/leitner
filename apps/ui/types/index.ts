@@ -7,6 +7,7 @@ export type Flashcard = {
   front: string;
   back?: string;
   remembered: boolean;
+  flipped: boolean;
 };
 
 // API
