@@ -1,5 +1,5 @@
 import LayoutNested from '@ui/components/layout/layout-nested';
-import QuizContainer from '@ui/features/quiz/quiz-container';
+import QuizContainer from '@ui/features/quiz/quiz-deck-container';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
