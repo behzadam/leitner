@@ -104,12 +104,5 @@ export const selectFlashcardsCount = createSelector(
 export const selectFlashcardById = (id: number) =>
   createSelector(selectFlashcards, (cards: Flashcard[]) => cards[id]);
 
-export const selectUnrememberedFlashcards = createSelector(
-  selectFlashcards,
-  (cards): Flashcard[] => {
-    return cards.filter((item) => item.remembered === false);
-  }
-);
-
 export const { cardFlipped, cardSwiped } = quizSlice.actions;
 export default quizSlice.reducer;
