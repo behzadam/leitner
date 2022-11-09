@@ -93,16 +93,22 @@ const quizSlice = createSlice({
   },
 });
 
-export const selectFlashcards = (state: RootState): Flashcard[] =>
-  state.quiz.cards;
+const selectState = (state: RootState) => state;
+
+export const selectFlashcards = createSelector(
+  selectState,
+  (state: RootState) => state.quiz.cards
+);
+
+export const selectCurrentIndex = createSelector(
+  selectState,
+  (state: RootState) => state.quiz.currentIndex
+);
 
 export const selectFlashcardsCount = createSelector(
   selectFlashcards,
   (cards: Flashcard[]) => cards.length
 );
-
-export const selectFlashcardById = (id: number) =>
-  createSelector(selectFlashcards, (cards: Flashcard[]) => cards[id]);
 
 export const { cardFlipped, cardSwiped } = quizSlice.actions;
 export default quizSlice.reducer;
