@@ -3,12 +3,12 @@ import { Flashcard } from '@ui/types';
 import { isNegative } from '@ui/utils/is-negative';
 import { useGesture } from '@use-gesture/react';
 import { useState } from 'react';
-import QuizDeckCard from './quiz-deck-card';
-import { SwipeDirection, SwipeProps } from './quiz-types';
+import { QuizDeckCard } from './quiz-deck-card';
+import { SwipeDirection } from './quiz-types';
 
 type QuizDeckProps = {
   cards: Flashcard[];
-  onSwiped: (props: SwipeProps) => void;
+  onSwiped: () => void;
 }
 
 const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
@@ -43,7 +43,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           if (isGone) {
             const id: number = cards[index].id;
             const direction: SwipeDirection = isNegative(x) ? 'left' : 'right';
-            onSwiped({ id, direction });
+            onSwiped();
           }
 
           return {
@@ -57,12 +57,12 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
   return (
     <>
       {
-        springs.map((props, i) => (
+        cards.map((card, i) => (
           < QuizDeckCard
-            card={cards[i]}
-            key={i}
+            key={card.id}
             {...bind(i)}
-            style={props}
+            style={springs[i]}
+            card={card}
           />
         ))
       }
