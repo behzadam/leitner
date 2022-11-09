@@ -1,6 +1,7 @@
 import { Box, BoxProps, styled } from '@mui/material';
 import { animated, useSpring } from '@react-spring/web';
 import { Flashcard } from '@ui/types';
+import React from 'react';
 
 
 const FlipCard = animated(styled(Box)<BoxProps>(() => ({
@@ -31,14 +32,14 @@ const FlipCardContent = animated(styled(Box)<BoxProps>(() => ({
 })));
 
 type QuizDeckCardProps = {
-  card: Flashcard
+  card: Flashcard,
 }
 
-const QuizDeckCard = ({
-  card,
-  ...props
-}: QuizDeckCardProps): JSX.Element => {
+function cardsAreEqual(prevCard: QuizDeckCardProps, nextCard: QuizDeckCardProps) {
+  return prevCard.card.flipped === nextCard.card.flipped;
+}
 
+const QuizDeckCardMemoed = ({ card, ...props }: QuizDeckCardProps): JSX.Element => {
   const { transform, opacity } = useSpring({
     opacity: card.flipped ? 1 : 0,
     transform: `perspective(600px) rotateY(${card.flipped ? 180 : 0}deg)`,
@@ -70,6 +71,6 @@ const QuizDeckCard = ({
       </FlipCardContent>
     </FlipCard>
   )
-}
+};
 
-export default QuizDeckCard;
+export const QuizDeckCard = React.memo(QuizDeckCardMemoed, cardsAreEqual);
