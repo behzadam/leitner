@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '@ui/store/index';
 import QuizDeck from './quiz-deck';
 import QuizDeckActions from './quiz-deck-actions';
 import { cardSwiped, selectCurrentIndex, selectFlashcards, selectFlashcardsCount } from './quiz-slice';
-import QuizToolbox from './quiz-toolbox';
 
 const QuizWrapper = styled(Box)<BoxProps>(() => ({
   width: '100vw',
@@ -39,7 +38,6 @@ const QuizContainer = (): JSX.Element => {
   const currentIndex = useAppSelector(selectCurrentIndex);
   const dispatch = useAppDispatch()
 
-  console.log('QuizContainer render', cardsCount);
   const handleCardSwiped = (): void => {
     dispatch(cardSwiped())
   }
@@ -53,7 +51,6 @@ const QuizContainer = (): JSX.Element => {
         <Show when={currentIndex < cardsCount}>
           <QuizDeckActions />
         </Show>
-        <QuizToolbox />
       </Box>
     </QuizWrapper>
   );
