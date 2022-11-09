@@ -1,11 +1,6 @@
-import {
-  createSelector,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@ui/store/index';
 import { Flashcard } from '@ui/types';
-import { SwipeProps } from './quiz-types';
 
 type QuizState = {
   cards: Flashcard[];
@@ -86,24 +81,28 @@ const quizSlice = createSlice({
   initialState,
   reducers: {
     cardFlipped(state: QuizState): void {
-      console.log('onFlipped');
       state.cards[state.currentIndex].flipped =
         !state.cards[state.currentIndex].flipped;
     },
 
-    cardSwiped(
-      state: QuizState,
-      action: PayloadAction<SwipeProps>
-    ): void {
-      // TODO: should update database
-      state.currentIndex++;
-      console.log('onSwiped currentIndex:', state.currentIndex);
+    cardSwiped(state: QuizState): void {
+      if (state.currentIndex < state.cards.length) {
+        state.currentIndex++;
+      }
     },
   },
 });
 
 export const selectFlashcards = (state: RootState): Flashcard[] =>
   state.quiz.cards;
+
+export const selectFlashcardsCount = createSelector(
+  selectFlashcards,
+  (cards: Flashcard[]) => cards.length
+);
+
+export const selectFlashcardById = (id: number) =>
+  createSelector(selectFlashcards, (cards: Flashcard[]) => cards[id]);
 
 export const selectUnrememberedFlashcards = createSelector(
   selectFlashcards,
