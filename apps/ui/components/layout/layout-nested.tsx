@@ -22,11 +22,13 @@ const LayoutNested = ({
       <AppBar
         position="relative"
         elevation={0}
+        enableColorOnDark
+        color='transparent'
       >
         <Toolbar>
-          <Typography variant="body1" noWrap component="div">
+          <Typography variant="overline" noWrap component="div">
             <IconButton onClick={handleClick} size="medium" sx={{ mr: 1 }}>
-              <ArrowBackIcon sx={{ color: 'white', fontSize: '1rem' }} />
+              <ArrowBackIcon sx={{ fontSize: '1rem' }} />
             </IconButton>
             {title}
           </Typography>
