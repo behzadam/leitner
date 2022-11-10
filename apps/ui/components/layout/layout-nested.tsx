@@ -20,7 +20,8 @@ const LayoutNested = ({
   return (
     <Stack>
       <AppBar
-        position="fixed"
+        position="relative"
+        elevation={0}
       >
         <Toolbar>
           <Typography variant="body1" noWrap component="div">

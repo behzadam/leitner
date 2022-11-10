@@ -13,7 +13,9 @@ type DashboardLayoutProps = {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <Stack>
-      <AppBar position="static">
+      <AppBar
+        position="relative"
+        elevation={0}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <StyleIcon sx={{ mr: 1 }} />
