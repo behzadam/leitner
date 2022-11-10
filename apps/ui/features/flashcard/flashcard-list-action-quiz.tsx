@@ -5,7 +5,7 @@ import Link from "next/link";
 const FlashcardListActionQuiz = (): JSX.Element => {
   return (
     <Link href="/quiz">
-      <IconButton size="medium">
+      <IconButton size="medium" color="primary">
         <PlayCircleOutlineOutlinedIcon />
       </IconButton>
     </Link>
