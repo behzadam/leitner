@@ -58,8 +58,6 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
 
           if (isGone) {
-            // const id: number = cards[index].id;
-            // const direction: SwipeDirection = isNegative(x) ? 'left' : 'right';
             onSwiped();
           }
 
@@ -70,6 +68,25 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
         })
       }
     })
+
+
+  const handleRemember = (index: number, isRemembered: boolean): void => {
+    console.log('handleRemember', index)
+    api.start(i => {
+      if (index !== i) return;
+      // left or right
+      const width = (200 + window.innerWidth);
+      const x = isRemembered === true ? width * -1 : width * 1;
+
+      // update state 
+      onSwiped();
+
+      return {
+        x,
+        config: { friction: 50, tension: 200 },
+      }
+    })
+  }
 
   return (
     <QuizDeckWrapper>
@@ -85,7 +102,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           ))
         }
       </QuizDeckInner>
-      <QuizDeckActions />
+      <QuizDeckActions onRemember={handleRemember} />
     </QuizDeckWrapper>
   )
 }
