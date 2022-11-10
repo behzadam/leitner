@@ -36,7 +36,6 @@ const LayoutNested = ({
       </AppBar>
       <Box
         component="main">
-        <Toolbar />
         {children}
       </Box>
     </Stack>
