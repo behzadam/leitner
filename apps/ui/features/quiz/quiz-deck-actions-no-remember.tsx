@@ -1,10 +1,17 @@
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { IconButton } from "@mui/material";
+import { useAppSelector } from '@ui/store/index';
+import { selectCurrentIndex } from './quiz-slice';
 
-const QuizDeckActionsNoRemember = (): JSX.Element => {
+type QuizDeckActionsNoRememberProps = {
+  onRemember: (index: number) => void;
+};
+
+const QuizDeckActionsNoRemember = ({ onRemember }: QuizDeckActionsNoRememberProps): JSX.Element => {
+  const currentIndex = useAppSelector(selectCurrentIndex);
 
   const handleNoRemember = (): void => {
-    console.log('handleNoRemember');
+    onRemember(currentIndex)
   }
 
   return (

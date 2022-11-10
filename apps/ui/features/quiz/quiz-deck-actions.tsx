@@ -7,14 +7,18 @@ import QuizDeckActionsNoRemember from './quiz-deck-actions-no-remember';
 import QuizDeckActionsRemember from './quiz-deck-actions-remember';
 import { selectCurrentIndex, selectFlashcardsCount } from './quiz-slice';
 
-const QuizDeckActions = (): JSX.Element => {
+type QuizDeckActionsProps = {
+  onRemember: (index: number, isRemembered: boolean) => void;
+}
+
+const QuizDeckActions = ({ onRemember }: QuizDeckActionsProps): JSX.Element => {
   const cardsCount = useAppSelector(selectFlashcardsCount);
   const currentIndex = useAppSelector(selectCurrentIndex);
   return (
     <Show when={currentIndex < cardsCount}>
       <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
-        <QuizDeckActionsNoRemember />
-        <QuizDeckActionsRemember />
+        <QuizDeckActionsNoRemember onRemember={(index) => onRemember(index, false)} />
+        <QuizDeckActionsRemember onRemember={(index) => onRemember(index, true)} />
         <QuizDeckActionsFlip />
       </Stack>
     </Show>
