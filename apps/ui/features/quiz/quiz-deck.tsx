@@ -5,6 +5,7 @@ import { useGesture } from '@use-gesture/react';
 import { useState } from 'react';
 import QuizDeckActions from './quiz-deck-actions';
 import { QuizDeckCard } from './quiz-deck-card';
+import QuizDeckToolbar from './quiz-deck-toolbar';
 
 const QuizDeckWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   display: 'flex',
@@ -33,7 +34,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
   const [springs, api] = useSprings(cards.length, i => ({
     from: {
       x: 0,
-      y: -100,
+      y: 0
     },
     to: {
       x: 0,
@@ -41,9 +42,6 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
       zIndex: cards.length - i
     }
   }))
-
-  console.log('springs', springs.length)
-  console.log('memoizedCards', cards.length);
 
   const bind = useGesture(
     {
@@ -69,9 +67,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
       }
     })
 
-
   const handleRemember = (index: number, isRemembered: boolean): void => {
-    console.log('handleRemember', index)
     api.start(i => {
       if (index !== i) return;
       // left or right
@@ -90,6 +86,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
 
   return (
     <QuizDeckWrapper>
+      <QuizDeckToolbar />
       <QuizDeckInner>
         {
           cards.map((card, i) => (
