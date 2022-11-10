@@ -16,8 +16,8 @@ const CategoryListActions = ({ id }: CategoryListActionsType): JSX.Element => {
       <CategoryListActionDelete />
       <CategoryListActionEdit />
       <FlashcardListActionStat />
-      <FlashcardListActionQuiz />
       <FlashcardListActionCreate />
+      <FlashcardListActionQuiz />
     </Stack>
   )
 }
