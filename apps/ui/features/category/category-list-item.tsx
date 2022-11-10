@@ -13,7 +13,7 @@ type CategoryListItemProps = {
 
 const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
   return (
-    <Card>
+    <Card sx={{ p: 3 }}>
       <CardContent>
         <Stack direction="row" alignItems="center">
           <LinkWithoutUnderline href="/flashcards" sx={{ display: 'flex', alignItems: 'center' }} >
