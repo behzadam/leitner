@@ -12,14 +12,23 @@ type CategoryListItemProps = {
 }
 
 const CategoryListItem = ({ id }: CategoryListItemProps): JSX.Element => {
-  console.log({ id })
-
   return (
     <Card>
       <CardContent>
         <Stack direction="row" alignItems="center">
-          <LinkWithoutUnderline href="/flashcards">
-            <Typography variant="overline">Flashcard Name</Typography>
+          <LinkWithoutUnderline href="/flashcards" sx={{ display: 'flex', alignItems: 'center' }} >
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: 14,
+                fontFamily: 'monospace',
+                fontWeight: 'bold'
+              }}
+              component="h2"
+              color="primary"
+            >
+              Flashcard Name
+            </Typography>
             <OpenInNewTwoToneIcon sx={{ fontSize: 10, ml: 1 }} />
           </LinkWithoutUnderline>
         </Stack>
