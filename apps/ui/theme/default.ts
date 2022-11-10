@@ -1,4 +1,5 @@
 import { createTheme, ThemeOptions } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 export const defaultTheme: ThemeOptions = createTheme({
   typography: {
@@ -27,7 +28,7 @@ export const defaultTheme: ThemeOptions = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: '#fafafa',
+          backgroundColor: grey[300],
         },
       },
     },
