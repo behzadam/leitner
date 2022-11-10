@@ -1,10 +1,27 @@
+import { Box, BoxProps, styled } from '@mui/material';
 import { useSprings } from '@react-spring/web';
 import { Flashcard } from '@ui/types';
-import { isNegative } from '@ui/utils/is-negative';
 import { useGesture } from '@use-gesture/react';
 import { useState } from 'react';
+import QuizDeckActions from './quiz-deck-actions';
 import { QuizDeckCard } from './quiz-deck-card';
-import { SwipeDirection } from './quiz-types';
+
+const QuizDeckWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'relative',
+  overflow: 'hidden',
+  touchAction: 'none'
+}));
+
+const QuizDeckInner = styled(Box)<BoxProps>(() => ({
+  aspectRatio: '0.8',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(350px,1fr))',
+  position: 'relative'
+}));
 
 type QuizDeckProps = {
   cards: Flashcard[];
@@ -41,8 +58,8 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
 
           if (isGone) {
-            const id: number = cards[index].id;
-            const direction: SwipeDirection = isNegative(x) ? 'left' : 'right';
+            // const id: number = cards[index].id;
+            // const direction: SwipeDirection = isNegative(x) ? 'left' : 'right';
             onSwiped();
           }
 
@@ -55,18 +72,21 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
     })
 
   return (
-    <>
-      {
-        cards.map((card, i) => (
-          < QuizDeckCard
-            key={card.id}
-            {...bind(i)}
-            style={springs[i]}
-            card={card}
-          />
-        ))
-      }
-    </>
+    <QuizDeckWrapper>
+      <QuizDeckInner>
+        {
+          cards.map((card, i) => (
+            < QuizDeckCard
+              key={card.id}
+              {...bind(i)}
+              style={springs[i]}
+              card={card}
+            />
+          ))
+        }
+      </QuizDeckInner>
+      <QuizDeckActions />
+    </QuizDeckWrapper>
   )
 }
 
