@@ -1,12 +1,14 @@
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import { IconButton } from "@mui/material";
+import { IconButton } from '@mui/material';
 import Show from '@ui/components/Show';
-import { useAppDispatch } from '@ui/store/index';
-import { useState } from 'react';
-import { cardFlipped } from './quiz-slice';
+import { useAppDispatch, useAppSelector } from '@ui/store/index';
+import { useEffect, useState } from 'react';
+
+import { cardFlipped, selectCurrentIndex } from './quiz-slice';
 
 const QuizDeckActionsFlip = (): JSX.Element => {
+  const currentIndex = useAppSelector(selectCurrentIndex);
   const dispatch = useAppDispatch();
   const [flipped, setFlipped] = useState<boolean>(false);
 
@@ -15,12 +17,18 @@ const QuizDeckActionsFlip = (): JSX.Element => {
     dispatch(cardFlipped());
   }
 
+  useEffect(() => {
+    if (flipped) {
+      setFlipped(false);
+    }
+  }, [currentIndex])
+
   return (
     <IconButton color="primary" onClick={handleFlipped}>
-      <Show when={!flipped}>
+      <Show when={flipped}>
         <RemoveRedEyeOutlinedIcon />
       </Show>
-      <Show when={flipped}>
+      <Show when={!flipped}>
         <VisibilityOffOutlinedIcon />
       </Show>
     </IconButton>
