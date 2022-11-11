@@ -1,8 +1,8 @@
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 import { IconButton, Stack, Typography } from "@mui/material";
 import QuizDeckToolbarProgress from './quiz-deck-toolbar-progress';
+import QuizDeckToolbarSettings from './quiz-deck-toolbar-settings';
 
 
 const QuizDeckToolbar = (): JSX.Element => {
@@ -11,9 +11,7 @@ const QuizDeckToolbar = (): JSX.Element => {
       <Typography variant="overline" sx={{ fontWeight: 600, pr: 2 }}>Flashcards</Typography>
       <QuizDeckToolbarProgress />
       <Stack direction="row" spacing={1} sx={{ ml: 'auto' }}>
-        <IconButton color="primary" size="medium">
-          <SettingsOutlinedIcon sx={{ fontSize: '1.2rem' }} />
-        </IconButton>
+        <QuizDeckToolbarSettings />
         <IconButton color="primary" size="medium">
           <AddCircleOutlineOutlinedIcon sx={{ fontSize: '1.2rem' }} />
         </IconButton>
