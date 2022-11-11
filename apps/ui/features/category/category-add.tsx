@@ -13,7 +13,6 @@ const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
 
 const CategoryListAddButton = (): JSX.Element => {
   const { onOpenDialog } = useDialogEvent();
-  console.log('CategoryListAddButton');
   return (
     <Fragment>
       <FabButton
