@@ -11,7 +11,7 @@ const QuizDeckToolbarProgress = (): JSX.Element => {
   return (
     <Show when={currentIndex < cardsCount}>
       <Typography variant="overline" sx={{ fontSize: '11px' }}>
-        {currentIndex} / {cardsCount}
+        {currentIndex + 1} / {cardsCount}
       </Typography>
     </Show>
   )
