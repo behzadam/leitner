@@ -1,11 +1,14 @@
 import { Box, BoxProps, styled } from '@mui/material';
 import { useSprings } from '@react-spring/web';
 import { Flashcard } from '@ui/types';
+import { isNegative } from '@ui/utils/is-negative';
 import { useGesture } from '@use-gesture/react';
 import { useState } from 'react';
 import QuizDeckActions from './quiz-deck-actions';
 import { QuizDeckCard } from './quiz-deck-card';
+import QuizDeckSuccess from './quiz-deck-success';
 import QuizDeckToolbar from './quiz-deck-toolbar';
+import { SwipeDirection } from './quiz-types';
 
 const QuizDeckWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
@@ -29,8 +32,10 @@ const QuizDeckInner = styled(Box)<BoxProps>(({ theme }) => ({
 
 type QuizDeckProps = {
   cards: Flashcard[];
-  onSwiped: () => void;
+  onSwiped: (direction: SwipeDirection) => void;
 }
+
+const swipeDirection = (x: number): SwipeDirection => isNegative(x) === true ? 'left' : 'right';
 
 const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
   const [gone] = useState(() => new Set())
@@ -59,7 +64,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
           const x = isGone ? (200 + window.innerWidth) * xDir : active ? mx : 0;
 
           if (isGone) {
-            onSwiped();
+            onSwiped(swipeDirection(x));
           }
 
           return {
@@ -77,8 +82,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
       const width = (200 + window.innerWidth);
       const x = isRemembered === true ? width * -1 : width * 1;
 
-      // update state 
-      onSwiped();
+      onSwiped(swipeDirection(x));
 
       return {
         x,
@@ -101,6 +105,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
             />
           ))
         }
+        <QuizDeckSuccess />
       </QuizDeckInner>
       <QuizDeckActions onRemember={handleRemember} />
     </QuizDeckWrapper>
