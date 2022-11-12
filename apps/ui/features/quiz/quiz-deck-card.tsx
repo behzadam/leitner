@@ -32,7 +32,8 @@ const FlipCardContent = animated(styled(Box)<BoxProps>(() => ({
 })));
 
 type QuizDeckCardProps = {
-  card: Flashcard,
+  card: Flashcard;
+  [props: string]: any;
 }
 
 function cardsAreEqual(prevCard: QuizDeckCardProps, nextCard: QuizDeckCardProps) {
