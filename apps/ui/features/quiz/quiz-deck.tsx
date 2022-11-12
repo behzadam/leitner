@@ -86,7 +86,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
 
       return {
         x,
-        config: { friction: 50, tension: 200 },
+        config: { friction: 50, tension: 150 },
       }
     })
   }
