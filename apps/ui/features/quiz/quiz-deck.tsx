@@ -8,6 +8,7 @@ import { QuizDeckCard } from './quiz-deck-card';
 import QuizDeckToolbar from './quiz-deck-toolbar';
 
 const QuizDeckWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+  height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
