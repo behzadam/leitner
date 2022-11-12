@@ -116,6 +116,11 @@ const quizSlice = createSlice({
         state.rememebered.noCount++;
       }
     },
+
+    cardsReload(state: QuizState): void {
+      //Todo: re-fetch from database
+      console.log('cardsReload');
+    },
   },
 });
 
