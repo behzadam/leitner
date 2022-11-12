@@ -1,10 +1,21 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import {
+  createSelector,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { RootState } from '@ui/store/index';
 import { Flashcard } from '@ui/types';
+import { SwipeDirection } from './quiz-types';
+
+type RememeberedCounts = {
+  yesCount: number;
+  noCount: number;
+};
 
 type QuizState = {
   cards: Flashcard[];
   currentIndex: number;
+  rememebered: RememeberedCounts;
 };
 
 const initialState: QuizState = {
@@ -74,6 +85,10 @@ const initialState: QuizState = {
     },
   ],
   currentIndex: 0,
+  rememebered: {
+    yesCount: 0,
+    noCount: 0,
+  },
 };
 
 const quizSlice = createSlice({
@@ -85,9 +100,20 @@ const quizSlice = createSlice({
         !state.cards[state.currentIndex].flipped;
     },
 
-    cardSwiped(state: QuizState): void {
+    cardSwiped(
+      state: QuizState,
+      action: PayloadAction<SwipeDirection>
+    ): void {
       if (state.currentIndex < state.cards.length) {
         state.currentIndex++;
+      }
+
+      if (action.payload === 'left') {
+        state.rememebered.yesCount++;
+      }
+
+      if (action.payload === 'right') {
+        state.rememebered.noCount++;
       }
     },
   },
@@ -108,6 +134,11 @@ export const selectCurrentIndex = createSelector(
 export const selectFlashcardsCount = createSelector(
   selectFlashcards,
   (cards: Flashcard[]) => cards.length
+);
+
+export const selectRememeberedCount = createSelector(
+  selectState,
+  (state: RootState): RememeberedCounts => state.quiz.rememebered
 );
 
 export const { cardFlipped, cardSwiped } = quizSlice.actions;
