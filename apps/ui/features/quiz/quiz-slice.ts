@@ -141,5 +141,14 @@ export const selectRememeberedCount = createSelector(
   (state: RootState): RememeberedCounts => state.quiz.rememebered
 );
 
-export const { cardFlipped, cardSwiped } = quizSlice.actions;
+export const selectIsDeckFinished = createSelector(
+  selectState,
+  (state: RootState): boolean => {
+    if (state.quiz.cards.length === 0) return false;
+    return state.quiz.currentIndex >= state.quiz.cards.length;
+  }
+);
+
+export const { cardFlipped, cardSwiped, cardsReload } =
+  quizSlice.actions;
 export default quizSlice.reducer;
