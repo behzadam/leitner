@@ -17,11 +17,13 @@ const QuizDeckWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   touchAction: 'none'
 }));
 
-const QuizDeckInner = styled(Box)<BoxProps>(() => ({
+const QuizDeckInner = styled(Box)<BoxProps>(({ theme }) => ({
   aspectRatio: '0.8',
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(350px,1fr))',
-  position: 'relative'
+  position: 'relative',
+  backgroundColor: theme.palette.grey[200],
+  borderRadius: '1.5rem',
 }));
 
 type QuizDeckProps = {
@@ -90,7 +92,7 @@ const QuizDeck = ({ cards, onSwiped }: QuizDeckProps): JSX.Element => {
       <QuizDeckInner>
         {
           cards.map((card, i) => (
-            < QuizDeckCard
+            <QuizDeckCard
               key={card.id}
               {...bind(i)}
               style={springs[i]}
