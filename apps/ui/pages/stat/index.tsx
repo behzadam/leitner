@@ -1,7 +1,7 @@
 import { Container, Grid } from '@mui/material';
 import LayoutNested from '@ui/components/layout/layout-nested';
 import Leitner from '@ui/features/leitner/Leitner';
-import ProgressCalendar from '@ui/features/progress/ProgressCalendar';
+import ProgressCalendar from '@ui/features/progress/progress-calendar';
 import { NextPageWithLayout } from '@ui/types';
 import { ReactElement } from 'react';
 
