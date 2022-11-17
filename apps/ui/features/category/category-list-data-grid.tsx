@@ -35,7 +35,7 @@ const CategoryListDataGrid = (): JSX.Element => {
     {
       field: "actions",
       headerName: "Actions",
-      minWidth: 80,
+      minWidth: 120,
       sortable: false,
       disableColumnMenu: true,
       renderCell: (params) => <CategoryListActions id={params.row.id} />
