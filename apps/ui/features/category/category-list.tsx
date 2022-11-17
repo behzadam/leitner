@@ -1,9 +1,7 @@
 import { Container } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
 import { useMemo } from 'react';
 
-import CategoryListAddButton from './category-add';
-import CategoryListItem from './category-list-item';
+import CategoryListDataGrid from './category-list-data-grid';
 
 const CategoryList = (): JSX.Element => {
   const categories: number[] = useMemo(() => {
@@ -11,15 +9,8 @@ const CategoryList = (): JSX.Element => {
   }, [])
 
   return (
-    <Container maxWidth="md" sx={{ paddingBottom: 12 }}>
-      <Grid container sx={{ mt: 4 }} spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 8, lg: 8 }}>
-        {categories.map((_, index) => (
-          <Grid xs={2} sm={4} md={4} key={index}>
-            <CategoryListItem id={index} />
-          </Grid>
-        ))}
-        <CategoryListAddButton />
-      </Grid>
+    <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
+      <CategoryListDataGrid />
     </Container>
   )
 }
