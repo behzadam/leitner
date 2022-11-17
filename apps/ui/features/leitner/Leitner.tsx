@@ -13,6 +13,10 @@ const Item = styled(Box)<BoxProps>(() => ({
   borderRadius: '0.6em'
 }));
 
+/**
+ * This component is not for version 1.
+ * @returns Leitner
+ */
 const Leitner = (): JSX.Element => {
   const leitnerBox = [
     { box: 5, color: '#14b8a6' },
