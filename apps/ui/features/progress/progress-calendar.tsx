@@ -8,6 +8,10 @@ type ProgressCalendar = {
   daysWithLearning?: string[];
 }
 
+/**
+ * This component is not for version 1.
+ * @returns ProgressCalendar
+ */
 const ProgressCalendar = ({
   startDate = '2022-08-06',
   daysWithLearning = [
