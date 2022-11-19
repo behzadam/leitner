@@ -1,7 +1,7 @@
 import { LinearProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import PlaceholderNoRow from '@ui/components/placeholder/placeholder-no-row';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import CategoryListActions from './category-list-actions';
 
 const rows = [
@@ -17,9 +17,6 @@ const rows = [
 ];
 
 const CategoryListDataGrid = (): JSX.Element => {
-
-  const [currentRows, setCurrentRows] = useState<number[]>();
-
   //#region Data Grid Columns
   const columns: GridColDef[] = useMemo(() => [
     {
@@ -49,17 +46,21 @@ const CategoryListDataGrid = (): JSX.Element => {
         NoRowsOverlay: PlaceholderNoRow,
         LoadingOverlay: LinearProgress,
       }}
+      initialState={{
+        columns: {
+          columnVisibilityModel: {
+            // Hide column id
+            id: false
+          },
+        },
+      }}
       rows={rows}
       columns={columns}
       pageSize={6}
       rowsPerPageOptions={[6]}
-      checkboxSelection
       disableSelectionOnClick
       experimentalFeatures={{ newEditingApi: true }}
       sx={{ backgroundColor: "white" }}
-      onSelectionModelChange={(newSelectionModel) => {
-        setCurrentRows(newSelectionModel as number[]);
-      }}
     />
   )
 }
