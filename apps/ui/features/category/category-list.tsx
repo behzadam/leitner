@@ -9,7 +9,7 @@ const CategoryList = (): JSX.Element => {
   }, [])
 
   return (
-    <Container maxWidth="md" sx={{ height: 422, mt: 4 }}>
+    <Container maxWidth="lg" sx={{ height: 422, mt: 4 }}>
       <CategoryListDataGrid />
     </Container>
   )
