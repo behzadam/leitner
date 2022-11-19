@@ -30,13 +30,13 @@ const CategoryListDataGrid = (): JSX.Element => {
     {
       field: 'name',
       headerName: 'Flashcard',
-      width: 150
+      flex: 1
     },
     {
       field: "actions",
       headerName: "Actions",
-      minWidth: 120,
       sortable: false,
+      minWidth: 160,
       disableColumnMenu: true,
       renderCell: (params) => <CategoryListActions id={params.row.id} />
     }
