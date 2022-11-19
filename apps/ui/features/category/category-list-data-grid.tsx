@@ -27,7 +27,9 @@ const CategoryListDataGrid = (): JSX.Element => {
     {
       field: 'name',
       headerName: 'Flashcard',
-      flex: 1
+      flex: 1,
+      disableColumnMenu: true,
+      sortable: false,
     },
     {
       field: "actions",
