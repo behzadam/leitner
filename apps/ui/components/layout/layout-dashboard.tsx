@@ -17,7 +17,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         position="relative"
         elevation={0}
         enableColorOnDark
-        color='transparent'
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>

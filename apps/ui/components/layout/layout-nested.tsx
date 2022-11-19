@@ -23,7 +23,6 @@ const LayoutNested = ({
         position="relative"
         elevation={0}
         enableColorOnDark
-        color='transparent'
       >
         <Toolbar>
           <Typography variant="overline" noWrap component="div">
