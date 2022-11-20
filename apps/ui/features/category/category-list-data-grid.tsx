@@ -62,7 +62,7 @@ const CategoryListDataGrid = (): JSX.Element => {
       rowsPerPageOptions={[6]}
       disableSelectionOnClick
       experimentalFeatures={{ newEditingApi: true }}
-      sx={{ backgroundColor: "white" }}
+      sx={{ backgroundColor: "white", px: 2 }}
     />
   )
 }
