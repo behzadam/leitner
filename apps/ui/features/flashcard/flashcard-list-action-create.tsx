@@ -15,7 +15,7 @@ const FlashcardListActionCreate = (): JSX.Element => {
   }
 
   return (
-    <IconButton size="medium" onClick={onCreate} >
+    <IconButton size="medium" color="primary" onClick={onCreate} >
       <AddCircleOutlineOutlinedIcon />
     </IconButton>
   )
