@@ -2,7 +2,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import { IconButton } from '@mui/material';
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
 
-import CategoryFormCreate from './category-create';
+import CategoryFormCreate from './category-form-create';
 
 const CategoryListAddButton = (): JSX.Element => {
   const { onOpenDialog } = useDialogEvent();

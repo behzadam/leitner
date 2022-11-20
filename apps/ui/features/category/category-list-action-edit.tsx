@@ -1,7 +1,7 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { IconButton } from "@mui/material";
 import { useDialogEvent } from "@ui/components/dialog/dialog.provider";
-import CategoryFormEdit from "./category-edit";
+import CategoryFormEdit from "./category-form-edit";
 
 type CategoryListActionEditProps = {
   id?: number
