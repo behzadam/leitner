@@ -1,30 +1,20 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Fab, FabProps, styled } from "@mui/material";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { IconButton } from '@mui/material';
 import { useDialogEvent } from '@ui/components/dialog/dialog.provider';
-import { Fragment } from 'react';
-import CategoryFormCreate from './category-create';
 
-const FabButton = styled(Fab)<FabProps>(({ theme }) => ({
-  position: 'fixed',
-  bottom: '16px',
-  left: '50%',
-  transform: 'translate(-50%, 0)'
-}));
+import CategoryFormCreate from './category-create';
 
 const CategoryListAddButton = (): JSX.Element => {
   const { onOpenDialog } = useDialogEvent();
   return (
-    <Fragment>
-      <FabButton
-        color="primary"
-        size="medium"
-        aria-label="add category"
-        onClick={() => onOpenDialog({
-          content: <CategoryFormCreate />
-        })}>
-        <AddIcon />
-      </FabButton>
-    </Fragment>
+    <IconButton
+      color="primary"
+      size="medium"
+      onClick={() => onOpenDialog({
+        content: <CategoryFormCreate />
+      })}>
+      <AddCircleOutlineOutlinedIcon />
+    </IconButton>
   )
 }
 
